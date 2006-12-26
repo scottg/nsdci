@@ -85,15 +85,15 @@ DciNcfInit(char *server, char *module)
     }
 
     if (repeater) {
-        Ns_Log(Notice, "creating repeater");
+        Ns_Log(Notice, "ncf: creating repeater");
         if (Dci_CreateReceiver(login, NcfRepeat, NULL) != NS_OK) {
-            Ns_Log(Error, "couldn't create repeater");
+            Ns_Log(Error, "ncf: couldn't create repeater");
 	    return NS_ERROR;
         }
     } else if (client) {
-        Ns_Log(Notice, "creating client");
+        Ns_Log(Notice, "ncf: creating client");
         if (Dci_CreateReceiver(login, NcfRecv, NULL) != NS_OK) {
-            Ns_Log(Error, "couldn't create repeater");
+            Ns_Log(Error, "ncf: couldn't create repeater");
 	    return NS_ERROR;
         }
     }
@@ -187,7 +187,7 @@ NcfSetFlushCmd(ClientData dummy, Tcl_Interp *interp, int argc, char **argv)
     }
 
     if (fDebug) {
-        Ns_Log(Notice,"Adding cache %s to list for automatic flush on connect", argv[1]);
+        Ns_Log(Notice, "ncf: adding cache %s to list for automatic flush on connect", argv[1]);
     }
     
     flushent = ns_malloc(sizeof(FlushEnt));
@@ -256,14 +256,14 @@ NcfFlushCache(char *name)
     if (cache != NULL) {
         Ns_CacheLock(cache);
         if (fDebug) {
-            Ns_Log(Notice,"ncf: performing full cache flush of %s",  name);
+            Ns_Log(Notice, "ncf: performing full cache flush of %s",  name);
         }
         Ns_CacheFlush(cache);
         Ns_CacheBroadcast(cache);
         Ns_CacheUnlock(cache);
     } else {
         if (fDebug) {
-            Ns_Log(Error,"ncf: could not find cache %s for flush",name);
+            Ns_Log(Error, "ncf: could not find cache %s for flush", name);
         }
     }
 }
@@ -299,13 +299,13 @@ NcfRecv(void *ignored, Ns_DString *dsPtr)
     if (*key == '\0') {
         if (strcmp (flag,NCF_ALLCACHE) == 0) {
             if (fDebug) {
-                Ns_Log(Notice,"ncf: received flush registered caches");
+                Ns_Log(Notice, "ncf: received flush registered caches");
             }
             NcfFlushAll();
         } else {
              if (strcmp(flag,NCF_ALLKEYS) == 0) {
                  if (fDebug) {
-                     Ns_Log(Notice,"ncf: received flush all keys of cache %s",name);
+                     Ns_Log(Notice, "ncf: received flush all keys of cache %s", name);
                  }   
                  NcfFlushCache(name);
                  cache = Ns_CacheFind(dsPtr->string);
@@ -313,7 +313,7 @@ NcfRecv(void *ignored, Ns_DString *dsPtr)
         }
     } else {
         if (fDebug) {
-            Ns_Log(Notice,"ncf: received flush %s[%s]",name,key);
+            Ns_Log(Notice, "ncf: received flush %s[%s]", name, key);
         }   
         cache = Ns_CacheFind(dsPtr->string);
         if (cache != NULL) {

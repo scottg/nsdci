@@ -283,7 +283,7 @@ SobCreate(char *server, char *module, char *name, char *path, int ncb)
 	ns_free(sobPtr);
 	sobPtr = NULL;
     }
-    Ns_Log(Notice, "sob[%s] created", name);
+    Ns_Log(Notice, "sob: created: %s", name);
     return sobPtr;
 }
 
@@ -1095,7 +1095,7 @@ SobGetFile(Tcl_Interp *interp, Sob *sobPtr, char *key, char **copyPtr, CbArg *cb
 
 done:
     if (fDebug) {
-	Ns_Log(data ? Notice : Warning, "%s: get %s - %s%s",
+	Ns_Log(data ? Notice : Warning, "sob: %s: get %s - %s%s",
 	    sobPtr->name, key,
 	    data ? "ok" : "failed", cached ? " (cached)": "");
     }
