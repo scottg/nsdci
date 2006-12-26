@@ -1199,7 +1199,7 @@ RpcStartListener(void *arg)
     }
     Ns_MutexUnlock(&listenerPtr->lock);
     if (status != NS_OK) {
-	Ns_Log(Warning, "rpc: timeout waiting for accpet of pending connections");
+	Ns_Log(Warning, "rpc: timeout waiting for accept of pending connections");
     } else {
 	Ns_Log(Notice, "rpc: listen thread started");
     }
