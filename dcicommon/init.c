@@ -179,14 +179,6 @@ DciModInit(char *server, char *module)
 	return NS_ERROR;
     }
 
-    /*
-     * Sort and log ident messages.
-     */
-
-    for (i = 0; i < nidents; ++i) {
-	Ns_Log(Notice, "%s: ident: %s", module, idents[i]);
-    }
-
     return NS_OK;
 }
 

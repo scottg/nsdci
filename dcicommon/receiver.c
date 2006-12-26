@@ -86,7 +86,7 @@ DciReceiverInit(char *server, char *module)
     if (!Ns_ConfigGetInt(path, "port", &port)) {
 	return NS_OK;
     }
-    return Dci_ListenCallback("dcirecv", addr, port, RecvAccept, NULL, NULL);
+    return Dci_ListenCallback("receiver", addr, port, RecvAccept, NULL, NULL);
 }
     
 
@@ -117,7 +117,7 @@ Dci_CreateReceiver(char *login, Dci_RecvProc *proc, void *arg)
 
     hPtr = Tcl_CreateHashEntry(&receivers, login, &new);
     if (!new) {
-	Ns_Log(Notice, "dcirecv: duplicate login: %s", login);
+	Ns_Log(Notice, "receiver: duplicate login: %s", login);
 	return NS_ERROR;
     }
     recvPtr = ns_malloc(sizeof(Recv));
@@ -248,10 +248,10 @@ stop:
 	    if (sockPtr->recvPtr == NULL) {
 		hPtr = Tcl_FindHashEntry(&receivers, sockPtr->ds.string);
 		if (hPtr == NULL) {
-		    Ns_Log(Error, "dcirecv: invalid login: %s", sockPtr->ds.string);
+		    Ns_Log(Error, "receiver: invalid login: %s", sockPtr->ds.string);
 		    goto stop;
 		}
-		Ns_Log(Notice, "dcirecv: login: %s", sockPtr->ds.string);
+		Ns_Log(Notice, "receiver: login: %s", sockPtr->ds.string);
 		sockPtr->recvPtr = Tcl_GetHashValue(hPtr);
 	    } else if ((*sockPtr->recvPtr->proc)(sockPtr->recvPtr->arg, &sockPtr->ds) != NS_OK) {
 	    	goto stop;

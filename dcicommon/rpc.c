@@ -240,10 +240,14 @@ DciRpcInit(char *server, char *module)
     }
     sock = Ns_SockListen(addr, port);
     if (sock < 0) {
-        Ns_Log(Error, "rpc: could not listen on: %s:%d",
+        Ns_Log(Error, "rpc: could not listen on %s:%d",
 		addr ? addr : "*", port);
     	return NS_ERROR;
     }
+
+    Ns_Log(Notice, "rpc: listening on %s:%d",
+        addr, port);
+
     hPtr = Tcl_CreateHashEntry(&listeners, server, &new);
     if (!new) {
     	Ns_Log(Error, "rpc: already initialized %s", server);
@@ -1188,7 +1192,7 @@ RpcStartListener(void *arg)
     Ns_Time timeout;
     int status;
 
-    Ns_Log(Notice, "rpc: starting listen thread");
+    Ns_Log(Notice, "rpc: starting listener thread");
     Ns_GetTime(&timeout);
     Ns_IncrTime(&timeout, 1, 0);
     Ns_ThreadCreate(RpcListenThread, arg, 0, &listenerPtr->thread);
