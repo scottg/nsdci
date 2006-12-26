@@ -56,7 +56,7 @@ DciLogInit(char *server, char *module)
 	logDir = Ns_HomePath(&ds, "log", NULL);
     }
     if (mkdir(logDir, 0755) != 0 && errno != EEXIST) {
-	Ns_Log(Error, "logs: could not create: %s", logDir); 
+	Ns_Log(Error, "log: could not create: %s", logDir); 
 	return NS_ERROR;
     }
     logDir = ns_strdup(logDir);
