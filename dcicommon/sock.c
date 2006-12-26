@@ -123,7 +123,7 @@ DciGetPeer(int sock)
 void
 DciLogPeer2(int sock, char *ident, char *msg)
 {
-    Ns_Log(Notice, "[%s]: %s: %s", ident, msg, DciGetPeer(sock));
+    Ns_Log(Notice, "%s: %s: %s", ident, msg, DciGetPeer(sock));
 }
 
 void

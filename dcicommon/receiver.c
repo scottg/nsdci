@@ -225,9 +225,9 @@ stop:
     n = recv(sock, sockPtr->next, (size_t)sockPtr->nleft, 0);
     if (n <= 0) {
         if (n < 0) {
-            Ns_Log(Error, "recv: recv() failed: %s", strerror(errno));
+            Ns_Log(Error, "receiver: recv() failed: %s", strerror(errno));
 	}
-        DciLogPeer2(sock, "recv", "dropped");
+        DciLogPeer2(sock, "receiver", "dropped");
 	goto stop;
     }
 
