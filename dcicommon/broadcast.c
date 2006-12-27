@@ -554,7 +554,7 @@ DciBroadcaster(void *arg)
 	    nextPtr = cPtr->nextPtr;
 	    ok = 1;
 	    if (cPtr->state == BCAST_CONNECT) {
-	    	if (cPtr->pfd->revents & POLLOUT) {
+	    	if (cPtr->pfd->revents & POLLOUT || cPtr->pfd->revents & POLLHUP) {
 		    if (send(cPtr->sock, "", 0, 0) == 0) {
     	    		Ns_Log(Notice, "%s: connected", cPtr->name);
 			Dci_SockOpts(cPtr->sock, DCI_SOCK_SERVER);
