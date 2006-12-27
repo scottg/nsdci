@@ -1210,11 +1210,11 @@ NfsUnlinkFile(Nfs *nfsPtr, Ns_DString *dsPtr)
         Ns_MutexUnlock(&nfsPtr->statslock);
 	NfsFlush(nfsPtr, file);
     }
-    Ns_DStringFree(&path);
     if (fDebug) {
-	Ns_Log(status == NS_OK ? Notice : Error, "unlink: %s %s",
-	    file, status == NS_OK ? "ok" : "failed");
+	Ns_Log(status == NS_OK ? Notice : Error, "unlink: %s (%s)",
+	    path.string, status == NS_OK ? "ok" : "failed");
     }
+    Ns_DStringFree(&path);
     return status;
 }
 
@@ -1378,7 +1378,7 @@ NfsWriteFile3(Nfs *nfsPtr, char *key, char *bytes, int len, int nl, int append)
     	}
     }
     if (fDebug) {
-	Ns_Log(status == NS_OK ? Notice : Error, "%s: %s - %s",
+	Ns_Log(status == NS_OK ? Notice : Error, "%s: %s (%s)",
 	    append ? "append" : "write", path.string, status == NS_OK ? "ok" : "failed");
     }
 
