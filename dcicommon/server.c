@@ -463,7 +463,8 @@ static void
 ConnectWarn(Client *cPtr, time_t now)
 {
     if (cPtr->nextwarn <= now) {
-	Ns_Log(Warning, "%s: connect failed", cPtr->name);
+	Ns_Log(Warning, "%s: connect to %s:%d failed", 
+            cPtr->name, cPtr->host, cPtr->port);
 	cPtr->nextwarn = now + warnInterval;
     }
 }
