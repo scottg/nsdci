@@ -730,7 +730,8 @@ DciServer(void *arg)
 		    if (send(cPtr->sock, NULL, 0, 0) != 0) {
 		    	res = NS_ERROR;
 		    } else {
-    	    	    	Ns_Log(Notice, "%s: connected", cPtr->name);
+    	    	    	Ns_Log(Notice, "%s: connected to %s:%d", 
+                            cPtr->name, cPtr->host, cPtr->port);
 			Dci_SockOpts(cPtr->sock, DCI_SOCK_SERVER);
 			Ns_SockSetNonBlocking(cPtr->sock);
     			cPtr->recvcnt = 0;
