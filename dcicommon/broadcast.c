@@ -556,7 +556,8 @@ DciBroadcaster(void *arg)
 	    if (cPtr->state == BCAST_CONNECT) {
 	    	if (cPtr->pfd->revents & POLLOUT || cPtr->pfd->revents & POLLHUP) {
 		    if (send(cPtr->sock, "", 0, 0) == 0) {
-    	    		Ns_Log(Notice, "%s: connected", cPtr->name);
+    	    		Ns_Log(Notice, "%s: connected to %s:%d", 
+                            cPtr->name, cPtr->host, cPtr->port);
 			Dci_SockOpts(cPtr->sock, DCI_SOCK_SERVER);
 			MsgSend(cPtr, (Msg *) login);
 			cPtr->state = BCAST_LOGIN;

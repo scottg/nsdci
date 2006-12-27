@@ -66,7 +66,7 @@ ListenProc(int sock, void *arg, int why)
     if (sock == -1) {
 	Ns_Log(Error, "%s: accept() failed: %s", lPtr->name, strerror(errno));
     } else {
-	DciLogPeer2(sock, lPtr->name, "connected");
+	DciLogPeer2(sock, lPtr->name, "connected to");
 	(lPtr->acceptProc)(sock, lPtr->arg);
     }
     return NS_TRUE;
@@ -123,7 +123,7 @@ DciGetPeer(int sock)
 void
 DciLogPeer2(int sock, char *ident, char *msg)
 {
-    Ns_Log(Notice, "%s: %s: %s", ident, msg, DciGetPeer(sock));
+    Ns_Log(Notice, "%s: %s %s", ident, msg, DciGetPeer(sock));
 }
 
 void
