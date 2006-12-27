@@ -725,7 +725,7 @@ DciServer(void *arg)
 	while (cPtr != NULL) {
 	    res = NS_OK;
 	    if (cPtr->state == Connecting) {
-	    	if (cPtr->pfd->revents & POLLOUT) {
+	    	if (cPtr->pfd->revents & POLLOUT || cPtr->pfd->revents & POLLHUP) {
 		    if (send(cPtr->sock, NULL, 0, 0) != 0) {
 		    	res = NS_ERROR;
 		    } else {
@@ -740,9 +740,7 @@ DciServer(void *arg)
 			res = (*sPtr->procPtr)((Dci_Client *) cPtr,
 				sPtr->serverData, DCI_SERVER_INIT);
 		    }
-		} else {
-                    res = NS_ERROR;
-                }
+		}
 	    } else {
 	    	if (cPtr->state == RecvData && (cPtr->pfd->revents & POLLIN)) {
     	    	    /*

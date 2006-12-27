@@ -1379,7 +1379,7 @@ NfsWriteFile3(Nfs *nfsPtr, char *key, char *bytes, int len, int nl, int append)
     }
     if (fDebug) {
 	Ns_Log(status == NS_OK ? Notice : Error, "%s: %s - %s",
-	    append ? "append" : "write", file, status == NS_OK ? "ok" : "failed");
+	    append ? "append" : "write", path.string, status == NS_OK ? "ok" : "failed");
     }
 
     Ns_MutexLock(&nfsPtr->statslock);
