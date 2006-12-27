@@ -740,7 +740,9 @@ DciServer(void *arg)
 			res = (*sPtr->procPtr)((Dci_Client *) cPtr,
 				sPtr->serverData, DCI_SERVER_INIT);
 		    }
-		}
+		} else {
+                    res = NS_ERROR;
+                }
 	    } else {
 	    	if (cPtr->state == RecvData && (cPtr->pfd->revents & POLLIN)) {
     	    	    /*
