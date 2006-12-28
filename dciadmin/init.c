@@ -30,7 +30,6 @@
 #include "dciadmin.h"
 
 static int AddCmds(Tcl_Interp *interp, void *context);
-int Ns_ModuleVersion = 1;
 
 extern int DciQueFileInit(char *, char *);
 extern int DciQueInit(char *, char *);
