@@ -30,5 +30,9 @@ MOD      =  dciadmin
 HDRS 	 =  dciadmin.h 
 OBJS     =  quefile.o sked.o que.o init.o links.o csv.o
 DLLLIBS += -ldci
+INSTALL  =  install-tcl
 
 include $(AOLSERVER)/include/ns.mak
+
+install-tcl:
+	$(INST) -d $(AOLSERVER)/modules/tcl tcl/dciadmin.tcl
