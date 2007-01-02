@@ -2,11 +2,11 @@
 = File System Layout =
 {{{
 ~shmooved/
-    cvs/tcl/            - Tcl source
-    cvs/aolserver/      - AOLserver source
-    svn/nsdci/          - nsdci source
+    cvs/tcl/          - Tcl source
+    cvs/aolserver/    - AOLserver source
+    svn/nsdci/        - nsdci source
 
-/usr/local/aolserver    - Build directory
+/usr/local/aolserver  - Build directory
 }}}
 = Download and Compile Tcl (8.4.14) =
 {{{
