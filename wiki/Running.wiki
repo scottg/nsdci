@@ -30,7 +30,7 @@
 = Testing =
 == Frontend: SOB Write ==
 {{{
-% % telnet 127.0.0.1 9900
+% telnet 127.0.0.1 9900
 Trying 127.0.0.1...
 Connected to localhost.
 Escape character is '^]'.
