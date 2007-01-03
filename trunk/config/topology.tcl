@@ -2,6 +2,7 @@ global Topology
 
 set Topology(servers)       [list "frontend" "sob" "tool"]
 set Topology(sobClients)    [list "frontend" "tool"]
+set Topology(nvClients)     [list "frontend"]
 
 set Topology(frontend.httpAddress)      "127.0.0.1"
 set Topology(frontend.httpPort)         9000
@@ -12,6 +13,14 @@ set Topology(frontend.rpcAddress)       "127.0.0.1"
 set Topology(frontend.rpcPort)          9800
 set Topology(frontend.receiverAddress)  "127.0.0.1"
 set Topology(frontend.receiverPort)     9700
+set Topology(frontend.nevalAddress)     "127.0.0.1"
+set Topology(frontend.nevalPort)        9600
+
+#
+# nevalPassword = neval (ns_crypt neval t2)
+#
+
+set Topology(frontend.nevalPassword)    "t2abr7Y/HAlzU"
 
 set Topology(tool.httpAddress)          "127.0.0.1"
 set Topology(tool.httpPort)             8000
