@@ -385,6 +385,7 @@ Dci_RpcCreateClient(char *server, char *module, char *name, int timeout)
         if (!Ns_ConfigGetInt(path, "httpnumconnections", &rpcPtr->httpAvail)) {
             rpcPtr->httpAvail = 1;
         }
+        Ns_Log(Notice, "rpc[%s]: listening on %s:%d (HTTP)", name, rpcPtr->addr,rpcPtr->port);
     } else {
         rpcPtr->httpAvail = 0;
     }
