@@ -250,7 +250,7 @@ DciNvModInit(char *server, char *module)
 	path = Ns_ConfigGetPath(server, module, "nv/server", name, NULL);
 	login = Ns_ConfigGetValue(path, "login");
         if (fDebug) {
-            Ns_Log(Notice,"Configuring nv server %s",name);
+            Ns_Log(Notice,"nv: configuring server: %s", name);
         }
 	if (login == NULL) {
 	    login = name;
@@ -298,7 +298,7 @@ DciNvModInit(char *server, char *module)
 	path = Ns_ConfigGetPath(server, module, "nv/client", name, NULL);
 	login = Ns_ConfigGetValue(path, "login");
         if ( fDebug ) {
-            Ns_Log(Notice,"Configuring nv client %s",name);
+            Ns_Log(Notice,"nv: configuring nv client: %s", name);
         }
 	if (login == NULL) {
 	    login = name;
