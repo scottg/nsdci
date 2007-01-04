@@ -208,6 +208,7 @@ AddServerCmds(Tcl_Interp *interp, void *ignored)
     Tcl_CreateCommand(interp, "nt.debug", DciSetDebugCmd, &fDebug, NULL);
     Tcl_CreateCommand(interp, "nt.get", NtsGetCmd, (ClientData) 'g', NULL);
     Tcl_CreateCommand(interp, "nt.peek", NtsGetCmd, (ClientData) 'p', NULL);
+    Tcl_CreateCommand(interp, "nt.buckets", NtsGetCmd, (ClientData) 'b', NULL);
     Tcl_CreateCommand(interp, "nt.dump", NtsDumpCmd, NULL, NULL);
     Tcl_CreateCommand(interp, "nt.exists", NtsExistsCmd, NULL, NULL);
     Tcl_CreateCommand(interp, "nt.read", NtsIOCmd, (ClientData) 'r', NULL);
@@ -648,15 +649,31 @@ NtsGetCmd(ClientData arg, Tcl_Interp *interp, int argc, char **argv)
     char buf[20];
     int cmd = (int) arg;
 
-    if (argc != 3) {
-	Tcl_AppendResult(interp, "wrong # args: should be \"",
-	    argv[0], " bucket proc\"", NULL);
-	return TCL_ERROR;
+    if (cmd != 'b') {
+        if (argc != 3) {
+	    Tcl_AppendResult(interp, "wrong # args: should be \"",
+	        argv[0], " bucket proc\"", NULL);
+	    return TCL_ERROR;
+        }   
     }
 
     Tcl_DStringInit(&ds);
     tablePtr = NULL;
     Ns_MutexLock(&serverLock);
+
+    if (cmd == 'b') {
+        hPtr = Tcl_FirstHashEntry(&buckets, &search);
+
+        while (hPtr != NULL) {
+            Tcl_DStringAppendElement(&ds, Tcl_GetHashKey(&buckets, hPtr));
+            hPtr = Tcl_NextHashEntry(&search);
+        }
+
+        Ns_MutexUnlock(&serverLock);
+        Tcl_DStringResult(interp, &ds);
+        return TCL_OK;
+    }
+    
     hPtr = Tcl_FindHashEntry(&buckets, argv[1]);
     if (hPtr != NULL) {
 	tablePtr = Tcl_GetHashValue(hPtr);
