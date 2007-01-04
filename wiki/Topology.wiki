@@ -1,4 +1,4 @@
-#summary One-sentence summary of this page.
+#Information on the bundled servers
 
 = Topology =
 
@@ -11,4 +11,3 @@ The "frontend" server is a client for those services on the "tool" server. It is
 The "SOB" server will broker SOB content from the tool server to the frontend server and mange caching.  More information on SOB and each of the tool server services can be found on the wiki.
 
 At start up, the topology.tcl file, in the etc/ directory, creates an array of client lists and ports for each service as well as IP addresses for each server. This array is used by the server specific configuration files to make the needed connections and listen on the correct ports.  See "Running" on the wiki for information on starting servers.
-
