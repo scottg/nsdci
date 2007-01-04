@@ -1,10 +1,38 @@
+= Topology =
 
-The bundled set up comes with three servers:
+The bundled setup comes with three servers.
 
-The "tool" server is where all the services are hosted: Networked Poll, Networked Tally, Networked Rate, NV, etc.  You could just as easily create separate servers for each service - but for simplicity -  a single tool server has been used.
+== Tool ==
 
-The "frontend" server is a client for those services on the "tool" server. It is also where forward-facing Web Application will be hosted.
+The "tool" server is where all the services are hosted: networked poll (np), networked tally (nt), networked ratings (nrate), networked variables (nv), etc. You could just as easily create separate servers for each service, but for simplicity, a single tool server is provided.
 
-The "SOB" server will broker SOB content from the tool server to the frontend server and mange caching.  More information on SOB and each of the tool server services can be found on the wiki.
+|| *Service* || *Address* || *Port* ||
+|| http || 127.0.0.1 || 8000 ||
+|| nscp || 127.0.0.1 || 8900 ||
+|| rpc || 127.0.0.1 || 8800 ||
+|| receiver || 127.0.0.1 || 8700 ||
 
-At start up, the topology.tcl file, in the etc/ directory, creates an array of client lists and ports for each service as well as IP addresses for each server. This array is used by the server specific configuration files to make the needed connections and listen on the correct ports.  See "Running" on the wiki for information on starting servers.
+== Frontend ==
+
+The "frontend" server is considered a client, and has connections to both the "tool" and "SOB" servers. It is generally where forward-facing Web application are hosted.
+
+|| *Service* || *Address* || *Port* ||
+|| http || 127.0.0.1 || 9000 ||
+|| nscp || 127.0.0.1 || 9900 ||
+|| rpc || 127.0.0.1 || 9800 ||
+|| receiver || 127.0.0.1 || 9700 ||
+|| eval || 127.0.0.1 || 9600 ||
+|| nt || 127.0.0.1 || 9500 ||
+
+== SOB ==
+
+The "SOB" server stores and publishes content from both the "frontend" and "tool" servers. 
+
+|| *Service* || *Address* || *Port* ||
+|| http || 127.0.0.1 || 9000 ||
+|| nscp || 127.0.0.1 || 9900 ||
+
+== topology.tcl ==
+
+At start up, the "topology.tcl" file, found in the etc/ directory, creates an array of client lists and ports for each service as well as IP addresses for each server. This array is used by the server specific configuration files to make the needed connections and listen on the correct ports. See "[WikiSyntax Running]" on the Wiki for information on starting servers.
+
