@@ -34,5 +34,4 @@ The "SOB" server stores and publishes content from both the "frontend" and "tool
 
 == topology.tcl ==
 
-At start up, the "topology.tcl" file, found in the etc/ directory, creates an array of client lists and ports for each service as well as IP addresses for each server. This array is used by the server specific configuration files to make the needed connections and listen on the correct ports. See "[WikiSyntax Running]" on the Wiki for information on starting servers.
-
+At start up, the "topology.tcl" file, found in the etc/ directory, creates an array of client lists and ports for each service as well as IP addresses for each server. This array is used by the server specific configuration files to make the needed connections and listen on the correct ports. See "[Running]" on the Wiki for information on starting servers.
