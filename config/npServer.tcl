@@ -4,10 +4,10 @@ ns_section "ns/server/$server/module/dci/np"
 ns_section "ns/server/$server/module/dci/np/server/clients"
 
 foreach npClient [topology.getValue "npClients"] {
-    set npAddress [topology.getValue "npAddress" $npClient]
-    set npPort [topology.getValue "npPort" $npClient]
+    set rpcAddress [topology.getValue "rpcAddress" $npClient]
+    set rpcPort [topology.getValue "rpcPort" $npClient]
 
-    ns_param $npClient $npAddress:$npPort
+    ns_param $npClient $rpcAddress:$rpcPort
 }
 
 ns_section "ns/server/$server/module/dci/np/server"
