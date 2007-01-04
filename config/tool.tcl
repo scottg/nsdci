@@ -6,3 +6,4 @@ source sobClient.tcl
 source nvServer.tcl
 source ntServer.tcl
 source npServer.tcl
+source nrateServer.tcl

@@ -6,6 +6,9 @@ set Topology(sobClients)    [list "frontend" "tool"]
 set Topology(nvClients)     [list "frontend"]
 set Topology(ntClients)     [list "frontend"]
 set Topology(npClients)     [list "frontend"]
+set Topology(nrateClients)  [list "frontend"]
+set Topology(ncbClients)    [list "frontend"]
+
 
 set Topology(frontend.httpAddress)      "127.0.0.1"
 set Topology(frontend.httpPort)         9000
