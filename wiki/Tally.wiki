@@ -103,6 +103,7 @@ Notice the the runtime data structure has been updated and the tally reset:
 {{{
 tool:nscp 3> nv.dump nv
 bar.count 1 dork.total 1 bar.total 5 dork.count 1
+
 tool:nscp 4> nt.dump foo
 
 tool:nscp 5> exit
