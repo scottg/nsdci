@@ -4,6 +4,7 @@
 ~shmooved/svn/nsdci    - nsdci source code
 
 /usr/local/aolserver
+    /etc               - configuration
     /servers/frontend  - frontend server
     /servers/tool      - tool server
     /servers/sob       - sob server
@@ -18,14 +19,16 @@
 = Installing AOLserver Configuration Files =
 {{{
 % cd /usr/local/aolserver
+% mkdir etc
+% cd etc
 % cp ~shmooved/svn/nsdci/config/* .
 }}}
 = Running AOLserver Instances (Foreground) =
 {{{
 % cd /usr/local/aolserver
-% bin/nsd -ft frontend.tcl 
-% bin/nsd -ft tool.tcl 
-% bin/nsd -ft sob.tcl 
+% bin/nsd -ft etc/frontend.tcl 
+% bin/nsd -ft etc/tool.tcl 
+% bin/nsd -ft etc/sob.tcl 
 }}}
 = Testing =
 == Frontend: SOB Write ==
