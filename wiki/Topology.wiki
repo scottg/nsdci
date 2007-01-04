@@ -1,3 +1,4 @@
+#labels Phase-Design,Phase-Implementation
 = Topology =
 
 The bundled setup comes with three servers.
@@ -29,8 +30,8 @@ The "frontend" server is considered a client, and has connections to both the "t
 The "SOB" server stores and publishes content from both the "frontend" and "tool" servers. 
 
 || *Service* || *Address* || *Port* ||
-|| http || 127.0.0.1 || 9000 ||
-|| nscp || 127.0.0.1 || 9900 ||
+|| http || 127.0.0.1 || 7000 ||
+|| nscp || 127.0.0.1 || 7900 ||
 
 == topology.tcl ==
 
