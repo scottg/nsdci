@@ -10,8 +10,5 @@ foreach npClient [topology.getValue "npClients"] {
     ns_param $npClient $rpcAddress:$rpcPort
 }
 
-ns_section "ns/server/$server/module/dci/np/server"
-    ns_param database np
-
 ns_section "ns/server/$server/module/dci/rpc/server/np"
     ns_param http 1
