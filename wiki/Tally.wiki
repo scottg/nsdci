@@ -4,7 +4,7 @@ Tally is used to keep track of votes or points. At some interval, those votes or
 
 = Configuration ==
 
-*Tool Server*
+*Tally Server (tool)*
 {{{
  ns_section ns/server/${serverName}/module/dci/nt
     ns_param debug 1
