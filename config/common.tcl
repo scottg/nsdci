@@ -1,9 +1,12 @@
 set home [file dirname [ns_info config]]
 set pageRoot $home/servers/$server/pages
 
+regsub -all "/etc" $home "" home
+
 ns_section "ns/parameters"
     ns_param home $home
     ns_param logdebug true
+    ns_param serverlog $server.log
 
 ns_section "ns/mimetypes"
     ns_param default "*/*"
@@ -46,6 +49,7 @@ ns_section "ns/server/$server/module/nslog"
     ns_param rollonsignal true
     ns_param rollhour 0
     ns_param maxbackup 2
+    ns_param file $home/log/$server.access
     
 ns_section "ns/server/$server/module/nscp"
     ns_param address [topology.getValue "nscpAddress" $server]
