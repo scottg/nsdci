@@ -33,10 +33,10 @@ ns_section ns/server/${serverName}/module/dci/nt
 To use tally, you have to have a callback loaded on the tool server. Here is a sample tally callback. NOTE: Tally Callbacks must take "key count total" as arguments in that order:
 {{{
 proc generic.processTallies {key count total} {
-    if {[nv.cget tallyTotals ${key}.total oldTotal]} {
+    if {[nv.cget nv ${key}.total oldTotal]} {
         incr total $oldTotal
     }
-    if {[nv.cget tallyTotals ${key}.count oldCount]} {
+    if {[nv.cget nv ${key}.count oldCount]} {
         incr count $oldCount
     }
     nv.set tallyTotals ${key}.total $total
