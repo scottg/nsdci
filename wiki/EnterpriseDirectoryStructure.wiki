@@ -1,4 +1,4 @@
-#Setting up the Enterprise Directory Structure
+Setting up the Enterprise Directory Structure
 
 = Introduction =
 
