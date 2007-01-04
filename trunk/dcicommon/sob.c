@@ -139,33 +139,6 @@ DciSobInit(char *server, char *module)
 	}
     }
 
-#if 0
-    /*
-     * Create NCB clients.
-     */
-
-    path = Ns_ConfigGetPath(server, module, "ncb/clients", NULL);
-    set = Ns_ConfigGetSection(path);
-    for (i = 0; set != NULL && i < Ns_SetSize(set); ++i) {
-    	name = Ns_SetKey(set, i);
-	path = Ns_ConfigPath(server, module, "ncb/client", name, NULL);
-	if (SobCreate(server, module, name, path, 1) == NULL) {
-	    return NS_ERROR;
-	}
-    }
-    /*
-     * Create the default NCB client.
-     */
-
-    path = Ns_ConfigGetPath(server, module, "ncb", NULL);
-    if (path != NULL) {
-    	ncbPtr = SobCreate(server, module, "ncb", path, 1);
-	if (ncbPtr == NULL) {
-	    return NS_ERROR;
-	}
-    }
-#endif
-     
     /*
      * Add Tcl commands.
      */
