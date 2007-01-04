@@ -1,5 +1,7 @@
 set server "frontend"
 
+cd [file dirname [ns_info config]]
+
 source topology.tcl
 source common.tcl
 source sobClient.tcl

@@ -83,13 +83,13 @@ rename ns_section ns_section.orig
 rename ns_param ns_param.orig
 
 proc ns_section {args} {
-    puts stdout "CONFIG: ns_section $args"
+    puts stdout "ns_section $args"
     
     return [ns_section.orig $args]
 }
 
 proc ns_param {args} {
-    puts stdout "CONFIG:     ns_param $args"
+    puts stdout "    ns_param $args"
     
     return [eval [concat ns_param.orig $args]]
 }
