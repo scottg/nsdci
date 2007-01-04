@@ -39,8 +39,8 @@ proc generic.processTallies {key count total} {
     if {[nv.cget nv ${key}.count oldCount]} {
         incr count $oldCount
     }
-    nv.set tallyTotals ${key}.total $total
-    nv.set tallyTotals ${key}.count $count
+    nv.set nv ${key}.total $total
+    nv.set nv ${key}.count $count
 }
 }}}
 
