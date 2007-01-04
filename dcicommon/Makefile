@@ -38,8 +38,8 @@ OBJS	 =  \
 	broadcast.o cache.o cb.o cbapi.o cfg.o cmdinfo.o compat30.o	\
 	datenum.o eval.o file.o flush.o gdbm.o geo.o html.o http.o	\
 	init.o img.o list.o log.o main.o misc.o netdb.o	\
-	neval.o nfs.o nproxy.o nrate.o nrs.o nv.o page.o parse.o poll.o	\
-	proxy.o otally.o receiver.o rpc.o server.o sl.o sob.o	\
+	neval.o nfs.o nproxy.o nrate.o nrs.o nv.o otally.o page.o parse.o poll.o	\
+	proxy.o receiver.o rpc.o server.o sl.o sob.o	\
 	sock.o strftime.o tclexport.o time.o unix.o uuid.o modinit.o
 
 MAN	 =  dci.n
