@@ -1,4 +1,3 @@
-#Information on the bundled servers
 
 = Topology =
 
