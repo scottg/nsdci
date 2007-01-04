@@ -38,7 +38,7 @@ static char rcsid[] = "$Id$";
  * Define to 1 for compatibility with old nts.so module.
  */
 
-#define NTS_COMPAT 1
+#define NTS_COMPAT 0
 
 typedef struct Req {
 #if ! NTS_COMPAT
@@ -340,7 +340,7 @@ NtcThread(void *arg)
 	    if (fDebug) {
     	        Ns_Log(ok ? Notice : Warning, "nt: send %s/%s = %d: %s",
 			msgPtr->req.bucket, msgPtr->req.key,
-			msgPtr->req.value, ok ? "sent" : "requeued");
+			ntohl((uint32_t) msgPtr->req.value), ok ? "sent" : "requeued");
 	    }
 	}
 
