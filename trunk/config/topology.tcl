@@ -26,8 +26,6 @@ set Topology(frontend.nevalPort)        9600
 set Topology(frontend.nevalPassword)    "t2abr7Y/HAlzU"
 set Topology(frontend.ntAddress)        "127.0.0.1"
 set Topology(frontend.ntPort)           9500
-set Topology(frontend.npAddress)        "127.0.0.1"
-set Topology(frontend.npPort)           9400
 
 set Topology(tool.httpAddress)          "127.0.0.1"
 set Topology(tool.httpPort)             8000
