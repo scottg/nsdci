@@ -1,6 +1,4 @@
 
-= Topology =
-
 The bundled set up comes with three servers:
 
 The "tool" server is where all the services are hosted: Networked Poll, Networked Tally, Networked Rate, NV, etc.  You could just as easily create separate servers for each service - but for simplicity -  a single tool server has been used.
