@@ -44,38 +44,54 @@ proc generic.processTallies {key count total} {
 }
 }}}
 
+
 Send some votes to the Tally server:
 
+
 {{{
-[neon:~] Michael% telnet 0 <frontend Control Port> 
+[neon:/usr/local/aolserver] Michael% telnet localhost 9900
 Trying 127.0.0.1...
 Connected to localhost.
 Escape character is '^]'.
 login: 
 Password: 
 
-frontend:nscp 1> nt.send foo bar 5 
+Welcome to frontend running at /usr/local/aolserver/bin/nsd (pid 24171)
+AOLserver/4.5.0 (aolserver4_5) for osx built on Jan  4 2007 at 17:11:28
+CVS Tag: $Name:  $
+frontend:nscp 1> nt.send foo bar 5
 
 frontend:nscp 2> nt.send foo dork 1
 
-frontend:nscp 2>exit
+frontend:nscp 3> exit
+
+Goodbye!
+Connection closed by foreign host.
+[neon:/usr/local/aolserver] Michael%
 }}}
 
-You can dump the tally bucket to get to quick look at what will be processed:
+
+You can dump the tally bucket on the tool server to get a quick look at what will be processed:
+
 
 {{{
-[neon:~] Michael% telnet 0 <tool/tally Control Port> 
+[neon:/usr/local/aolserver] Michael% telnet 127.0.0.1 8900
 Trying 127.0.0.1...
 Connected to localhost.
 Escape character is '^]'.
 login: 
 Password: 
 
+Welcome to tool running at /usr/local/aolserver/bin/nsd (pid 24173)
+AOLserver/4.5.0 (aolserver4_5) for osx built on Jan  4 2007 at 17:11:28
+CVS Tag: $Name:  $
 tool:nscp 1> nt.dump foo
 {dork 1 1} {bar 1 5}
 }}}
 
+
 To process the tallies:
+
 
 {{{
 tool:nscp 2> nt.get foo generic.processTallies
