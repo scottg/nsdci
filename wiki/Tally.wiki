@@ -12,30 +12,40 @@ Client servers have configurable buffer which allows tallies to be collected eve
 
 === Server (tool) ===
 {{{
-ns_section ns/server/_server_/module/dci/nt
+set server      "server1"
+set rpcAddress  "127.0.0.1"
+set rpcPort     "8000"
+
+ns_section ns/server/$server/module/dci/nt
     ns_param debug 1
  
-ns_section ns/server/${serverName}/module/dci/nt/server
+ns_section ns/server/$server/module/dci/nt/server
     ns_param backupfile ntData.bak
  
-ns_section ns/server/${serverName}/module/dci/nt/server/clients
-    ns_param frontend ${frontendIPAddress}:${frontendRPCPort}
+ns_section ns/server/$server/module/dci/nt/server/clients
+    ns_param frontend $rpcAddress:$rpcPort
 }}}
 
 === Client (frontend) ===
 {{{
-ns_section ns/server/${serverName}/module/dci/nt
+ns_section ns/server/$server/module/dci/nt
     ns_param debug 1
 
-ns_section ns/server/${serverName}/module/dci/nt/client
-    ns_param address ${address}
-    ns_param port ${rpcPort}
+ns_section ns/server/$server/module/dci/nt/client
+    ns_param address $rpcAddress
+    ns_param port $rpcPort
     ns_param max 1000
 }}}
 
 == Usage ==
 
-To use tally, you have to have a callback loaded on AOLserver instance running the tally server.  Here is a sample tally callback proc.  Tally Callbacks must take "key count total" as arguments, in that order.  This callback *adds* the current counts and totals of a bucket to an *existing* [NV]:
+To use tally, you have to have a callback loaded on the AOLserver instance running the tally server. 
+
+Here is a sample tally Tcl callback. Tally callbacks use the following prototype:
+
+*tallyCallback* _key_ _count_ _total_
+
+The callback *adds* the current counts and totals of a bucket to an *existing* [NV]:
 {{{
     proc generic.processTallies {key count total} {
          if {[nv.cget nv ${key}.total oldTotal]} {
@@ -214,4 +224,3 @@ nt.peek
 nt.send
 
 = Best Practices =
-
