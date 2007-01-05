@@ -77,7 +77,7 @@ Any client can "get" data from the broker:
 ==Caching and Network Cache Flush==
 To optimize performance, nsob has the ability to cache at both the server and client. With caching turned on, the initial client request first looks into its own cache. If no entry is found it will make a call to the server.  If the server has caching turned on, it will first look in its cache.  If no entry is found, it will read from disk, make a cache entry, and return the data. The client API will make a cache entry and return the data.  
 
-Network Cache Flush ([NCF]) is another service availble in nsdci.  With the SOBs configured to send cache flush messages, remote client cache will be flushed when a sob entry is addded or changed. Note: You must configure NCF on the AOLserver instance hosting the SOB servers in order for the SOBs to send cache flush messages.
+Network Cache Flush ([NCF]) is another service availble in nsdci.  With the SOBs configured to send cache flush messages, the remote client cache will be flushed when a sob entry is addded or changed. Note: You must configure NCF on the AOLserver instance hosting the SOBs in order for the SOBs to send cache flush messages.
 
 There are significant performance gains from caching. Consider a fetch to "file.xml" which is 8KB:
 
@@ -105,7 +105,7 @@ If dubugging is turned on, you will see the following log entries in the tool.se
     [04/Jan/2007:20:48:02][24410.25212928][-nscp:3-] Notice: sob: sob: get file.xml - ok (cached)
 }}}
 
-The first entry shows that the data was fetched from the server, the second shows the data was retrieved from cache.  For information on debugging see the "Debugging RPC Connections" section in this article.
+The first entry shows that the data was fetched from the server, the second shows the data was retrieved from cache.  See the "Debugging RPC Connections" section for more information.
 
 ==TCL API==
 
