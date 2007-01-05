@@ -1,4 +1,4 @@
-= Networked Poll (np) =
+= Networked Poll (nps, nps2, npc, npc2) =
 
 == Introduction ==
 
