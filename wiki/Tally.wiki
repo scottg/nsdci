@@ -1,6 +1,6 @@
 = Networked Tally (nt) =
 
-== Introduction ==
+== Introduction: ==
 
 Network tally provides a simple mechanism for collecting counts from remote servers. Counts are stored for user-defined keys, which are grouped in buckets. 
 
@@ -8,7 +8,7 @@ The basic model is that front-end clients update tally counts for keys within bu
 
 Client servers have configurable buffer which allows tallies to be collected even if the back-end server is not available. The back-end server stores data on disk for persistent storage across restarts. It's important to note, however, that the backup file is only written at server exit in the case of a proper shutdown, or if additional code is written to explicitly backup the data.
 
-== Configuration ==
+== Configuration: ==
 
 === Server (tool) ===
 {{{
@@ -37,7 +37,7 @@ ns_section ns/server/$server/module/dci/nt/client
     ns_param max 1000
 }}}
 
-== Usage ==
+== Usage: ==
 
 To use tally, you have to have a callback loaded on the AOLserver instance running the tally server. 
 
@@ -46,17 +46,20 @@ Here is a sample tally Tcl callback. Tally callbacks use the following prototype
 *tallyCallback* _key_ _count_ _total_
 
 The callback *adds* the current counts and totals of a bucket to an *existing* [NV]:
+
 {{{
-    proc generic.processTallies {key count total} {
-         if {[nv.cget nv ${key}.total oldTotal]} {
-             incr total $oldTotal
-         }
-         if {[nv.cget nv ${key}.count oldCount]} {
-             incr count $oldCount
-         }
-         nv.set nv ${key}.total $total
-         nv.set nv ${key}.count $count
-     }
+proc tallyCallback {key count total} {
+    if {[nv.cget nv ${key}.total oldTotal]} {
+        incr total $oldTotal
+    }
+   
+    if {[nv.cget nv ${key}.count oldCount]} {
+        incr count $oldCount
+    }
+
+    nv.set nv ${key}.total $total
+    nv.set nv ${key}.count $count
+}
 }}}
 
 Buckets are self initializing.  Using the AOLserver Control Port, send some votes to the tally server. 
