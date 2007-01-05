@@ -188,64 +188,69 @@ Used to fetch data from the broker. If caching is enabled, the API will fetch fr
 --------------------------------------------------------------------------------
 }}}
 
+=== nsob.delete===
+Used to remove data from the broker. If sendflush is enabled, a ncf message will be sent to all clients.
 
-*nsob.delete:* Used to remove data from the broker. If sendflush is enabled, a ncf message will be sent to all clients.
-{{{
-     Example:
-         nsob.delete sob myFile
+*nsob.delete* _server key_
 
-     Arguments:
-         server - the name of the sob server
-         key - the file name (key) of the data
+|| *Argument* || *Description* ||
+|| _server_ || String. The name of the sob server. ||
+|| _key_ || String. The file name or key of the data. ||
  
-     Return:
-         void = success
-         TCL_ERROR = error
-}}}
 
-*nsob.names:* Used to list the names of the sobs configured.  Both clients and servers are listed.
+|| *Result* || *Description* ||
+|| {{{NULL}}} || Success. The file has been deleted. ||
+|| {{{TCL_ERROR}}} || Failure. An error occurred. See the server log for more information. ||
+
 {{{
-    Example:
-        nsob.names
-
-    Arguments:
-        none
-
-    Return:
-        TCL_LIST of configured sobs = Success
-        TCL_ERROR = error
+--------------------------------------------------------------------------------
 }}}
 
-*nsob.debug:* Used to toggle debug mode. Debug mode adds log messages for many nsob commands.
+
+=== nsob.names === 
+Used to list the names of the configured SOBs.  Both clients and servers are listed.
+
+*nsob.names*
+
+|| *Result* || *Description* ||
+|| {{{String}}} || Success. The names of the configured SOBs in TCL_LIST format . ||
+|| {{{TCL_ERROR}}} || Failure. An error occurred. See the server log for more information. ||
+
 {{{
-    Example:
-        nsob.debug 1 (turns on debugging)
-        nsob.debug 0 (turns off debugging)
-        nsob.debug (returns debug value)
-
-    Arguments:
-        boolean: 1 = turn on, 0 = turn off
-        none
-
-    Return:
-        boolean: 1 = success, 0 = fail
-        when no argument is given the reuturn is the current setting
+--------------------------------------------------------------------------------
 }}}
 
-*nsob.copy:* Used to copy the contents of a local file to the borker.  If sendflush is enabled, a ncf message will be sent to all clients.
+
+===nsob.debug=== 
+Used to toggle debug mode. Debug mode adds log messages for many nsob commands.
+
+*nsob.debug* _?boolean?_
+
+|| *Argument* || *Description* ||
+|| _?boolean?_ || Boolean. Optional. Specifies whether or not debugging is enabled. ||
+
+
+|| *Result* || *Description* ||
+|| {{{1}}} || Success. Returned if boolean was specified. ||
+|| {{{boolean}}} || Success. If a boolean was not specified, then the current debug value is returned. ||
+
 {{{
-    Example:
-        nsob.copy myLocalFile.txt sob mySobFile
-
-    Arguments:
-        file - the full path of the local file
-        server - the sob server to be used
-        key - the key/file name on the sob server
-
-    Return:
-        VOID = sucess
-        TCL_ERROR = error
+--------------------------------------------------------------------------------
 }}}
+
+== nsob.copy==
+Used to copy the contents of a local file to the borker.  If sendflush is enabled, a ncf message will be sent to all clients.
+
+*nsob.copy* _localFile server key_
+
+|| *Argument* || *Description* ||
+|| _localFile_ || String. The complete file path to the file. ||
+|| _server_ || String. The name of the sob server. ||
+|| _key_ || String. The file name or key of the data. ||
+
+|| *Result* || *Description* ||
+|| {{{NULL}}} || Success. The file was copied to the server. ||
+|| {{{TCL_ERROR}}} || Failure. An error occurred. See the server log for more information. ||
 
 ==Best Practices ==
 Special attention should be paid to the RPC stats.  The size of each sob file, combined with the number of clients and number of sob calls on a page can decrease performance and/or cause socket drops and timeouts. The AOLserver stats interface can be used to measure RPC socket performance and should be monitored regularly.
@@ -253,6 +258,7 @@ Special attention should be paid to the RPC stats.  The size of each sob file, c
 Caching should be used where possible to optimize performance. The AOLserver Stats interface has insight to Cache-hit-rate information and should be used to measure the performance of the sob cache.  A high cache-hit-rate is preferred.
 
 You might find that flowing content one way per server gives better performance.  For example, one server brokering data from the tool server to the frontned, and a second from the frontend to the tool server would perform better than one server doing both.
+
 
 
 
