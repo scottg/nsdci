@@ -230,9 +230,52 @@ Used to copy the contents of a local file to the borker.  If sendflush is enable
 || {{{NULL}}} || Success. The file was copied to the server. ||
 || {{{TCL_ERROR}}} || Failure. An error occurred. See the server log for more information. ||
 
-==Best Practices ==
+==Best Practices==
 The size of each sob file, combined with the number of clients and number of sob calls on a page can decrease performance and/or cause socket drops and timeouts. The AOLserver stats interface can be used to measure RPC socket performance and should be monitored regularly.
 
 Caching should be used where possible to optimize performance. The AOLserver Stats interface has insight to Cache-hit-rate information and should be used to measure the performance of the sob cache.  A high cache-hit-rate is preferred.
 
 You might find that flowing content one way per server gives better performance.  For example, one server brokering data from the tool server to the frontned, and a second from the frontend to the tool server would perform better than one server doing both.
+
+==Debugging==
+When using rpc, a reverse conenction is established with the sob server connecting to the sob clients.  When a client starts up, it begins to listen on its rpc port:
+{{{
+    [05/Jan/2007:15:45:16][25101.2684407744][-main-] Notice: rpc: listening on 127.0.0.1:9800
+}}}
+When the SOB server establishins a connection, a log entry is made:
+{{{
+    [05/Jan/2007:15:46:50][25101.25191424][-rpclisten-] Notice: rpc[nsobc:sob:0]: accepted connection: 127.0.0.1
+}}}
+The conenction is also seen in the sob server log:
+{{{
+    [05/Jan/2007:15:46:50][25103.25190400][rps:nsobc:sob] Notice: frontend: connected to 127.0.0.1:9800
+}}}
+By turning on nsob.debug on the frontend server, we can see each nsob request:
+{{{
+    [05/Jan/2007:15:52:33][25101.25169920][-nscp:1-] Notice: sob: sob: get file.xml - ok
+    [05/Jan/2007:15:55:20][25101.25169920][-nscp:1-] Notice: sob: sob: get file.xml - ok (cached)
+}}}
+You can see that the first time the file was called it was pulled from the server - the second was pulled from the cache.  Similar log entries are were made on the server side:
+{{{
+    [05/Jan/2007:15:52:33][25103.25190400][rps:nsobc:sob] Notice: read: file.xml
+}}}
+If the frontend server goes down, you can see the connection drop and the sob server try to restablish the connection.
+{{{
+    [05/Jan/2007:15:57:24][25103.25190400][rps:nsobc:sob] Warning: frontend: dropped
+    [05/Jan/2007:15:57:25][25103.25190400][rps:nsobc:sob] Warning: frontend: connect to 127.0.0.1:9800 failed
+}}}
+Connection retires will occure every few seconds.  When the frontend server comes back up the connections will be reestablished.  The frontend no longer has file.xml in cache:
+{{{
+    [05/Jan/2007:16:02:55][25111.25169920][-nscp:1-] Notice: sob: sob: get file.xml - ok
+}}}
+But the server DOES still have it in cache:
+{{{
+    [05/Jan/2007:16:02:55][25103.25190400][rps:nsobc:sob] Notice: read: file.xml (cached)
+}}}
+    
+    
+
+
+
+
+
