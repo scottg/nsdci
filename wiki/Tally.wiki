@@ -12,25 +12,25 @@ Client servers have configurable buffer which allows tallies to be collected eve
 
 === Server (tool) ===
 {{{
-ns_section ns/server/$server/module/dci/nt
-    ns_param debug 1
+    ns_section ns/server/$server/module/dci/nt
+        ns_param debug 1
  
-ns_section ns/server/$server/module/dci/nt/server
-    ns_param backupfile ntData.bak
+    ns_section ns/server/$server/module/dci/nt/server
+        ns_param backupfile ntData.bak
  
-ns_section ns/server/$server/module/dci/nt/server/clients
-    ns_param frontend $rpcAddress:$rpcPort
+    ns_section ns/server/$server/module/dci/nt/server/clients
+        ns_param frontend $rpcAddress:$rpcPort
 }}}
 
 === Client (frontend) ===
 {{{
-ns_section ns/server/$server/module/dci/nt
-    ns_param debug 1
+    ns_section ns/server/$server/module/dci/nt
+        ns_param debug 1
 
-ns_section ns/server/$server/module/dci/nt/client
-    ns_param address $rpcAddress
-    ns_param port $rpcPort
-    ns_param max 1000
+    ns_section ns/server/$server/module/dci/nt/client
+        ns_param address $rpcAddress
+        ns_param port $rpcPort
+        ns_param max 1000
 }}}
 
 == Usage: ==
@@ -53,24 +53,24 @@ In order to effectively use tally, you'll need to write your own callback Tcl fu
 The following example *adds* the current counts and totals of a bucket to an *existing* [NV].
 
 {{{
-proc tallyCallback {key count total} {
-    if {[nv.cget nv ${key}.total oldTotal]} {
-        incr total $oldTotal
-    }
+    proc tallyCallback {key count total} {
+        if {[nv.cget nv ${key}.total oldTotal]} {
+            incr total $oldTotal
+        }
    
-    if {[nv.cget nv ${key}.count oldCount]} {
-        incr count $oldCount
-    }
+        if {[nv.cget nv ${key}.count oldCount]} {
+            incr count $oldCount
+        }
 
-    nv.set nv ${key}.total $total
-    nv.set nv ${key}.count $count
-}
+        nv.set nv ${key}.total $total
+        nv.set nv ${key}.count $count
+    }   
 }}}
 
 Buckets are self initializing.  Using the AOLserver Control Port, send some votes to the tally server. 
 
 {{{
-    [neon:/usr/local/aolserver] Michael% telnet localhost 9900
+    % telnet localhost 9900
     Trying 127.0.0.1...
     Connected to localhost.
     Escape character is '^]'.
@@ -83,18 +83,12 @@ Buckets are self initializing.  Using the AOLserver Control Port, send some vote
     frontend:nscp 1> nt.send myBucket bar 5
  
     frontend:nscp 2> nt.send myBucket dork 1
- 
-    frontend:nscp 3> exit
- 
-    Goodbye!
-    Connection closed by foreign host.
-    [neon:/usr/local/aolserver] Michael%
 }}}
 
 You can dump the tally bucket on the tool server to get a quick look at what will be processed:
 
 {{{
-    [neon:/usr/local/aolserver] Michael% telnet 127.0.0.1 8900
+    telnet 127.0.0.1 8900
     Trying 127.0.0.1...
     Connected to localhost.
     Escape character is '^]'.
@@ -128,28 +122,21 @@ Notice that the runtime data structure has been updated and the tally reset. In 
 
 You can use the ns schedule API to schedule the sweep as needed.
 
-= Tcl API =
+== Tcl API: ==
 
 == nt.debug (client, server) ==
 
 Used to retrieve the current debug value, or to set a new debug value.
 
-=== Prototype ===
-
 *nt.debug* _?boolean?_
-
-=== Arguments ===
 
 || *Argument* || *Description* ||
 || _?boolean?_ || Boolean. Optional. Specifies whether or not debugging is enabled. ||
 
-=== Results ===
 
 || *Result* || *Description* ||
 || {{{1}}} || Success. Returned if a boolean was specified. ||
 || {{{BOOLEAN}}} || Success. If a boolean was not specified, then the current debug value is returned. ||
-
-=== Examples ===
 
 {{{
 nt.debug
