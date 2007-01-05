@@ -59,22 +59,6 @@ frontend:nscp 3> exit
 
 Goodbye!
 Connection closed by foreign host.
-[neon:/usr/local/aolserver] Michael% telnet 127.0.0.1 8900
-Trying 127.0.0.1...
-Connected to localhost.
-Escape character is '^]'.
-login: 
-Password: 
-
-Welcome to tool running at /usr/local/aolserver/bin/nsd (pid 24173)
-AOLserver/4.5.0 (aolserver4_5) for osx built on Jan  4 2007 at 17:11:28
-CVS Tag: $Name:  $
-tool:nscp 1> nsob.get sob myOtherSobFile
-my other sob data
-tool:nscp 2> exit
-
-Goodbye!
-Connection closed by foreign host.
 [neon:/usr/local/aolserver] Michael%
 }}}
 
