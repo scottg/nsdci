@@ -108,7 +108,37 @@ You can use the ns schedule API to schedule the sweep as needed.
 
 = Tcl API =
 
-== nt.send ==
+== nt.debug (client, server) ==
+
+Used to retrieve the current debug value, or to set a new debug value.
+
+=== Prototype ===
+
+*nt.debug* _?boolean?_
+
+=== Arguments ===
+
+|| *Argument* || *Description* ||
+|| _?boolean?_ || Boolean. Optional. Specifies whether or not debugging is enabled. ||
+
+=== Results ===
+
+|| *Result* || *Description* ||
+|| {{{1}}} || Success. Returned if a boolean was specified. ||
+|| {{{BOOLEAN}}} || Success. If a boolean was not specified, then the current debug value is returned. ||
+
+=== Examples ===
+
+{{{
+nt.debug
+nt.debug false
+}}}
+
+{{{
+--------------------------------------------------------------------------------
+}}}
+
+== nt.send (client)==
 
 Used to set key/value pairs for a given bucket name.
 
@@ -122,6 +152,7 @@ Used to set key/value pairs for a given bucket name.
 || _bucket_ || String. Name of the tally bucket. ||
 || _key_ || String. Name of the key to set in the specified bucket. ||
 || _value_ || Integer. The count to set for the specified key, in the specified bucket. ||
+
 
 === Results ===
 
@@ -137,9 +168,25 @@ nt.send clicks index 1
 nt.send clicks photos.html 10
 }}}
 
+{{{
+--------------------------------------------------------------------------------
+}}}
+
+== nt.dump (server) ==
+
+Used to dump the contents of a bucket. This does not reset the bucket.
+
+=== Prototype ===
+
 *nt.dump* _?boolean?_ 
 
-== Server ==
+=== Arguments ===
+
+=== Results ===
+
+{{{
+--------------------------------------------------------------------------------
+}}}
 
 *nt.exists* _bucket_
 
@@ -163,4 +210,6 @@ nt.peek
 nt.send
 
 = Best Practices =
+
+
 
