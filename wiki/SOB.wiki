@@ -146,7 +146,7 @@ The first entry shows that the data was fetched from the server, the second show
  
      Return:
          void = success
-         error string = error
+         TCL_ERROR = error
 }}}
 
 *nsob.append:* Used to append data on the broker. If sendflush is enabled, a ncf message will be sent to all clients.
@@ -161,7 +161,7 @@ The first entry shows that the data was fetched from the server, the second show
  
      Return:
          void = success
-         error string = error
+         TCL_ERROR = error
 }}}
 
 *nsob.get:* Used to fetch data from the broker. If caching is enabled, the API will fetch from cache if exists, and make a cache entry if it does not.
@@ -175,7 +175,7 @@ The first entry shows that the data was fetched from the server, the second show
 
     Return:
         The contents of the file/key = success
-        TCL_ERROR string = error
+        TCL_ERROR = error
 }}}
 
 *nsob.delete:* Used to remove data from the broker. If sendflush is enabled, a ncf message will be sent to all clients.
@@ -189,7 +189,7 @@ The first entry shows that the data was fetched from the server, the second show
  
      Return:
          void = success
-         error string = error
+         TCL_ERROR = error
 }}}
 
 *nsob.names:* Used to list the names of the sobs configured.  Both clients and servers are listed.
@@ -201,8 +201,8 @@ The first entry shows that the data was fetched from the server, the second show
         none
 
     Return:
-        TCL_LIST = Success
-        error string = error
+        TCL_LIST of configured sobs = Success
+        TCL_ERROR = error
 }}}
 
 *nsob.debug:* Used to toggle debug mode. Debug mode adds log messages for many nsob commands.
