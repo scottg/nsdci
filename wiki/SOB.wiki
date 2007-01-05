@@ -104,8 +104,27 @@ We can also "get" the data from any "sob" client:
 
 To optimize performance, SOB has the ability to cache at both the server level and client level. With caching turned on the initial client request first looks into its own cache. If no entry is found it will make a call to the server.  If the server has caching turned on, it will first look in its cache.  If no entry is found, it will read from disk, make a cache entry, and return the data. The client API will make a cache entry and return the data.  
 
-Network Cache Flush (NCF) is another service availble in nsdci.  With the SOBs configured to send cache flush messages, remote client cache will be flushed when the sob entry is changed using nsob.put.  See <article> for information on NCF.
+Network Cache Flush (NCF) is another service availble in nsdci.  With the SOBs configured to send cache flush messages, remote client cache will be flushed when the sob entry is changed using nsob.put.  See <article> for information on NCF. You must configure NCF on the SOB AOLserver instance in order for the SOBs to send NCFs.
 
-Note: You must configure NCF on the SOB AOLserver instance in order for the SOBs to send NCFs.
+The performance gains are obvious. file.xml is 8KB:
+
+{{{
+ [neon:/tmp/sob] Michael% telnet 127.0.0.1 8900
+ Trying 127.0.0.1...
+ Connected to localhost.
+ Escape character is '^]'.
+ login: 
+ Password: 
+ 
+ Welcome to tool running at /usr/local/aolserver/bin/nsd (pid 24410)
+ AOLserver/4.5.0 (aolserver4_5) for osx built on Jan  4 2007 at 17:11:28
+ CVS Tag: $Name:  $
+ tool:nscp 1> time {nsob.get sob file.xml}
+ 555 microseconds per iteration
+ tool:nscp 2> time {nsob.get sob file.xml} 100
+ 79.08 microseconds per iteration
+ tool:nscp 3> 
+}}}
 
 = Best Practices =
+
