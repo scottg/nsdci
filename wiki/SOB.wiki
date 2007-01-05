@@ -167,19 +167,27 @@ Used to append data on the broker. If sendflush is enabled, a ncf message will b
 {{{
 --------------------------------------------------------------------------------
 }}}
-*nsob.get:* Used to fetch data from the broker. If caching is enabled, the API will fetch from cache if exists, and make a cache entry if it does not.
+
+=== nsob.get ===
+Used to fetch data from the broker. If caching is enabled, the API will fetch from cache if exists, and make a cache entry if it does not.
+
+*nsob.get* _server key_
+
+
+|| *Argument* || *Description* ||
+|| _server_ || String. The name of the sob server. ||
+|| _key_ || String. The file name or key of the data. ||
+
+
+|| *Result* || *Description* ||
+|| {{{STRING}}} || Success. The contents of the file. ||
+|| {{{NULL}}} || Success. The communication was successful, but there was no such key. ||
+|| {{{TCL_ERROR}}} || Failure. An error occurred. See the server log for more information. ||
+
 {{{
-    Example:
-        nsob.get sob myFile
-
-    Arguments:
-        server - the name of the sob server
-        key - the file name (key) of the data
-
-    Return:
-        The contents of the file/key = success
-        TCL_ERROR = error
+--------------------------------------------------------------------------------
 }}}
+
 
 *nsob.delete:* Used to remove data from the broker. If sendflush is enabled, a ncf message will be sent to all clients.
 {{{
@@ -245,5 +253,7 @@ Special attention should be paid to the RPC stats.  The size of each sob file, c
 Caching should be used where possible to optimize performance. The AOLserver Stats interface has insight to Cache-hit-rate information and should be used to measure the performance of the sob cache.  A high cache-hit-rate is preferred.
 
 You might find that flowing content one way per server gives better performance.  For example, one server brokering data from the tool server to the frontned, and a second from the frontend to the tool server would perform better than one server doing both.
+
+
 
 
