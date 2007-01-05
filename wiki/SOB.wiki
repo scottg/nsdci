@@ -26,7 +26,7 @@ tool:nscp 1> nsob.put sob mySobFile "my sob data"
 tool:nscp 2>
 }}}
 
-Because the tool server is also a client of the "sob" type sob server, we can also "get" the data:
+We can also "get" the data:
 
 {{{
 tool:nscp 2> nsob.get sob mySobFile
@@ -36,6 +36,46 @@ tool:nscp 3> exit
 Goodbye!
 Connection closed by foreign host.
 [neon:/usr/local/aolserver] Michael% 
+}}}
+
+Other clients the "sob" SOB server may also "get" and "put" data:
+
+{{{
+[neon:/usr/local/aolserver] Michael% telnet 127.0.0.1 9900
+Trying 127.0.0.1...
+Connected to localhost.
+Escape character is '^]'.
+login: 
+Password: 
+
+Welcome to frontend running at /usr/local/aolserver/bin/nsd (pid 24171)
+AOLserver/4.5.0 (aolserver4_5) for osx built on Jan  4 2007 at 17:11:28
+CVS Tag: $Name:  $
+frontend:nscp 1> nsob.get sob mySobFile
+my sob data
+frontend:nscp 2> nsob.put sob myOtherSobFile "my other sob data"
+
+frontend:nscp 3> exit
+
+Goodbye!
+Connection closed by foreign host.
+[neon:/usr/local/aolserver] Michael% telnet 127.0.0.1 8900
+Trying 127.0.0.1...
+Connected to localhost.
+Escape character is '^]'.
+login: 
+Password: 
+
+Welcome to tool running at /usr/local/aolserver/bin/nsd (pid 24173)
+AOLserver/4.5.0 (aolserver4_5) for osx built on Jan  4 2007 at 17:11:28
+CVS Tag: $Name:  $
+tool:nscp 1> nsob.get sob myOtherSobFile
+my other sob data
+tool:nscp 2> exit
+
+Goodbye!
+Connection closed by foreign host.
+[neon:/usr/local/aolserver] Michael%
 }}}
 
 = Caching and NCF =
