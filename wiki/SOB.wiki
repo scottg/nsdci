@@ -4,13 +4,9 @@
 The Networked Small Object Broker (nsob) is used to broker content between servers.  The following article will discuss configuration, usage and caching, the TCL API, and best practices.
 
 == Configuration ==
-The bundled set up has a single AOLserver instance brokering many different SOB servers.  You could easily break out each SOB server to its own AOLserver instance.  You can configure nsob to connect over RPC or HTTP:
+The bundled set up has a single AOLserver instance brokering many different SOB servers.  You could easily break out each SOB server to its own AOLserver instance.  Below is a simple configuration using HTTP:
 
-=== RPC Server (sob) ===
-
-=== RPC Client (frontend, tools) ===
-
-=== HTTP Server (sob) ===
+=== Server (sob) ===
 {{{
     ns_section "ns/server/${server}/module/dci/sob/sobs"
         ns_param sob 0
@@ -31,7 +27,7 @@ The bundled set up has a single AOLserver instance brokering many different SOB 
         ns_param frontend ${frontendAddress}:$(frontendRpcPort}
 }}}
 
-=== HTTP Client (frontend, tool) ===
+=== Client (frontend, tool) ===
 {{{
     ns_section "ns/server/${server}/module/dci/sob/sobs"
         ns_param sob 0
@@ -50,6 +46,12 @@ The bundled set up has a single AOLserver instance brokering many different SOB 
         ns_param cachesize 1000000
         ns_param debug 1
 }}}
+
+You can also configure nsom to connect over RPC:
+
+=== Server (sob) ===
+
+=== Client (frontend, tool) ===
 
 == Usage ==
 Any client can "put" data on the broker. The "put" command requires "server, key, and value" as arguments. Use the AOLserver Control Port to test the commands:
