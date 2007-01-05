@@ -1,7 +1,8 @@
 set home [file dirname [ns_info config]]
-set pageRoot $home/servers/$server/pages
 
 regsub -all "/etc" $home "" home
+
+set pageRoot $home/servers/$server/pages
 
 ns_section "ns/parameters"
     ns_param home $home
