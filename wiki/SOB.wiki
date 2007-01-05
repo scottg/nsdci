@@ -31,7 +31,11 @@ Because the tool server is also a client of the "sob" type sob server, we can re
 {{{
 tool:nscp 2> nsob.get sob mySobFile
 my sob data
-tool:nscp 3> 
+tool:nscp 3> exit
+
+Goodbye!
+Connection closed by foreign host.
+[neon:/usr/local/aolserver] Michael% 
 }}}
 
 = Caching and NCF =
