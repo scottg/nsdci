@@ -12,10 +12,6 @@ Client servers have configurable buffer which allows tallies to be collected eve
 
 === Server (tool) ===
 {{{
-set server      "server1"
-set rpcAddress  "127.0.0.1"
-set rpcPort     "8000"
-
 ns_section ns/server/$server/module/dci/nt
     ns_param debug 1
  
