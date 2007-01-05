@@ -259,12 +259,12 @@ You can see that the first time the file was fetched it was fetched from the ser
 {{{
     [05/Jan/2007:15:52:33][25103.25190400][rps:nsobc:sob] Notice: read: file.xml
 }}}
-If the client server goes down, you can see the connection drop and an attempt to reconnect:
+If the client server goes down, you can see the connection drop, and an attempt to reconnect:
 {{{
     [05/Jan/2007:15:57:24][25103.25190400][rps:nsobc:sob] Warning: frontend: dropped
     [05/Jan/2007:15:57:25][25103.25190400][rps:nsobc:sob] Warning: frontend: connect to 127.0.0.1:9800 failed
 }}}
-Connection retires will occur every few seconds.  When connection is reestablished the client's cache is empty:
+Connection retires will occur every few seconds.  When the client comes back up, and a connection is reestablished, the client's cache is empty:
 {{{
     [05/Jan/2007:16:02:55][25111.25169920][-nscp:1-] Notice: sob: sob: get file.xml - ok
 }}}
