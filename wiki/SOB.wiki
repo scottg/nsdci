@@ -242,7 +242,7 @@ When a sob client starts up, it begins to listen on its rpc port:
 {{{
     [05/Jan/2007:15:45:16][25101.2684407744][-main-] Notice: rpc: listening on 127.0.0.1:9800
 }}}
-The SOB server then conencts and a log entry is made:
+The SOB server then conencts:
 {{{
     [05/Jan/2007:15:46:50][25101.25191424][-rpclisten-] Notice: rpc[nsobc:sob:0]: accepted connection: 127.0.0.1
 }}}
@@ -255,16 +255,16 @@ By turning on nsob.debug on the client, we can see each nsob request:
     [05/Jan/2007:15:52:33][25101.25169920][-nscp:1-] Notice: sob: sob: get file.xml - ok
     [05/Jan/2007:15:55:20][25101.25169920][-nscp:1-] Notice: sob: sob: get file.xml - ok (cached)
 }}}
-You can see that the first time the file was called it was pulled from the server - the second was pulled from the client's cache.  A Similar log entry was made on server:
+You can see that the first time the file was called it was pulled from the server.  The second time it was pulled from the cache.  A Similar log entry was made on server indicating it had to read the contents from disk:
 {{{
     [05/Jan/2007:15:52:33][25103.25190400][rps:nsobc:sob] Notice: read: file.xml
 }}}
-If the frontend server goes down, you can see the connection drop and the server try to restablish the connection witht he client:
+If the client server goes down, in the server's log you can see the connection drop and the server try to restablish the connection witht he client:
 {{{
     [05/Jan/2007:15:57:24][25103.25190400][rps:nsobc:sob] Warning: frontend: dropped
     [05/Jan/2007:15:57:25][25103.25190400][rps:nsobc:sob] Warning: frontend: connect to 127.0.0.1:9800 failed
 }}}
-Connection retires will occure every few seconds.  When the client comes back up the cache is empty so all requesrs will go to the server:
+Connection retires will occure every few seconds.  When connection is reestablished the client's cache is empty:
 {{{
     [05/Jan/2007:16:02:55][25111.25169920][-nscp:1-] Notice: sob: sob: get file.xml - ok
 }}}
@@ -273,8 +273,9 @@ However the server never went down, so it has the file in cahce and does not nee
     [05/Jan/2007:16:02:55][25103.25190400][rps:nsobc:sob] Notice: read: file.xml (cached)
 }}}
 
+If sendflush is turned on, the server will send a flush message to the clients when it estabishes a connection to ensure that old cache entrties are not used.
+
 Keep in mnd that dcirpc uses a reverse connection. The servers conenct to the clients.  This is true off all services running on dcirpc (Tally, nrate, sob, etc).  By using debug, you can gain insight into caching.  By tailing the log you see the staus of the connections.
     
-
 
 
