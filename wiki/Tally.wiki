@@ -110,7 +110,7 @@ You can use the ns schedule API to schedule the sweep as needed.
 
 == Client ==
 
-*nt.send* _bucket_ _key_ _value_
+= *nt.send* _bucket_ _key_ _value_ =
 
 === Description ===
 
@@ -127,7 +127,8 @@ Used to set key/value pairs for a given bucket name.
 
 || *Result* || *Description* ||
 || NULL || Success. The result was successfully written to the nt server. Buckets are created and initialized on the fly as needed. ||
-|| TCL_ERROR || Failure. An error occurred. See the server log for more information. ||
+|| TCL___ERROR || Failure. An error occurred. See the server log for more information. ||
+
 
 === Examples ===
 
