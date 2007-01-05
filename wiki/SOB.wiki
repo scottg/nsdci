@@ -238,10 +238,6 @@ The first entry shows that the data was fetched from the server, the second show
 
 = Best Practices =
 
+Special attention should be paid to the RPC stats.  The size of each sob file, combined with the number of clients and number of sob calls on a page can decrease performance and/or cause socket drops and timeouts. The AOLserver stats interface can be used to measure RPC socket performance and should be monitored regularly.
 
-
-
-
-
-
-
+Caching should be used where possible to optimize performance. The AOLserver Stats interface has insight to Cache-hit-rate information and should be used to measure the performance of the sob cache.  A high cache-hit-rate is preferred.
