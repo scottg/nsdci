@@ -8,7 +8,7 @@ The bundled set up has a single AOLserver instance called "sob" brokering many d
 
 = Usage =
 
-From the tool server we can "put" data on the broker. The "put" command requires a serverName, key, and value as argument. In the following example we are using a SOB server called "sob".
+From the tool server we can "put" data on the broker. The "put" command requires "server, key, and value" as arguments. In the following example we are using a server called "sob".
 
 {{{
 [neon:/usr/local/aolserver] Michael% telnet 127.0.0.1 8900
@@ -37,4 +37,3 @@ tool:nscp 3>
 = Caching and NCF =
 
 = Best Practices =
-
