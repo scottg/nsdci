@@ -134,7 +134,7 @@ The first entry shows that the data was fetched from the server, the second show
 
 = TCL API =
 
-*nsob.put:* Used to put data from a client to the broker.
+*nsob.put:* Used to put data from a client to the broker. If sendflush is enabled, a ncf message will be sent to all clients.
 {{{
      Example:
          nsob.put sob myFile "some data"
@@ -149,9 +149,34 @@ The first entry shows that the data was fetched from the server, the second show
          error string = error
 }}}
 
-nsob.delete 
+*nsob.append:* Used to append data on the broker. If sendflush is enabled, a ncf message will be sent to all clients.
+{{{
+     Example:
+         nsob.append sob myFile " MORE data"
 
-nsob.append 
+     Arguments:
+         server - the name of the sob server
+         key - the file name (key) of the data
+         data - what to append to the file
+ 
+     Return:
+         void = success
+         error string = error
+}}}
+
+*nsob.delete:* Used to remove data from the broker. If sendflush is enabled, a ncf message will be sent to all clients.
+{{{
+     Example:
+         nsob.delete sob myFile
+
+     Arguments:
+         server - the name of the sob server
+         key - the file name (key) of the data
+ 
+     Return:
+         void = success
+         error string = error
+}}}
 
 nsob.names 
 
