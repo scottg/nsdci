@@ -242,7 +242,7 @@ When a sob client starts up, it begins to listen on its rpc port:
 {{{
     [05/Jan/2007:15:45:16][25101.2684407744][-main-] Notice: rpc: listening on 127.0.0.1:9800
 }}}
-The SOB server then connects:
+The sob server then connects:
 {{{
     [05/Jan/2007:15:46:50][25101.25191424][-rpclisten-] Notice: rpc[nsobc:sob:0]: accepted connection: 127.0.0.1
 }}}
@@ -268,7 +268,7 @@ Connection retires will occur every few seconds.  When connection is reestablish
 {{{
     [05/Jan/2007:16:02:55][25111.25169920][-nscp:1-] Notice: sob: sob: get file.xml - ok
 }}}
-However the server never went down, so it has the file in cahce and does not need to read from disk:
+However, the sob server never went down, so it has the file in cahce and does not need to read from disk:
 {{{
     [05/Jan/2007:16:02:55][25103.25190400][rps:nsobc:sob] Notice: read: file.xml (cached)
 }}}
