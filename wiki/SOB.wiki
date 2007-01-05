@@ -257,4 +257,8 @@ Caching should be used where possible to optimize performance. The AOLserver Sta
 You might find that flowing content one way per server gives better performance.  For example, one server brokering data from the tool server to the frontned, and a second from the frontend to the tool server would perform better than one server doing both.
 
 == Debugging ==
-RPC is used as the connection over which nsob communicates.  The connection is reversed so the cli
+RPC is used as the connection over which nsob communicates.  The connection is reversed so the server tries to connect to the clients.  At start up the clients start listening on their RPC port.  Here is a log entry for the "frontend" server:
+
+    [05/Jan/2007:10:08:12][24881.2684407744][-main-] Notice: rpc: listening on 127.0.0.1:9800
+
+
