@@ -257,28 +257,9 @@ Caching should be used where possible to optimize performance. The AOLserver Sta
 You might find that flowing content one way per server gives better performance.  For example, one server brokering data from the tool server to the frontned, and a second from the frontend to the tool server would perform better than one server doing both.
 
 == Debugging ==
-RPC is used as the connection over which nsob communicates.  The connection is reversed so the server tries to connect to the clients.  At start up the clients start listening on their RPC port.  
+You can configure RPC or HTTP as the connection type for nsob.
 
-Here is a log entry for the "frontend" server:
+===RPC===
 
-    [05/Jan/2007:10:08:12][24881.2684407744][-main-] Notice: rpc: listening on 127.0.0.1:9800
 
-The server then connects to it.  Here is a log entry from the "sob" server:
-
-    [05/Jan/2007:13:59:28][24870.25190400][rps:nsobc:sob] Notice: frontend: connected to 127.0.0.1:9800
-
-If the client restarts or goes down you will see the drop in the log:
-
-    [05/Jan/2007:14:00:44][24870.25190400][rps:nsobc:sob] Warning: frontend: dropped
-
-If nsob.debug has been turned on, you will also see the server trying to restablish a connection every few seconds:
-
-    [05/Jan/2007:14:01:44][24870.25190400][rps:nsobc:sob] Warning: frontend: connect to 127.0.0.1:9800 failed
-
-Bringing up the frontend again would reestablish the needed connection:
-
-    [05/Jan/2007:14:03:15][24870.25190400][rps:nsobc:sob] Notice: frontend: connected to 127.0.0.1:9800
-
-You would also see a log entry on the frontend:
-
-    [05/Jan/2007:14:03:15][24909.25191424][-rpclisten-] Notice: rpc[nsobc:sob:0]: accepted connection: 127.0.0.1
+===HTTP===
