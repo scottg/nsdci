@@ -385,9 +385,11 @@ Dci_RpcCreateClient(char *server, char *module, char *name, int timeout)
         if (!Ns_ConfigGetInt(path, "httpnumconnections", &rpcPtr->httpAvail)) {
             rpcPtr->httpAvail = 1;
         }
-        Ns_Log(Notice, "rpc[%s]: listening on %s:%d (HTTP)", name, rpcPtr->addr,rpcPtr->port);
+        Ns_Log(Notice, "rpc[%s]: sending to http://%s:%d/%s (HTTP)", name, rpcPtr->addr, rpcPtr->port, name);
     } else {
         rpcPtr->httpAvail = 0;
+        Ns_Log(Notice, "rpc[%s]: sending to %d (DCIRPC)", name, rpcPtr->port);
+        
     }
     return (Dci_Rpc *) rpcPtr;
 }
@@ -444,7 +446,9 @@ Dci_RpcCreateServer(char *server, char *module, char *name, char *handshake,
     	Ns_DStringVarAppend(&ds, "/", name, NULL);
     	Ns_RegisterRequest(server, method, ds.string, RpsRequest, NULL,
 		           rpsPtr, 0);
-	Ns_Log(Notice, "rpc[%s]: registered: %s %s", name, method, ds.string);
+	Ns_Log(Notice, "rpc[%s]: recieving %s (HTTP)", name, ds.string);
+    } else {
+        Ns_Log(Notice, "rpc[%s]: recieving (DCIRPC)");
     }
     if (clients != NULL && Ns_SetSize(clients) > 0) {
     	Ns_DStringTrunc(&ds, 0);
