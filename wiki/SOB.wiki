@@ -140,7 +140,6 @@ Used to put data from a client to the broker. If sendflush is enabled, a ncf mes
 || _value_ || String. Data ||
  
 
-
 || *Result* || *Description* ||
 || {{{VOID}}} || Success ||
 || {{{TCL_ERROR}}} || Failure. An error occurred. See the error string or the server log for more information. ||
