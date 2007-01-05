@@ -1,34 +1,34 @@
-= Networked SOB (nsob) =
+=Networked SOB (nsob)=
 
-== Introduction ==
+==Introduction==
 The Networked Small Object Broker (nsob) is used to broker content between servers.  The following article will discuss configuration, usage and caching, the TCL API, and best practices.
 
-== Configuration ==
+==Configuration==
 The bundled set up has a single AOLserver instance brokering many different SOB servers.  You could easily break out each SOB server to its own AOLserver instance.  Below is a simple configuration using RPC:
 
-=== Server (sob) using RPC ===
+===Server (sob) using RPC===
 {{{
 
 }}}
 
-=== Client (frontend, tool) using RPC ===
+===Client (frontend, tool) using RPC===
 {{{
 
 }}}
 
-You can also configure nsob to connect over HTTP.  A bennifit of HTTP is that each client will connect over the same socket. In RPC, each client is a separate socket connection.
+You can also configure nsob to connect over HTTP.  A bennifit of HTTP is that each client will connect over the same socket. In RPC, each client is a separate socket connection.  Below is a simple configuration using HTTP:
 
-=== Server (sob) using HTTP ===
+===Server (sob) using HTTP ===
 {{{
 
 }}}
 
-=== Client (frontend, tool) using HTTP ===
+===Client (frontend, tool) using HTTP===
 {{{
 
 }}}
 
-== Usage ==
+==Usage==
 Any client can "put" data on the broker. The "put" command requires "server, key, and value" as arguments. Use the AOLserver Control Port to test the commands:
 
 {{{
@@ -74,7 +74,7 @@ Any client can "get" data from the broker:
     [neon:/usr/local/aolserver] Michael%
 }}}
 
-== Caching and Network Cache Flush ==
+==Caching and Network Cache Flush==
 To optimize performance, nsob has the ability to cache at both the server and client. With caching turned on, the initial client request first looks into its own cache. If no entry is found it will make a call to the server.  If the server has caching turned on, it will first look in its cache.  If no entry is found, it will read from disk, make a cache entry, and return the data. The client API will make a cache entry and return the data.  
 
 Network Cache Flush ([NCF]) is another service availble in nsdci.  With the SOBs configured to send cache flush messages, remote client cache will be flushed when a sob entry is addded or changed. Note: You must configure NCF on the AOLserver instance hosting the SOB servers in order for the SOBs to send NCFs.
@@ -107,7 +107,7 @@ If dubugging is turned on, you will see the following log entries in the tool.se
 
 The first entry shows that the data was fetched from the server, the second shows the data was retrieved from cache.  For information on debugging See the nsob.debug command in the TCL API section of this article.
 
-==TCL API ==
+==TCL API==
 
 ===nsob.put===
 Used to put data from a client to the broker. If sendflush is enabled, a ncf message will be sent to all clients.
@@ -128,7 +128,7 @@ Used to put data from a client to the broker. If sendflush is enabled, a ncf mes
 --------------------------------------------------------------------------------
 }}}
 
-=== nsob.append===
+===nsob.append===
 Used to append data on the broker. If sendflush is enabled, a ncf message will be sent to all clients.
 
 *nsob.append* _server key value_
@@ -147,7 +147,7 @@ Used to append data on the broker. If sendflush is enabled, a ncf message will b
 --------------------------------------------------------------------------------
 }}}
 
-=== nsob.get ===
+===nsob.get ===
 Used to fetch data from the broker. If caching is enabled, the API will fetch from cache if exists, and make a cache entry if it does not.
 
 *nsob.get* _server key_
@@ -166,7 +166,7 @@ Used to fetch data from the broker. If caching is enabled, the API will fetch fr
 --------------------------------------------------------------------------------
 }}}
 
-=== nsob.delete===
+===nsob.delete===
 Used to remove data from the broker. If sendflush is enabled, a ncf message will be sent to all clients.
 
 *nsob.delete* _server key_
@@ -184,7 +184,7 @@ Used to remove data from the broker. If sendflush is enabled, a ncf message will
 --------------------------------------------------------------------------------
 }}}
 
-=== nsob.names ===
+===nsob.names===
 Used to list the names of the configured SOBs.  Both clients and servers are listed.
 
 *nsob.names*
@@ -215,7 +215,7 @@ Used to toggle debug mode. Debug mode adds log messages for many nsob commands.
 --------------------------------------------------------------------------------
 }}}
 
-=== nsob.copy ===
+===nsob.copy===
 Used to copy the contents of a local file to the borker.  If sendflush is enabled, a ncf message will be sent to all clients.
 
 *nsob.copy* _localFile server key_
