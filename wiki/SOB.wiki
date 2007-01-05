@@ -205,7 +205,7 @@ The first entry shows that the data was fetched from the server, the second show
         error string = error
 }}}
 
-*nsob.debug:* Used to toggle debug mode. Debug mode addes server.log messages on many nsob commands.
+*nsob.debug:* Used to toggle debug mode. Debug mode adds log messages for many nsob commands.
 {{{
     Example:
         nsob.debug 1 (turns on debugging)
@@ -221,9 +221,23 @@ The first entry shows that the data was fetched from the server, the second show
         when no argument is given the reuturn is the current setting
 }}}
 
-nsob.copy
+*nsob.copy:* Used to copy the contents of a local file to the borker.  If sendflush is enabled, a ncf message will be sent to all clients.
+{{{
+    Example:
+        nsob.copy myLocalFile.txt sob mySobFile
+
+    Arguments:
+        file - the full path of the local file
+        server - the sob server to be used
+        key - the key/file name on the sob server
+
+    Return:
+        VOID = sucess
+        TCL_ERROR = error
+}}}
 
 = Best Practices =
+
 
 
 
