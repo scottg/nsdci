@@ -94,7 +94,7 @@ To process the tallies:
     1
 }}}
 
-Notice the the runtime data structure has been updated and the tally reset. In this example, NV has been used as the runtime data structure.
+Notice the the runtime data structure has been updated and the tally reset. In this example, [NV] has been used as the runtime data structure.
 
 {{{
     tool:nscp 3> nv.dump nv
