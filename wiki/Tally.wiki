@@ -46,7 +46,7 @@ To use tally, you have to have a callback loaded on the tool server. Here is a s
      }
 }}}
 
-Send some votes to the Tally server:
+Using the AOLserver Control Port, Send some votes to the Tally server:
 
 {{{
     [neon:/usr/local/aolserver] Michael% telnet localhost 9900
