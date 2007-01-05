@@ -106,15 +106,15 @@ Notice that the runtime data structure has been updated and the tally reset. In 
 
 You can use the ns schedule API to schedule the sweep as needed.
 
-= TCL API =
+= Tcl API =
 
-== Client ==
+== nt.send ==
 
-*nt.send* _bucket_ _key_ _value_
+Used to set key/value pairs for a given bucket name.
 
-=== Description ===
+=== Prototype ===
 
-Used to set key/value pairs for a given bucket name. 
+*nt.send* _bucket_ _key_ _value_ 
 
 === Arguments ===
 
@@ -126,8 +126,8 @@ Used to set key/value pairs for a given bucket name.
 === Results ===
 
 || *Result* || *Description* ||
-|| NULL || Success. The result was successfully written to the nt server. Buckets are created and initialized on the fly as needed. ||
-|| 'TCL_ERROR' || Failure. An error occurred. See the server log for more information. ||
+|| {{{NULL}}} || Success. The result was successfully written to the nt server. Buckets are created and initialized on the fly as needed. ||
+|| {{{TCL_ERROR}}} || Failure. An error occurred. See the server log for more information. ||
 
 
 === Examples ===
@@ -163,3 +163,4 @@ nt.peek
 nt.send
 
 = Best Practices =
+
