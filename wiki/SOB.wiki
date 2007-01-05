@@ -250,11 +250,10 @@ Used to copy the contents of a local file to the borker.  If sendflush is enable
 || {{{TCL_ERROR}}} || Failure. An error occurred. See the server log for more information. ||
 
 ==Best Practices ==
-Special attention should be paid to the RPC stats.  The size of each sob file, combined with the number of clients and number of sob calls on a page can decrease performance and/or cause socket drops and timeouts. The AOLserver stats interface can be used to measure RPC socket performance and should be monitored regularly.
+The size of each sob file, combined with the number of clients and number of sob calls on a page can decrease performance and/or cause socket drops and timeouts. The AOLserver stats interface can be used to measure RPC socket performance and should be monitored regularly.
 
 Caching should be used where possible to optimize performance. The AOLserver Stats interface has insight to Cache-hit-rate information and should be used to measure the performance of the sob cache.  A high cache-hit-rate is preferred.
 
 You might find that flowing content one way per server gives better performance.  For example, one server brokering data from the tool server to the frontned, and a second from the frontend to the tool server would perform better than one server doing both.
-
 
 
