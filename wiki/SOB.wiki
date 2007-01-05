@@ -121,7 +121,15 @@ If dubugging is turned on, you will see the following log entries in the tool.se
     [04/Jan/2007:20:48:02][24410.25212928][-nscp:3-] Notice: sob: sob: get file.xml - ok (cached)
 }}}
 
-The first entry shows that the data was fetched from the server, the second shows the data was retrieved from cache.  See the "Debugging RPC Connections" section for more information.
+The first entry shows that the data was fetched from the server, the second shows the data was retrieved from cache.   Similar notices can be seen on the server:
+
+{{{
+    [04/Jan/2007:20:48:02][25809.25191424][-conn:0-] Notice: read: file.xml
+}}}
+or 
+{{{
+    [04/Jan/2007:20:48:02][25809.25191424][-conn:0-] Notice: read: file.xml (cached)
+}}}
 
 ==TCL API==
 
@@ -292,3 +300,5 @@ However, the sob server never went down, so it has the file in cahce and does no
 If sendflush is turned on, the server will send a flush message to the client when it establishes a connection to ensure that old cache entries are not used.  Also, keep in mind that dcirpc uses a reverse connection. The server connect to the clients.  This is true off all services running on dcirpc (tally, nrate, sob, etc).
 
 If a timeout happens, the client will drop the connection.  The server will then reestablish the connection.  Use the rpc stats to gain insight into socket performance.  See "Best Practices" section for more information.
+
+
