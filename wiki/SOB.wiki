@@ -255,7 +255,7 @@ By turning on nsob.debug on the client, we can see each nsob request:
     [05/Jan/2007:15:52:33][25101.25169920][-nscp:1-] Notice: sob: sob: get file.xml - ok
     [05/Jan/2007:15:55:20][25101.25169920][-nscp:1-] Notice: sob: sob: get file.xml - ok (cached)
 }}}
-You can see that the first time the file was called it was pulled from the server.  The second time it was pulled from the cache.  A similar log entry was made on server indicating it read the contents from disk:
+You can see that the first time the file was fetched it was fetched from the server.  The second time, it was found in cache.  A similar log entry was made on server indicating it read the contents from disk:
 {{{
     [05/Jan/2007:15:52:33][25103.25190400][rps:nsobc:sob] Notice: read: file.xml
 }}}
