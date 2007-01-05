@@ -16,7 +16,7 @@ The bundled set up has a single AOLserver instance brokering many different SOB 
 
 }}}
 
-You can also configure nsob to connect over HTTP.  A bennifit of HTTP is that each client will connect over the same socket. In RPC each client is a separate socket connection.
+You can also configure nsob to connect over HTTP.  A bennifit of HTTP is that each client will connect over the same socket. In RPC, each client is a separate socket connection.
 
 === Server (sob) using HTTP ===
 {{{
