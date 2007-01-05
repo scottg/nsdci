@@ -27,7 +27,7 @@ The bundled set up has a single AOLserver instance brokering many different SOB 
         ns_param frontend ${frontendAddress}:$(frontendRpcPort}
 }}}
 
-=== Client (frontend,tool) ===
+=== Client (frontend, tool) ===
 {{{
     ns_section "ns/server/${server}/module/dci/sob/sobs"
         ns_param sob 0
