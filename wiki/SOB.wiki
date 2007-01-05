@@ -1,1 +1,3 @@
+= Introduction =
+
 The Small Object Broker, or SOB, is used to send content from a tool server and/or frontend server to a middle-tier broker.  The client servers (tool and frontend) send content to, and request content from, the broker through the SOB API.  The following article will discuss configuration, the API, caching, and best practices.
