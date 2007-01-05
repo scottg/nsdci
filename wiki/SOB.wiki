@@ -11,44 +11,44 @@ The bundled set up has a single AOLserver instance called "sob" brokering many d
 *Server Configuration:*
 
 {{{
- ns_section "ns/server/${server}/module/dci/sob/sobs"
-     ns_param sob 0
+    ns_section "ns/server/${server}/module/dci/sob/sobs"
+        ns_param sob 0
 
- ns_section "ns/server/${server}/module/dci/sob/servers"
-     ns_param sob sob
+    ns_section "ns/server/${server}/module/dci/sob/servers"
+        ns_param sob sob
 
- ns_section "ns/server/${server}/module/dci/sob/server/sob"
-     ns_param root $sobRoot
-     ns_param sendflush 1
-     ns_param readonly 0
-     ns_param mkdirs 1
-     ns_param debug 1
-     ns_param nocache 0
+    ns_section "ns/server/${server}/module/dci/sob/server/sob"
+        ns_param root $sobRoot
+        ns_param sendflush 1
+        ns_param readonly 0
+        ns_param mkdirs 1
+        ns_param debug 1
+        ns_param nocache 0
 
- ns_section "ns/server/${server}/module/dci/sob/server/sob/clients"
-     ns_param tool ${toolAddress}:${toolRpcPort}
-     ns_param frontend ${frontendAddress}:$(frontendRpcPort}
+    ns_section "ns/server/${server}/module/dci/sob/server/sob/clients"
+        ns_param tool ${toolAddress}:${toolRpcPort}
+        ns_param frontend ${frontendAddress}:$(frontendRpcPort}
 }}}
 
 *Client Configuration:*
 
 {{{
- ns_section "ns/server/${server}/module/dci/sob/sobs"
-     ns_param sob 0
+    ns_section "ns/server/${server}/module/dci/sob/sobs"
+        ns_param sob 0
 
- ns_section "ns/server/${server}/module/dci/sob/clients"
-     ns_param sob sob
+    ns_section "ns/server/${server}/module/dci/sob/clients"
+        ns_param sob sob
 
- ns_section "ns/server/${serverName}/module/dci/rpc/client/nsobc:sob"
-     ns_param address $sobAddress
-     ns_param port $sobHttpPort
-     ns_param httpkeepalive true
-     ns_param httpnumconnections 1
-     ns_param debug 1
+    ns_section "ns/server/${serverName}/module/dci/rpc/client/nsobc:sob"
+        ns_param address $sobAddress
+        ns_param port $sobHttpPort
+        ns_param httpkeepalive true
+        ns_param httpnumconnections 1
+        ns_param debug 1
 
- ns_section "ns/server/${server}/module/dci/sob/client/sob"
-     ns_param cachesize 1000000
-     ns_param debug 1
+    ns_section "ns/server/${server}/module/dci/sob/client/sob"
+        ns_param cachesize 1000000
+        ns_param debug 1
 }}}
 
 = Usage =
@@ -56,48 +56,48 @@ The bundled set up has a single AOLserver instance called "sob" brokering many d
 From any "sob" client, we can "put" data on the broker. The "put" command requires "server, key, and value" as arguments:
 
 {{{
- [neon:/usr/local/aolserver] Michael% telnet 127.0.0.1 8900
- Trying 127.0.0.1...
- Connected to localhost.
- Escape character is '^]'.
- login: 
- Password: 
+    [neon:/usr/local/aolserver] Michael% telnet 127.0.0.1 8900
+    Trying 127.0.0.1...
+    Connected to localhost.
+    Escape character is '^]'.
+    login: 
+    Password: 
  
- Welcome to tool running at /usr/local/aolserver/bin/nsd (pid 24173)
- AOLserver/4.5.0 (aolserver4_5) for osx built on Jan  4 2007 at 17:11:28
- CVS Tag: $Name:  $
- tool:nscp 1> nsob.put sob mySobFile "my sob data"
+    Welcome to tool running at /usr/local/aolserver/bin/nsd (pid 24173)
+    AOLserver/4.5.0 (aolserver4_5) for osx built on Jan  4 2007 at 17:11:28
+    CVS Tag: $Name:  $
+    tool:nscp 1> nsob.put sob mySobFile "my sob data"
  
- tool:nscp 2>
+    tool:nscp 2>
 }}}
 
 We can also "get" the data from any "sob" client:
 
 {{{
- tool:nscp 2> nsob.get sob mySobFile
- my sob data
- tool:nscp 3> exit
+    tool:nscp 2> nsob.get sob mySobFile
+    my sob data
+    tool:nscp 3> exit
  
- Goodbye!
- Connection closed by foreign host.
- [neon:/usr/local/aolserver] Michael% telnet 127.0.0.1 9900
- Trying 127.0.0.1...
- Connected to localhost.
- Escape character is '^]'.
- login: 
- Password: 
+    Goodbye!
+    Connection closed by foreign host.
+    [neon:/usr/local/aolserver] Michael% telnet 127.0.0.1 9900
+    Trying 127.0.0.1...
+    Connected to localhost.
+    Escape character is '^]'.
+    login: 
+    Password: 
 
- Welcome to frontend running at /usr/local/aolserver/bin/nsd (pid 24171)
- AOLserver/4.5.0 (aolserver4_5) for osx built on Jan  4 2007 at 17:11:28
- CVS Tag: $Name:  $
- frontend:nscp 1> nsob.get sob mySobFile
- my sob data
+    Welcome to frontend running at /usr/local/aolserver/bin/nsd (pid 24171)
+    AOLserver/4.5.0 (aolserver4_5) for osx built on Jan  4 2007 at 17:11:28
+    CVS Tag: $Name:  $
+    frontend:nscp 1> nsob.get sob mySobFile
+    my sob data
  
- frontend:nscp 2> exit
+    frontend:nscp 2> exit
  
- Goodbye!
- Connection closed by foreign host.
- [neon:/usr/local/aolserver] Michael%
+    Goodbye!
+    Connection closed by foreign host.
+    [neon:/usr/local/aolserver] Michael%
 }}}
 
 = Caching and Networked Cache Flush =
@@ -109,26 +109,39 @@ Network Cache Flush (NCF) is another service availble in nsdci.  With the SOBs c
 The performance gains are obvious. file.xml is 8KB:
 
 {{{
- [neon:/tmp/sob] Michael% telnet 127.0.0.1 8900
- Trying 127.0.0.1...
- Connected to localhost.
- Escape character is '^]'.
- login: 
- Password: 
+    [neon:/tmp/sob] Michael% telnet 127.0.0.1 8900
+    Trying 127.0.0.1...
+    Connected to localhost.
+    Escape character is '^]'.
+    login: 
+    Password: 
  
- Welcome to tool running at /usr/local/aolserver/bin/nsd (pid 24410)
- AOLserver/4.5.0 (aolserver4_5) for osx built on Jan  4 2007 at 17:11:28
- CVS Tag: $Name:  $
- tool:nscp 1> time {nsob.get sob file.xml}
- 555 microseconds per iteration
- tool:nscp 2> time {nsob.get sob file.xml} 100
- 79.08 microseconds per iteration
- tool:nscp 3> 
+    Welcome to tool running at /usr/local/aolserver/bin/nsd (pid 24410)
+    AOLserver/4.5.0 (aolserver4_5) for osx built on Jan  4 2007 at 17:11:28
+    CVS Tag: $Name:  $
+    tool:nscp 1> time {nsob.get sob file.xml}
+    555 microseconds per iteration
+    tool:nscp 2> time {nsob.get sob file.xml} 100
+    79.08 microseconds per iteration
+    tool:nscp 3> 
 }}}
 
 = TCL API =
 
-nsob.put
+*nsob.put:* Used to put data from a client to the broker.
+{{{
+     Example:
+         nsob.put sob myFile "some data"
+
+     Arguments:
+         server - the name of the sob server
+         key - the file name (key) of the data
+         data - what to put in the file
+ 
+     Return:
+         void = success
+         error string = error
+}}}
 
 nsob.delete 
 
@@ -143,3 +156,7 @@ nsob.get
 nsob.copy
 
 = Best Practices =
+
+
+
+
