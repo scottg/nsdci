@@ -68,18 +68,16 @@ From any "sob" client, we can "put" data on the broker. The "put" command requir
     CVS Tag: $Name:  $
     tool:nscp 1> nsob.put sob mySobFile "my sob data"
  
-    tool:nscp 2>
+    tool:nscp 2> exit
+ 
+    Goodbye!
+    Connection closed by foreign host.
+    [neon:/usr/local/aolserver] Michael% 
 }}}
 
 We can also "get" the data from any "sob" client:
 
 {{{
-    tool:nscp 2> nsob.get sob mySobFile
-    my sob data
-    tool:nscp 3> exit
- 
-    Goodbye!
-    Connection closed by foreign host.
     [neon:/usr/local/aolserver] Michael% telnet 127.0.0.1 9900
     Trying 127.0.0.1...
     Connected to localhost.
