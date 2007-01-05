@@ -104,7 +104,7 @@ To optimize performance, SOB has the ability to cache at both the server and cli
 
 Network Cache Flush ([NCF]) is another service availble in nsdci.  With the SOBs configured to send cache flush messages, remote client cache will be flushed when a sob entry is addded or changed. Note: You must configure NCF on the AOLserver instance hosting the SOB servers in order for the SOBs to send NCFs.
 
-There are significant performance gains from caching. Consider a fetch "file.xml" which is 8KB:
+There are significant performance gains from caching. Consider a fetch to "file.xml" which is 8KB:
 
 {{{
     [neon:/tmp/sob] Michael% telnet 127.0.0.1 8900
