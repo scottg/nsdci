@@ -31,7 +31,7 @@ Tally is used to keep track of votes and points. At some interval, those votes a
 
 = Usage =
 
-To use tally, you have to have a callback loaded on AOLserver instance running the tally server.  Here is a sample tally callback proc.  Tally Callbacks must take "key count total" as arguments, in that order.  This callback *adds* the current counts and totals of a bucket to an *existing* nv:
+To use tally, you have to have a callback loaded on AOLserver instance running the tally server.  Here is a sample tally callback proc.  Tally Callbacks must take "key count total" as arguments, in that order.  This callback *adds* the current counts and totals of a bucket to an *existing* [NV]:
 {{{
     proc generic.processTallies {key count total} {
          if {[nv.cget nv ${key}.total oldTotal]} {
