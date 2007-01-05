@@ -238,6 +238,8 @@ Caching should be used where possible to optimize performance. The AOLserver Sta
 You might find that flowing content one way per server gives better performance.  For example, one server brokering data from the tool server to the frontned, and a second from the frontend to the tool server would perform better than one server doing both.
 
 ==Debugging RPC Connections==
+By using debug and tailing the log, you can gain insight into caching and connection status.
+
 When a sob client starts up, it begins to listen on its rpc port:
 {{{
     [05/Jan/2007:15:45:16][25101.2684407744][-main-] Notice: rpc: listening on 127.0.0.1:9800
@@ -273,4 +275,4 @@ However, the sob server never went down, so it has the file in cahce and does no
     [05/Jan/2007:16:02:55][25103.25190400][rps:nsobc:sob] Notice: read: file.xml (cached)
 }}}
 
-If sendflush is turned on, the server will send a flush message to the clients when it establishes a connection to ensure that old cache entries are not used.  Keep in mnd that dcirpc uses a reverse connection. The servers connect to the clients.  This is true off all services running on dcirpc (tally, nrate, sob, etc).  By using debug and tailing the log, you can gain insight into caching and connection status.
+If sendflush is turned on, the server will send a flush message to the client when it establishes a connection to ensure that old cache entries are not used.  Also, keep in mind that dcirpc uses a reverse connection. The server connect to the clients.  This is true off all services running on dcirpc (tally, nrate, sob, etc).
