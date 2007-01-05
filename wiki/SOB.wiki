@@ -4,7 +4,30 @@ The Small Object Broker, or SOB, is used to send content from a tool and/or fron
 
 = Configuration =
 
-The bundled set up has a single AOLserver instance called "sob" brokering many different SOB servers.  You could easily break out each SOB server to its own AOLserver instance, but for simplicity we have set up a single instance, serving many SOBs. See the sobServer.tcl and sobClient.tcl for configuration information.
+The bundled set up has a single AOLserver instance called "sob" brokering many different SOB servers.  You could easily break out each SOB server to its own AOLserver instance, but for simplicity we have set up a single instance, serving many SOBs. See the sobServer.tcl and sobClient.tcl for configuration information. Below is 
+
+*SOB Configuration*
+{{{
+ns_section "ns/server/${server}/module/dci/sob/sobs"
+    ns_param sob 0
+
+ns_section "ns/server/${server}/module/dci/sob/servers"
+    ns_param sob sob
+
+ns_section "ns/server/${server}/module/dci/sob/server/sob"
+    ns_param root $sobRoot
+    ns_param sendflush 1
+    ns_param readonly 0
+    ns_param mkdirs 1
+    ns_param debug 1
+    ns_param nocache 0
+
+ns_section "ns/server/${server}/module/dci/sob/server/sob/clients"
+    ns_param tool ${toolAddress}:${toolRpcPort}
+    ns_param frontend ${frontendAddress}:$(frontendRpcPort}
+}}}
+
+*Client Configuration*
 
 = Usage =
 
