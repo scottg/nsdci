@@ -86,7 +86,7 @@ You can dump the tally bucket on the tool server to get a quick look at what wil
     {dork 1 1} {bar 1 5}
 }}}
 
-To process the tallies:
+To process a bucket:
 
 {{{
     tool:nscp 2> nt.get myBucket generic.processTallies
