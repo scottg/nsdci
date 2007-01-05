@@ -8,8 +8,33 @@ The bundled set up has a single AOLserver instance called "sob" brokering many d
 
 = Usage =
 
+From the tool server we can "put" data on the broker. The "put" command requires a serverName, key, and value as argument. In the following example we are using a SOB server called "sob".
+
+{{{
+[neon:/usr/local/aolserver] Michael% telnet 127.0.0.1 8900
+Trying 127.0.0.1...
+Connected to localhost.
+Escape character is '^]'.
+login: 
+Password: 
+
+Welcome to tool running at /usr/local/aolserver/bin/nsd (pid 24173)
+AOLserver/4.5.0 (aolserver4_5) for osx built on Jan  4 2007 at 17:11:28
+CVS Tag: $Name:  $
+tool:nscp 1> nsob.put sob mySobFile "my sob data"
+
+tool:nscp 2>
+}}}
+
+Because the tool server is also a client of the "sob" type sob server, we can request the data:
+
+{{{
+tool:nscp 2> nsob.get sob mySobFile
+my sob data
+tool:nscp 3> 
+}}}
+
 = Caching and NCF =
 
 = Best Practices =
-
 
