@@ -124,6 +124,14 @@ The performance gains are obvious. file.xml is 8KB:
     tool:nscp 3> 
 }}}
 
+If dubugging is turned on, you will see the following log entries in the tool.server.log file:
+{{{
+    [04/Jan/2007:20:47:47][24410.25212928][-nscp:3-] Notice: sob: sob: get file.xml - ok
+    [04/Jan/2007:20:48:02][24410.25212928][-nscp:3-] Notice: sob: sob: get file.xml - ok (cached)
+}}}
+
+The first entry shows that the data was fetched from the server, the second shows the data was retrieved from cache.  For information on debugging See the nsob.debug command in the TCL API section of this article.
+
 = TCL API =
 
 *nsob.put:* Used to put data from a client to the broker.
