@@ -2,7 +2,7 @@
 
 == Introduction: ==
 
-Network tally provides a simple mechanism for collecting counts from remote servers. Counts are stored for user-defined keys, which are grouped in buckets. 
+Networked Tally provides a simple mechanism for collecting counts from remote servers. Counts are stored for user-defined keys, which are grouped in buckets. 
 
 The basic model is that front-end clients update tally counts for keys within buckets, with the data processed by the back-end server. 
 
