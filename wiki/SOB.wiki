@@ -203,7 +203,7 @@ Used to remove data from the broker. If sendflush is enabled, a ncf message will
 --------------------------------------------------------------------------------
 }}}
 
-=== nsob.names === 
+=== nsob.names ===
 Used to list the names of the configured SOBs.  Both clients and servers are listed.
 
 *nsob.names*
@@ -217,7 +217,7 @@ Used to list the names of the configured SOBs.  Both clients and servers are lis
 --------------------------------------------------------------------------------
 }}}
 
-===nsob.debug=== 
+===nsob.debug===
 Used to toggle debug mode. Debug mode adds log messages for many nsob commands.
 
 *nsob.debug* _?boolean?_
