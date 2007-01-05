@@ -2,6 +2,7 @@
     <s_h>
         <s_l></s_l>
         <s_l></s_l>
+        <s_l></s_l>
         <s_l>Name</s_l>
         <s_l>Total</s_l>
         <s_l>1</s_l>
@@ -46,6 +47,7 @@ foreach n [nps.find] {
     ns_adp_puts "<s_r>
         <s_c $s><a href=np.adp?a=edit&p=$n><img src=img/wand.gif border=0></a></s_c>
         <s_c $s><a href=np.adp?a=delete&p=$n><img src=img/trash.gif border=0></a></s_c>
+        <s_c $s><a href=np.adp?a=graph&p=$n><img src=img/graph.gif border=0></a></s_c>
         <s_c $s>$n</s_c>
         <s_c $ts>$t</s_c>"
 
