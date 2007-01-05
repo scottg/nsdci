@@ -23,7 +23,7 @@ The bundled set up has a single AOLserver instance called "sob" brokering many d
      ns_param readonly 0
      ns_param mkdirs 1
      ns_param debug 1
-    ns_param nocache 0
+     ns_param nocache 0
 
  ns_section "ns/server/${server}/module/dci/sob/server/sob/clients"
      ns_param tool ${toolAddress}:${toolRpcPort}
