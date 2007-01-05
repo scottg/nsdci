@@ -37,18 +37,12 @@ Client servers have configurable buffer which allows tallies to be collected eve
 
 In order to effectively use tally, you'll need to write your own callback Tcl function to handle the processing of the tallies on the server side in conjunction with *nt.get*. 
 
-=== Prototype ===
-
 *tallyCallback* _key_ _count_ _total_
-
-=== Arguments ===
 
 || *Argument* || *Description* ||
 || _key_ || String. Name of the key. ||
 || _count_ || Integer. Current count for the specified key. ||
 || _total_ || Integer. Total count for all keys. ||
-
-=== Example ===
 
 The following example *adds* the current counts and totals of a bucket to an *existing* [NV].
 
@@ -138,9 +132,10 @@ Used to retrieve the current debug value, or to set a new debug value.
 || {{{1}}} || Success. Returned if a boolean was specified. ||
 || {{{BOOLEAN}}} || Success. If a boolean was not specified, then the current debug value is returned. ||
 
+=== Examples ===
 {{{
-nt.debug
-nt.debug false
+    nt.debug
+    nt.debug false
 }}}
 
 {{{
