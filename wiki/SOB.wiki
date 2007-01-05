@@ -6,7 +6,7 @@ The Small Object Broker, or SOB, is used to send content from a tool and/or fron
 
 = Configuration =
 
-The bundled set up has a single AOLserver instance brokering many different SOB servers.  You could easily break out each SOB server to its own AOLserver instance.  See the sobServer.tcl and sobClient.tcl for configuration information. Below is a sample config:
+The bundled set up has a single AOLserver instance brokering many different SOB servers.  You could easily break out each SOB server to its own AOLserver instance. Below is a sample config:
 
 *Server Configuration:*
 
