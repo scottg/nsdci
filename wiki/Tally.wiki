@@ -1,3 +1,5 @@
+#Networked Tally: nt API
+
 = Introduction =
 
 Tally is used to keep track of votes or points. At some interval, those votes or points are "swept" by a callback into a runtime data structure. The developer writes the callback to do whatever the product needs - add to NV, write to SOB, etc. The tally is then reset. Runtime totals are pulled from the runtime datasource that was updated by the callback.
