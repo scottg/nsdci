@@ -235,7 +235,6 @@ DciRpcInit(char *server, char *module)
     path = Ns_ConfigGetPath(server, module, "rpc", NULL);
     addr = Ns_ConfigGetValue(path, "address");
     if (!Ns_ConfigGetInt(path, "port", &port)) {
-    	Ns_Log(Notice, "rpc: no config - disabled");
 	return NS_OK;
     }
     sock = Ns_SockListen(addr, port);
@@ -446,10 +445,8 @@ Dci_RpcCreateServer(char *server, char *module, char *name, char *handshake,
     	Ns_DStringVarAppend(&ds, "/", name, NULL);
     	Ns_RegisterRequest(server, method, ds.string, RpsRequest, NULL,
 		           rpsPtr, 0);
-	Ns_Log(Notice, "rpc[%s]: recieving %s (HTTP)", name, ds.string);
-    } else {
-        Ns_Log(Notice, "rpc[%s]: recieving (DCIRPC)");
-    }
+	Ns_Log(Notice, "rpc[%s]: registered %s (HTTP)", name, ds.string);
+    } 
     if (clients != NULL && Ns_SetSize(clients) > 0) {
     	Ns_DStringTrunc(&ds, 0);
     	Ns_DStringVarAppend(&ds, "rps:", name, NULL);
