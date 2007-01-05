@@ -39,11 +39,21 @@ ns_section ns/server/$server/module/dci/nt/client
 
 == Usage: ==
 
-To use tally, you have to have a callback loaded on the AOLserver instance running the tally server. 
+In order to effectively use tally, you'll need to write your own callback Tcl function to handle the processing of the tallies on the server side in conjunction with the *nt.dump* Tcl API. 
 
-Here is a sample tally Tcl callback. Tally callbacks use the following prototype:
+=== Prototype ===
 
 *tallyCallback* _key_ _count_ _total_
+
+=== Arguments ===
+
+|| *Argument* || *Description* ||
+|| _key_ || String. Specifies whether or not debugging is enabled. ||
+|| _count_ || Integer. Specifies whether or not debugging is enabled. ||
+|| _total_ || Integer. Specifies whether or not debugging is enabled. ||
+
+
+=== Example ===
 
 The callback *adds* the current counts and totals of a bucket to an *existing* [NV]:
 
