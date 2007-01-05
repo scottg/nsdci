@@ -40,10 +40,3 @@ ns_section "ns/server/$server/module/dci/sob/server/sob"
     ns_param statsdetail 1
 
 ns_section "ns/server/$server/module/dci/sob/server/sob/clients"
-
-foreach sobClient [topology.getValue "sobClients"] {
-    set rpcAddress [topology.getValue "rpcAddress" $sobClient]
-    set rpcPort [topology.getValue "rpcPort" $sobClient]
-
-    ns_param $sobClient $rpcAddress:$rpcPort
-}

@@ -10,10 +10,3 @@ ns_section "ns/server/$server/module/dci/sob/server/ncb0"
     ns_param sendflush 0
 
 ns_section "ns/server/$server/module/dci/sob/server/ncb0/clients"
-
-foreach ncbClient [topology.getValue "ncbClients"] {
-    set rpcAddress [topology.getValue "rpcAddress" $ncbClient]
-    set rpcPort [topology.getValue "rpcPort" $ncbClient]
-
-    ns_param $ncbClient $rpcAddress:$rpcPort
-}

@@ -7,8 +7,10 @@ ns_section "ns/server/$server/module/dci/rpc"
     ns_param port [topology.getValue "rpcPort" $server]
 
 ns_section "ns/server/$server/module/dci/rpc/client/nsobc:sob"
-    ns_param address [topology.getValue "rpcAddress" $server]
-    ns_param port [topology.getValue "rpcPort" $server]
+    ns_param address [topology.getValue "httpAddress" "sob"]
+    ns_param port [topology.getValue "httpPort" "sob"]
+    ns_param httpkeepalive true
+    ns_param httpnumconnections 1
 
 ns_section "ns/server/$server/module/dci/ncf"
     ns_param debug 1
