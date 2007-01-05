@@ -2,13 +2,17 @@
 
 == Introduction ==
 
-Network tally provides a simple mechanism for collecting counts from remote servers. Counts are stored for user-defined keys, which belong to buckets. The basic model is that front-end clients update tally counts for keys within buckets, with the data processed by the back-end server. Client servers have configurable buffer which allows tallies to be collected even if the back-end server is not available. The back-end server stores data on disk for persistent storage across restarts. It's important to note, however, that the backup file is only written at server exit in the case of a proper shutdown.
+Network tally provides a simple mechanism for collecting counts from remote servers. Counts are stored for user-defined keys, which are grouped in buckets. 
+
+The basic model is that front-end clients update tally counts for keys within buckets, with the data processed by the back-end server. 
+
+Client servers have configurable buffer which allows tallies to be collected even if the back-end server is not available. The back-end server stores data on disk for persistent storage across restarts. It's important to note, however, that the backup file is only written at server exit in the case of a proper shutdown, or if additional code is written to explicitly backup the data.
 
 == Configuration ==
 
 === Server (tool) ===
 {{{
-ns_section ns/server/${serverName}/module/dci/nt
+ns_section ns/server/_server_/module/dci/nt
     ns_param debug 1
  
 ns_section ns/server/${serverName}/module/dci/nt/server
@@ -210,5 +214,4 @@ nt.peek
 nt.send
 
 = Best Practices =
-
 
