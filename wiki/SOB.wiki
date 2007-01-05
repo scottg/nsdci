@@ -4,7 +4,7 @@
 The Networked Small Object Broker (nsob) is used to broker content between servers.  The following article will discuss configuration, usage, caching, the TCL API, and best practices.
 
 ==Configuration==
-The bundled configuration has a single AOLserver instance brokering many different SOB servers.  You could easily break out each SOB server to its own AOLserver instance.  Below is a simple configuration. There are no params for the last section. But the section is required. You must also set up the [RPC] and [NCF] config sections separately :
+The bundled configuration has a single AOLserver instance brokering many different SOB servers.  You could easily break out each SOB server to its own AOLserver instance.  Below is a simple configuration. There are no params for the last section. But the section is required. You must also configure [RPC] and [NCF]:
 
 ===Server (sob) ===
 {{{
@@ -300,5 +300,4 @@ However, the sob server never went down, so it has the file in cahce and does no
 If sendflush is turned on, the server will send a flush message to the client when it establishes a connection to ensure that old cache entries are not used.  Also, keep in mind that dcirpc uses a reverse connection. The server connect to the clients.  This is true off all services running on dcirpc (tally, nrate, sob, etc).
 
 If a timeout happens, the client will drop the connection.  The server will then reestablish the connection.  Use the rpc stats to gain insight into socket performance.  See "Best Practices" section for more information.
-
 
