@@ -13,6 +13,11 @@ set action [ns_queryget a]
 
 <%
 switch $action {
+    "graph" {
+        set poll [ns_queryget p]
+
+        ns_adp_include inc/np_graph.inc $poll
+    }
     "save" {
         set poll [ns_queryget p]
         set form [ns_conn form]
