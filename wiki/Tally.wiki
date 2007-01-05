@@ -119,6 +119,17 @@ Used to set key/value pairs for a given bucket name. Buckets are created on the 
 || _key_ || String. Name of the key to set in the specified bucket. ||
 || _value_ || String. Name of the value to set for the specified key, in the specified bucket. ||
 
+|| *Result* || *Description* ||
+|| NULL || Success. The result was successfully written to the nt server. ||
+|| TCL_ERROR || Failure. An error occurred. See the server log for more information. ||
+
+=== Examples: ===
+
+{{{
+nt.send clicks index 1
+nt.send clicks photos.html 10
+}}}
+
 *nt.dump* _?boolean?_ 
 
 == Server ==
