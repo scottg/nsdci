@@ -107,5 +107,25 @@ Notice the the runtime data structure has been updated and the tally reset:
 
 You can use the ns schedule API to schedule the sweep as needed.
 
+= TCL API =
+
+nt.dump 
+
+nt.exists 
+
+nt.get 
+
+nt.read 
+
+nt.buckets 
+
+nt.debug 
+
+nt.write 
+
+nt.peek
+
+nt.send
+
 
 
