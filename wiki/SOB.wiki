@@ -273,6 +273,6 @@ However, the sob server never went down, so it has the file in cahce and does no
     [05/Jan/2007:16:02:55][25103.25190400][rps:nsobc:sob] Notice: read: file.xml (cached)
 }}}
 
-If sendflush is turned on, the server will send a flush message to the clients when it estabishes a connection to ensure that old cache entrties are not used.
+If sendflush is turned on, the server will send a flush message to the clients when it establishes a connection to ensure that old cache entries are not used.
 
-Keep in mnd that dcirpc uses a reverse connection. The servers conenct to the clients.  This is true off all services running on dcirpc (Tally, nrate, sob, etc).  By using debug, you can gain insight into caching.  By tailing the log you see the staus of the connections.
+Keep in mnd that dcirpc uses a reverse connection. The servers connect to the clients.  This is true off all services running on dcirpc (tally, nrate, sob, etc).  By using debug and tailing the log, you can gain insight into caching and connection status.
