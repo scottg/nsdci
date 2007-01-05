@@ -164,6 +164,20 @@ The first entry shows that the data was fetched from the server, the second show
          error string = error
 }}}
 
+*nsob.get:* Used to fetch data from the broker. If caching is enabled, the API will fetch from cache if exists, and make a cache entry if it does not.
+{{{
+    Example:
+        nsob.get sob myFile
+
+    Arguments:
+        server - the name of the sob server
+        key - the file name (key) of the data
+
+    Return:
+        The contents of the file/key = success
+        TCL_ERROR string = error
+}}}
+
 *nsob.delete:* Used to remove data from the broker. If sendflush is enabled, a ncf message will be sent to all clients.
 {{{
      Example:
@@ -178,15 +192,41 @@ The first entry shows that the data was fetched from the server, the second show
          error string = error
 }}}
 
-nsob.names 
+*nsob.names:* Used to list the names of the sobs configured.  Both clients and servers are listed.
+{{{
+    Example:
+        nsob.names
 
-nsob.debug 
+    Arguments:
+        none
 
-nsob.get 
+    Return:
+        TCL_LIST = Success
+        error string = error
+}}}
+
+*nsob.debug:* Used to toggle debug mode. Debug mode addes server.log messages on many nsob commands.
+{{{
+    Example:
+        nsob.debug 1 (turns on debugging)
+        nsob.debug 0 (turns off debugging)
+        nsob.debug (returns debug value)
+
+    Arguments:
+        boolean: 1 = turn on, 0 = turn off
+        none
+
+    Return:
+        boolean: 1 = success, 0 = fail
+        when no argument is given the reuturn is the current setting
+}}}
 
 nsob.copy
 
 = Best Practices =
+
+
+
 
 
 
