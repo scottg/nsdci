@@ -53,7 +53,7 @@ The bundled set up has a single AOLserver instance brokering many different SOB 
 
 = Usage =
 
-From any "sob" client, we can "put" data on the broker. The "put" command requires "server, key, and value" as arguments. Use the AOLserver Control Port to test the commands:
+Any "sob" client can "put" data on the broker. The "put" command requires "server, key, and value" as arguments. Use the AOLserver Control Port to test the commands:
 
 {{{
     [neon:/usr/local/aolserver] Michael% telnet 127.0.0.1 8900
