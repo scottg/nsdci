@@ -234,7 +234,7 @@ Used to toggle debug mode. Debug mode adds log messages for many nsob commands.
 --------------------------------------------------------------------------------
 }}}
 
-== nsob.copy==
+=== nsob.copy ===
 Used to copy the contents of a local file to the borker.  If sendflush is enabled, a ncf message will be sent to all clients.
 
 *nsob.copy* _localFile server key_
@@ -256,4 +256,5 @@ Caching should be used where possible to optimize performance. The AOLserver Sta
 
 You might find that flowing content one way per server gives better performance.  For example, one server brokering data from the tool server to the frontned, and a second from the frontend to the tool server would perform better than one server doing both.
 
-
+== Debugging ==
+RPC is used as the connection over which nsob communicates.  The connection is reversed so the cli
