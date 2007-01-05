@@ -100,7 +100,7 @@ We can also "get" the data from any "sob" client:
  [neon:/usr/local/aolserver] Michael%
 }}}
 
-= Caching and NCF =
+= Caching and Networked Cache Flush =
 
 To optimize performance, SOB has the ability to cache at both the server level and client level. With caching turned on the initial client request first looks into its own cache. If no entry is found it will make a call to the server.  If the server has caching turned on, it will first look in its cache.  If no entry is found, it will read from disk, make a cache entry, and return the data. The client API will make a cache entry and return the data.  
 
