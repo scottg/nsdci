@@ -1,0 +1,278 @@
+= Networked SOB (nsob) =
+
+== Introduction ==
+The Networked Small Object Broker (nsob) is used to broker content between servers.  The following article will discuss configuration, usage and caching, the TCL API, and best practices.
+
+== Configuration ==
+The bundled set up has a single AOLserver instance brokering many different SOB servers.  You could easily break out each SOB server to its own AOLserver instance.  Below is a simple configuration using RPC:
+
+=== Server (sob) using RPC ===
+{{{
+
+}}}
+
+=== Client (frontend, tool) using RPC ===
+{{{
+
+}}}
+
+You can also configure nsob to connect over HTTP.  A bennifit of HTTP is that each client will connect over the same socket. In RPC, each client is a separate socket connection.
+
+=== Server (sob) using HTTP ===
+{{{
+
+}}}
+
+=== Client (frontend, tool) using HTTP ===
+{{{
+
+}}}
+
+== Usage ==
+Any client can "put" data on the broker. The "put" command requires "server, key, and value" as arguments. Use the AOLserver Control Port to test the commands:
+
+{{{
+    [neon:/usr/local/aolserver] Michael% telnet 127.0.0.1 8900
+    Trying 127.0.0.1...
+    Connected to localhost.
+    Escape character is '^]'.
+    login: 
+    Password: 
+ 
+    Welcome to tool running at /usr/local/aolserver/bin/nsd (pid 24173)
+    AOLserver/4.5.0 (aolserver4_5) for osx built on Jan  4 2007 at 17:11:28
+    CVS Tag: $Name:  $
+    tool:nscp 1> nsob.put sob mySobFile "my sob data"
+ 
+    tool:nscp 2> exit
+ 
+    Goodbye!
+    Connection closed by foreign host.
+    [neon:/usr/local/aolserver] Michael% 
+}}}
+
+Any client can "get" data from the broker:
+
+{{{
+    [neon:/usr/local/aolserver] Michael% telnet 127.0.0.1 9900
+    Trying 127.0.0.1...
+    Connected to localhost.
+    Escape character is '^]'.
+    login: 
+    Password: 
+
+    Welcome to frontend running at /usr/local/aolserver/bin/nsd (pid 24171)
+    AOLserver/4.5.0 (aolserver4_5) for osx built on Jan  4 2007 at 17:11:28
+    CVS Tag: $Name:  $
+    frontend:nscp 1> nsob.get sob mySobFile
+    my sob data
+ 
+    frontend:nscp 2> exit
+ 
+    Goodbye!
+    Connection closed by foreign host.
+    [neon:/usr/local/aolserver] Michael%
+}}}
+
+== Caching and Network Cache Flush ==
+To optimize performance, nsob has the ability to cache at both the server and client. With caching turned on, the initial client request first looks into its own cache. If no entry is found it will make a call to the server.  If the server has caching turned on, it will first look in its cache.  If no entry is found, it will read from disk, make a cache entry, and return the data. The client API will make a cache entry and return the data.  
+
+Network Cache Flush ([NCF]) is another service availble in nsdci.  With the SOBs configured to send cache flush messages, remote client cache will be flushed when a sob entry is addded or changed. Note: You must configure NCF on the AOLserver instance hosting the SOB servers in order for the SOBs to send NCFs.
+
+There are significant performance gains from caching. Consider a fetch to "file.xml" which is 8KB:
+
+{{{
+    [neon:/tmp/sob] Michael% telnet 127.0.0.1 8900
+    Trying 127.0.0.1...
+    Connected to localhost.
+    Escape character is '^]'.
+    login: 
+    Password: 
+ 
+    Welcome to tool running at /usr/local/aolserver/bin/nsd (pid 24410)
+    AOLserver/4.5.0 (aolserver4_5) for osx built on Jan  4 2007 at 17:11:28
+    CVS Tag: $Name:  $
+    tool:nscp 1> time {nsob.get sob file.xml}
+    555 microseconds per iteration
+    tool:nscp 2> time {nsob.get sob file.xml} 100
+    79.08 microseconds per iteration
+    tool:nscp 3> 
+}}}
+
+If dubugging is turned on, you will see the following log entries in the tool.server.log file:
+{{{
+    [04/Jan/2007:20:47:47][24410.25212928][-nscp:3-] Notice: sob: sob: get file.xml - ok
+    [04/Jan/2007:20:48:02][24410.25212928][-nscp:3-] Notice: sob: sob: get file.xml - ok (cached)
+}}}
+
+The first entry shows that the data was fetched from the server, the second shows the data was retrieved from cache.  For information on debugging See the nsob.debug command in the TCL API section of this article.
+
+==TCL API ==
+
+===nsob.put===
+Used to put data from a client to the broker. If sendflush is enabled, a ncf message will be sent to all clients.
+
+*nsob.put * _server key value_
+
+|| *Argument* || *Description* ||
+|| _server_ || String. The name of the sob server. ||
+|| _key_ || String. The file name or key of the data. ||
+|| _value_ || String. The data to be put. ||
+ 
+
+|| *Result* || *Description* ||
+|| {{{NULL}}} || Success ||
+|| {{{TCL_ERROR}}} || Failure. An error occurred. See the server log for more information. ||
+
+{{{
+--------------------------------------------------------------------------------
+}}}
+
+=== nsob.append===
+Used to append data on the broker. If sendflush is enabled, a ncf message will be sent to all clients.
+
+*nsob.append* _server key value_
+
+|| *Argument* || *Description* ||
+|| _server_ || String. The name of the sob server. ||
+|| _key_ || String. The file name or key of the data. ||
+|| _value_ || String. The data to be appended. ||
+ 
+
+|| *Result* || *Description* ||
+|| {{{NULL}}} || Success ||
+|| {{{TCL_ERROR}}} || Failure. An error occurred. See the server log for more information. ||
+
+{{{
+--------------------------------------------------------------------------------
+}}}
+
+=== nsob.get ===
+Used to fetch data from the broker. If caching is enabled, the API will fetch from cache if exists, and make a cache entry if it does not.
+
+*nsob.get* _server key_
+
+|| *Argument* || *Description* ||
+|| _server_ || String. The name of the sob server. ||
+|| _key_ || String. The file name or key of the data. ||
+
+
+|| *Result* || *Description* ||
+|| {{{STRING}}} || Success. The contents of the file. ||
+|| {{{NULL}}} || Success. The communication was successful, but there was no such key. ||
+|| {{{TCL_ERROR}}} || Failure. An error occurred. See the server log for more information. ||
+
+{{{
+--------------------------------------------------------------------------------
+}}}
+
+=== nsob.delete===
+Used to remove data from the broker. If sendflush is enabled, a ncf message will be sent to all clients.
+
+*nsob.delete* _server key_
+
+|| *Argument* || *Description* ||
+|| _server_ || String. The name of the sob server. ||
+|| _key_ || String. The file name or key of the data. ||
+ 
+
+|| *Result* || *Description* ||
+|| {{{NULL}}} || Success. The file has been deleted. ||
+|| {{{TCL_ERROR}}} || Failure. An error occurred. See the server log for more information. ||
+
+{{{
+--------------------------------------------------------------------------------
+}}}
+
+=== nsob.names ===
+Used to list the names of the configured SOBs.  Both clients and servers are listed.
+
+*nsob.names*
+
+|| *Result* || *Description* ||
+|| {{{String}}} || Success. The names of the configured SOBs in TCL_LIST format. ||
+|| {{{TCL_ERROR}}} || Failure. An error occurred. See the server log for more information. ||
+
+
+{{{
+--------------------------------------------------------------------------------
+}}}
+
+===nsob.debug===
+Used to toggle debug mode. Debug mode adds log messages for many nsob commands.
+
+*nsob.debug* _?boolean?_
+
+|| *Argument* || *Description* ||
+|| _?boolean?_ || Boolean. Optional. Specifies whether or not debugging is enabled. ||
+
+
+|| *Result* || *Description* ||
+|| {{{1}}} || Success. Returned if boolean was specified. ||
+|| {{{boolean}}} || Success. If a boolean was not specified, then the current debug value is returned. ||
+
+{{{
+--------------------------------------------------------------------------------
+}}}
+
+=== nsob.copy ===
+Used to copy the contents of a local file to the borker.  If sendflush is enabled, a ncf message will be sent to all clients.
+
+*nsob.copy* _localFile server key_
+
+|| *Argument* || *Description* ||
+|| _localFile_ || String. The complete file path to the file. ||
+|| _server_ || String. The name of the sob server. ||
+|| _key_ || String. The file name or key of the data. ||
+
+
+|| *Result* || *Description* ||
+|| {{{NULL}}} || Success. The file was copied to the server. ||
+|| {{{TCL_ERROR}}} || Failure. An error occurred. See the server log for more information. ||
+
+==Best Practices==
+The size of each sob file, combined with the number of clients and number of sob calls on a page can decrease performance and/or cause socket drops and timeouts. The AOLserver stats interface can be used to measure RPC socket performance and should be monitored regularly.
+
+Caching should be used where possible to optimize performance. The AOLserver Stats interface has insight to Cache-hit-rate information and should be used to measure the performance of the sob cache.  A high cache-hit-rate is preferred.
+
+You might find that flowing content one way per server gives better performance.  For example, one server brokering data from the tool server to the frontned, and a second from the frontend to the tool server would perform better than one server doing both.
+
+==Debugging==
+When a sob client starts up, it begins to listen on its rpc port:
+{{{
+    [05/Jan/2007:15:45:16][25101.2684407744][-main-] Notice: rpc: listening on 127.0.0.1:9800
+}}}
+The SOB server then conencts:
+{{{
+    [05/Jan/2007:15:46:50][25101.25191424][-rpclisten-] Notice: rpc[nsobc:sob:0]: accepted connection: 127.0.0.1
+}}}
+The conenction is also seen in the sob server log:
+{{{
+    [05/Jan/2007:15:46:50][25103.25190400][rps:nsobc:sob] Notice: frontend: connected to 127.0.0.1:9800
+}}}
+By turning on nsob.debug on the client, we can see each nsob request:
+{{{
+    [05/Jan/2007:15:52:33][25101.25169920][-nscp:1-] Notice: sob: sob: get file.xml - ok
+    [05/Jan/2007:15:55:20][25101.25169920][-nscp:1-] Notice: sob: sob: get file.xml - ok (cached)
+}}}
+You can see that the first time the file was called it was pulled from the server.  The second time it was pulled from the cache.  A Similar log entry was made on server indicating it had to read the contents from disk:
+{{{
+    [05/Jan/2007:15:52:33][25103.25190400][rps:nsobc:sob] Notice: read: file.xml
+}}}
+If the client server goes down, in the server's log you can see the connection drop and the server try to restablish the connection witht he client:
+{{{
+    [05/Jan/2007:15:57:24][25103.25190400][rps:nsobc:sob] Warning: frontend: dropped
+    [05/Jan/2007:15:57:25][25103.25190400][rps:nsobc:sob] Warning: frontend: connect to 127.0.0.1:9800 failed
+}}}
+Connection retires will occure every few seconds.  When connection is reestablished the client's cache is empty:
+{{{
+    [05/Jan/2007:16:02:55][25111.25169920][-nscp:1-] Notice: sob: sob: get file.xml - ok
+}}}
+However the server never went down, so it has the file in cahce and does not need to read from disk:
+{{{
+    [05/Jan/2007:16:02:55][25103.25190400][rps:nsobc:sob] Notice: read: file.xml (cached)
+}}}
+
+If sendflush is turned on, the server will send a flush message to the clients when it estabishes a connection to ensure that old cache entrties are not used.
+
+Keep in mnd that dcirpc uses a reverse connection. The servers conenct to the clients.  This is true off all services running on dcirpc (Tally, nrate, sob, etc).  By using debug, you can gain insight into caching.  By tailing the log you see the staus of the connections.
