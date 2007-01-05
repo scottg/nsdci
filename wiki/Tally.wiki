@@ -108,6 +108,22 @@ You can use the ns schedule API to schedule the sweep as needed.
 
 = TCL API =
 
+== Client ==
+
+*nt.send* _bucket_ _key_ _value_
+
+|| *Argument* || *Description* ||
+|| _bucket_ || String. Name of the tally bucket. ||
+|| _key_ || String. Name of the key to set in the specified bucket. ||
+|| _value_ || String. Name of the value to set for the specified key, in the specified bucket. ||
+
+*nt.dump* _?boolean?_ 
+
+== Server ==
+
+*nt.exists* _bucket_
+
+
 *nt.dump:* Used to dump the contents of a bucket. This does not reset the bucket.
 
 *nt.exists:* Used to test the existence of a tally bucket
