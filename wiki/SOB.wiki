@@ -126,21 +126,25 @@ If dubugging is turned on, you will see the following log entries in the tool.se
 
 The first entry shows that the data was fetched from the server, the second shows the data was retrieved from cache.  For information on debugging See the nsob.debug command in the TCL API section of this article.
 
-== TCL API ==
-*nsob.put:* Used to put data from a client to the broker. If sendflush is enabled, a ncf message will be sent to all clients.
-{{{
-     Example:
-         nsob.put sob myFile "some data"
+==TCL API ==
 
-     Arguments:
-         server - the name of the sob server
-         key - the file name (key) of the data
-         data - what to put in the file
+===nsob.put===
+Used to put data from a client to the broker. If sendflush is enabled, a ncf message will be sent to all clients.
+
+*nsob.put * _server key value_
+
+
+|| *Argument* || *Description* ||
+|| _server_ || String. The name of the sob server ||
+|| _key_ || String. The file name (key) of the data ||
+|| _value_ || String. Data ||
  
-     Return:
-         void = success
-         TCL_ERROR = error
-}}}
+
+
+|| *Result* || *Description* ||
+|| {{{VOID}}} || Success ||
+|| {{{TCL_ERROR}}} || Failure. An error occurred. See the error string or the server log for more information. ||
+
 
 *nsob.append:* Used to append data on the broker. If sendflush is enabled, a ncf message will be sent to all clients.
 {{{
@@ -235,4 +239,7 @@ Special attention should be paid to the RPC stats.  The size of each sob file, c
 Caching should be used where possible to optimize performance. The AOLserver Stats interface has insight to Cache-hit-rate information and should be used to measure the performance of the sob cache.  A high cache-hit-rate is preferred.
 
 You might find that flowing content one way per server gives better performance.  For example, one server brokering data from the tool server to the frontned, and a second from the frontend to the tool server would perform better than one server doing both.
+
+
+
 
