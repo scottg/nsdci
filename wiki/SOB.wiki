@@ -105,7 +105,7 @@ If dubugging is turned on, you will see the following log entries in the tool.se
     [04/Jan/2007:20:48:02][24410.25212928][-nscp:3-] Notice: sob: sob: get file.xml - ok (cached)
 }}}
 
-The first entry shows that the data was fetched from the server, the second shows the data was retrieved from cache.  For information on debugging See the nsob.debug command in the TCL API section of this article.
+The first entry shows that the data was fetched from the server, the second shows the data was retrieved from cache.  For information on debugging see the "Debugging RPC Connections" section in this article.
 
 ==TCL API==
 
