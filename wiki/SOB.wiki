@@ -1,14 +1,14 @@
-The Networked SOB (nsob) API
+= Networked SOB (nsob) =
 
-= Introduction =
+== Introduction ==
 
-The Small Object Broker, or SOB, is used to send content from a tool and/or frontend server to a middle-tier broker.  The client servers (tool and frontend) send content to, and request content from, the broker through the SOB API.  The following article will discuss configuration, usage and caching, the TCL API, and best practices.
+The Networked Small Object Broker (nsob ) is used to broker content between servers.  The following article will discuss configuration, usage and caching, the TCL API, and best practices.
 
-= Configuration =
+== Configuration ==
 
 The bundled set up has a single AOLserver instance brokering many different SOB servers.  You could easily break out each SOB server to its own AOLserver instance. Below is a sample config:
 
-*Server Configuration:*
+=== Server (sob) ===
 
 {{{
     ns_section "ns/server/${server}/module/dci/sob/sobs"
@@ -30,7 +30,7 @@ The bundled set up has a single AOLserver instance brokering many different SOB 
         ns_param frontend ${frontendAddress}:$(frontendRpcPort}
 }}}
 
-*Client Configuration:*
+=== Client (frontend,tool) ===
 
 {{{
     ns_section "ns/server/${server}/module/dci/sob/sobs"
@@ -51,9 +51,9 @@ The bundled set up has a single AOLserver instance brokering many different SOB 
         ns_param debug 1
 }}}
 
-= Usage =
+== Usage ==
 
-Any "sob" client can "put" data on the broker. The "put" command requires "server, key, and value" as arguments. Use the AOLserver Control Port to test the commands:
+Any client can "put" data on the broker. The "put" command requires "server, key, and value" as arguments. Use the AOLserver Control Port to test the commands:
 
 {{{
     [neon:/usr/local/aolserver] Michael% telnet 127.0.0.1 8900
@@ -75,7 +75,7 @@ Any "sob" client can "put" data on the broker. The "put" command requires "serve
     [neon:/usr/local/aolserver] Michael% 
 }}}
 
-We can also "get" the data from any "sob" client:
+Any client can "get" data from the broker:
 
 {{{
     [neon:/usr/local/aolserver] Michael% telnet 127.0.0.1 9900
@@ -98,9 +98,9 @@ We can also "get" the data from any "sob" client:
     [neon:/usr/local/aolserver] Michael%
 }}}
 
-= Caching and Network Cache Flush =
+== Caching and Network Cache Flush ==
 
-To optimize performance, SOB has the ability to cache at both the server and client. With caching turned on the initial client request first looks into its own cache. If no entry is found it will make a call to the server.  If the server has caching turned on, it will first look in its cache.  If no entry is found, it will read from disk, make a cache entry, and return the data. The client API will make a cache entry and return the data.  
+To optimize performance, nsob has the ability to cache at both the server and client. With caching turned on, the initial client request first looks into its own cache. If no entry is found it will make a call to the server.  If the server has caching turned on, it will first look in its cache.  If no entry is found, it will read from disk, make a cache entry, and return the data. The client API will make a cache entry and return the data.  
 
 Network Cache Flush ([NCF]) is another service availble in nsdci.  With the SOBs configured to send cache flush messages, remote client cache will be flushed when a sob entry is addded or changed. Note: You must configure NCF on the AOLserver instance hosting the SOB servers in order for the SOBs to send NCFs.
 
