@@ -35,7 +35,7 @@ ns_section ns/server/$server/module/dci/nt/client
 
 == Usage: ==
 
-In order to effectively use tally, you'll need to write your own callback Tcl function to handle the processing of the tallies on the server side in conjunction with the *nt.dump* Tcl API. 
+In order to effectively use tally, you'll need to write your own callback Tcl function to handle the processing of the tallies on the server side in conjunction with *nt.dump*. 
 
 === Prototype ===
 
@@ -44,15 +44,13 @@ In order to effectively use tally, you'll need to write your own callback Tcl fu
 === Arguments ===
 
 || *Argument* || *Description* ||
-|| _key_ || String. Specifies whether or not debugging is enabled. ||
-|| _count_ || Integer. Specifies whether or not debugging is enabled. ||
-|| _total_ || Integer. Specifies whether or not debugging is enabled. ||
-
-
+|| _key_ || String. Name of the key. ||
+|| _count_ || Integer. Current count for the specified key. ||
+|| _total_ || Integer. Total count for all keys. ||
 
 === Example ===
 
-The callback *adds* the current counts and totals of a bucket to an *existing* [NV]:
+The following example *adds* the current counts and totals of a bucket to an *existing* [NV].
 
 {{{
 proc tallyCallback {key count total} {
