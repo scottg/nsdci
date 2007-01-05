@@ -49,6 +49,7 @@ In order to effectively use tally, you'll need to write your own callback Tcl fu
 || _total_ || Integer. Specifies whether or not debugging is enabled. ||
 
 
+
 === Example ===
 
 The callback *adds* the current counts and totals of a bucket to an *existing* [NV]:
