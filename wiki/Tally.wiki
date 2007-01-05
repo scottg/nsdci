@@ -1,4 +1,4 @@
-#Networked Tally: nt API
+The Networked Tally (nt) API
 
 = Introduction =
 
@@ -112,3 +112,6 @@ Notice the the runtime data structure has been updated and the tally reset:
 }}}
 
 You can use the ns schedule API to schedule the sweep as needed.
+
+
+
