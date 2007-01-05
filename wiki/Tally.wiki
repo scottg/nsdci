@@ -109,4 +109,4 @@ tool:nscp 4> nt.dump foo
 tool:nscp 5> exit
 }}}
 
-You can use the schedule API to schedule the sweep as needed.
+You can use the ns schedule API to schedule the sweep as needed.
