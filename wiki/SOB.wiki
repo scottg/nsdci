@@ -102,9 +102,7 @@ We can also "get" the data from any "sob" client:
 
 To optimize performance, SOB has the ability to cache at both the server level and client level. With caching turned on the initial client request first looks into its own cache. If no entry is found it will make a call to the server.  If the server has caching turned on, it will first look in its cache.  If no entry is found, it will read from disk, make a cache entry, and return the data. The client API will make a cache entry and return the data.  
 
-In this configuration caching turned on as is NCF (Network Cache Flush). Network Cache flush is another service availble in nsdci.  With the SOBs configured to send cache flush messages, remote client cach will be flushed when the sob entry is changed using nsob.put.  See <article> for information on NCF.
-
-Note: You must configure NCF on the SOB AOLserver instance in order for the SOBs to send NCFs.
+Network Cache Flush (NCF) is another service availble in nsdci.  With the SOBs configured to send cache flush messages, remote client cache will be flushed when the sob entry is changed using nsob.put.  See <article> for information on NCF.
 
 Note: You must configure NCF on the SOB AOLserver instance in order for the SOBs to send NCFs.
 
