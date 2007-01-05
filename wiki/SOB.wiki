@@ -238,11 +238,11 @@ Caching should be used where possible to optimize performance. The AOLserver Sta
 You might find that flowing content one way per server gives better performance.  For example, one server brokering data from the tool server to the frontned, and a second from the frontend to the tool server would perform better than one server doing both.
 
 ==Debugging==
-When using rpc, a reverse conenction is established with the sob server connecting to the sob clients.  When a client starts up, it begins to listen on its rpc port:
+When a sob client starts up, it begins to listen on its rpc port:
 {{{
     [05/Jan/2007:15:45:16][25101.2684407744][-main-] Notice: rpc: listening on 127.0.0.1:9800
 }}}
-When the SOB server establishins a connection, a log entry is made:
+The SOB server then conencts and a log entry is made:
 {{{
     [05/Jan/2007:15:46:50][25101.25191424][-rpclisten-] Notice: rpc[nsobc:sob:0]: accepted connection: 127.0.0.1
 }}}
@@ -274,7 +274,6 @@ But the server DOES still have it in cache:
 }}}
     
     
-
 
 
 
