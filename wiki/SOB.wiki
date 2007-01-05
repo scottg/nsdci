@@ -26,7 +26,7 @@ tool:nscp 1> nsob.put sob mySobFile "my sob data"
 tool:nscp 2>
 }}}
 
-Because the tool server is also a client of the "sob" type sob server, we can request the data:
+Because the tool server is also a client of the "sob" type sob server, we can also "get" the data:
 
 {{{
 tool:nscp 2> nsob.get sob mySobFile
