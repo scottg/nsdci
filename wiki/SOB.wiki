@@ -18,7 +18,7 @@ The bundled configuration has a single AOLserver instance brokering many differe
         ns_param http 1
 
     ns_section "ns/server/$server/module/dci/sob/server/sob"
-        ns_param root "/tmp/sob"
+        ns_param root $sobRoot
         ns_param mkdirs 1
         ns_param rename 1
         ns_param statsdetail 1
@@ -28,7 +28,20 @@ The bundled configuration has a single AOLserver instance brokering many differe
 
 ===Client (frontend, tool) using HTTP===
 {{{
+    ns_section "ns/server/$server/module/dci/sob"
+        ns_param debug 1
 
+    ns_section "ns/server/$server/module/dci/sob/clients"
+        ns_param sob sob
+
+    ns_section "ns/server/$server/module/dci/sob/client/sob"
+        ns_param timeout 1
+
+    ns_section "ns/server/$server/module/dci/rpc/client/nsobc:sob"
+        ns_param address $sobHostAddress
+        ns_param port $sobHostPort
+        ns_param httpkeepalive true
+        ns_param httpnumconnections 1
 }}}
 
 ==Usage==
