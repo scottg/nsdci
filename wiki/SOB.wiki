@@ -135,35 +135,38 @@ Used to put data from a client to the broker. If sendflush is enabled, a ncf mes
 
 
 || *Argument* || *Description* ||
-|| _server_ || String. The name of the sob server ||
-|| _key_ || String. The file name (key) of the data ||
-|| _value_ || String. Data ||
+|| _server_ || String. The name of the sob server. ||
+|| _key_ || String. The file name or key of the data. ||
+|| _value_ || String. The data to be put. ||
  
 
 || *Result* || *Description* ||
-|| {{{VOID}}} || Success ||
+|| {{{NULL}}} || Success ||
 || {{{TCL_ERROR}}} || Failure. An error occurred. See the error string or the server log for more information. ||
 
 {{{
 --------------------------------------------------------------------------------
 }}}
 
+=== nsob.append===
+Used to append data on the broker. If sendflush is enabled, a ncf message will be sent to all clients.
 
-*nsob.append:* Used to append data on the broker. If sendflush is enabled, a ncf message will be sent to all clients.
-{{{
-     Example:
-         nsob.append sob myFile " MORE data"
+*nsob.append* _server key value_
 
-     Arguments:
-         server - the name of the sob server
-         key - the file name (key) of the data
-         data - what to append to the file
+
+|| *Argument* || *Description* ||
+|| _server_ || String. The name of the sob server. ||
+|| _key_ || String. The file name or key of the data. ||
+|| _value_ || String. The data to be appended. ||
  
-     Return:
-         void = success
-         TCL_ERROR = error
-}}}
 
+|| *Result* || *Description* ||
+|| {{{NULL}}} || Success ||
+|| {{{TCL_ERROR}}} || Failure. An error occurred. See the error string or the server log for more information. ||
+
+{{{
+--------------------------------------------------------------------------------
+}}}
 *nsob.get:* Used to fetch data from the broker. If caching is enabled, the API will fetch from cache if exists, and make a cache entry if it does not.
 {{{
     Example:
