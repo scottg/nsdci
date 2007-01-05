@@ -2,7 +2,7 @@ The Networked Tally (nt) API
 
 = Introduction =
 
-Tally is used to keep track of votes and points. At some interval, those votes and points are "swept" by a callback into a runtime data structure. The developer writes the callback to do whatever the product needs - add to NV, write to SOB, etc. The tally is then reset. Runtime totals are pulled from the runtime datasource that was updated by the callback.
+Tally is used to keep track of votes and points. At some interval, those votes and points are "swept" by a callback into a runtime data structure. The developer writes the callback to do whatever the product needs - add to NV, append to SOB, etc. The tally is then reset. Runtime totals are pulled from the runtime datasource that was updated by the callback.
 
 = Configuration =
 
@@ -29,10 +29,9 @@ Tally is used to keep track of votes and points. At some interval, those votes a
        ns_param max 1000
 }}}
 
-
 = Usage =
 
-To use tally, you have to have a callback loaded on AOLserver instance running the tally server.  Here is a sample tally callback. NOTE: Tally Callbacks must take "key count total" as arguments in that order:
+To use tally, you have to have a callback loaded on AOLserver instance running the tally server.  Here is a sample tally callback proc.  Tally Callbacks must take "key count total" as arguments, in that order.  This callback *adds* the current counts and totals of a bucket to an *existing* nv:
 {{{
     proc generic.processTallies {key count total} {
          if {[nv.cget nv ${key}.total oldTotal]} {
@@ -46,7 +45,7 @@ To use tally, you have to have a callback loaded on AOLserver instance running t
      }
 }}}
 
-Using the AOLserver Control Port, Send some votes to the Tally server:
+Buckets are self initializing.  Using the AOLserver Control Port, send some votes to the tally server. 
 
 {{{
     [neon:/usr/local/aolserver] Michael% telnet localhost 9900
@@ -59,9 +58,9 @@ Using the AOLserver Control Port, Send some votes to the Tally server:
     Welcome to frontend running at /usr/local/aolserver/bin/nsd (pid 24171)
     AOLserver/4.5.0 (aolserver4_5) for osx built on Jan  4 2007 at 17:11:28
     CVS Tag: $Name:  $
-    frontend:nscp 1> nt.send foo bar 5
+    frontend:nscp 1> nt.send myBucket bar 5
  
-    frontend:nscp 2> nt.send foo dork 1
+    frontend:nscp 2> nt.send myBucket dork 1
  
     frontend:nscp 3> exit
  
@@ -83,24 +82,24 @@ You can dump the tally bucket on the tool server to get a quick look at what wil
     Welcome to tool running at /usr/local/aolserver/bin/nsd (pid 24173)
     AOLserver/4.5.0 (aolserver4_5) for osx built on Jan  4 2007 at 17:11:28
     CVS Tag: $Name:  $
-    tool:nscp 1> nt.dump foo
+    tool:nscp 1> nt.dump myBucket
     {dork 1 1} {bar 1 5}
 }}}
 
 To process the tallies:
 
 {{{
-    tool:nscp 2> nt.get foo generic.processTallies
+    tool:nscp 2> nt.get myBucket generic.processTallies
     1
 }}}
 
-Notice the the runtime data structure has been updated and the tally reset. In this example, [NV] has been used as the runtime data structure.
+Notice that the runtime data structure has been updated and the tally reset. In this example, [NV] has been used as the runtime data structure.
 
 {{{
     tool:nscp 3> nv.dump nv
     bar.count 1 dork.total 1 bar.total 5 dork.count 1
  
-    tool:nscp 4> nt.dump foo
+    tool:nscp 4> nt.dump myBucket
 
     tool:nscp 5> exit
 }}}
@@ -109,11 +108,11 @@ You can use the ns schedule API to schedule the sweep as needed.
 
 = TCL API =
 
-nt.dump 
+*nt.dump:* Used to dump the contents of a bucket. This does not reset the bucket.
 
-nt.exists 
+*nt.exists:* Used to test the existence of a tally bucket
 
-nt.get 
+*nt.get:* Gets the current buckets contents and calls the specified callback for processing 
 
 nt.read 
 
