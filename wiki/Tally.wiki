@@ -112,6 +112,8 @@ You can use the ns schedule API to schedule the sweep as needed.
 
 *nt.send* _bucket_ _key_ _value_
 
+Used to set key/value pairs for a given bucket name. Buckets are created on the fly.
+
 || *Argument* || *Description* ||
 || _bucket_ || String. Name of the tally bucket. ||
 || _key_ || String. Name of the key to set in the specified bucket. ||
