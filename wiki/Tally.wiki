@@ -35,7 +35,7 @@ ns_section ns/server/$server/module/dci/nt/client
 
 == Usage: ==
 
-In order to effectively use tally, you'll need to write your own callback Tcl function to handle the processing of the tallies on the server side in conjunction with *nt.dump*. 
+In order to effectively use tally, you'll need to write your own callback Tcl function to handle the processing of the tallies on the server side in conjunction with *nt.get*. 
 
 === Prototype ===
 
