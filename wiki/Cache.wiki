@@ -102,7 +102,7 @@ Deletes an entry from the named cache after first unsetting the current value (i
 *cache.flushEntry* _entry_
 
 || *Argument* || *Description* ||
-|| _entry_ || String. The handle to the value in the named cache. ||
+|| _entry_ || String. The handle to the value returned by _cache.findEntry_. ||
 
 || *Return* || * Description* ||
 || {{{NULL}}} || Success. The value was unset, the memory released, and the entry removed. ||
