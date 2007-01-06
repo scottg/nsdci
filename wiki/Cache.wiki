@@ -4,3 +4,38 @@
 The Cache API provides a mechanism to create size-based and time-based cache buckets.  The Network Cache Flush API ([NCF]) is used to send cache flush messages to client servers where these buckets have been created.  Together they provide a powerful, high performance cache-messaging service.
 
 ==Usage==
+The Cache API functions at a very low level and great care should be taken in its use.  The following AOLserver Control Port session is meant to give an overview only. Please see the "Best Practices" section on how to safly use the Cache API.
+{{{
+    [neon:local/aolserver/etc] Michael% telnet localhost 9900
+    Trying 127.0.0.1...
+    Connected to localhost.
+    Escape character is '^]'.
+    login: 
+    Password: 
+
+    Welcome to frontend running at /usr/local/aolserver/bin/nsd (pid 628)
+    AOLserver/4.5.0 (aolserver4_5) for osx built on Jan  4 2007 at 17:11:28
+    CVS Tag: $Name:  $
+    frontend:nscp 1> cache.createSized myCache 5000000          
+
+    frontend:nscp 2> cache.lock myCache
+
+    frontend:nscp 3> cache.createEntry myCache foo notUsed
+    eid0x619088
+    frontend:nscp 4> cache.setValue eid0x619088 "my value"
+
+    frontend:nscp 5> cache.unlock myCache
+
+    frontend:nscp 6> cache.findEntry myCache foo
+    eid0x619088
+    frontend:nscp 7> cache.getValue eid0x619088 returnVar
+    1
+    frontend:nscp 8> set returnVar
+    my value
+    frontend:nscp 9> exit
+
+    Goodbye!
+    Connection closed by foreign host.
+    [neon:local/aolserver/etc] Michael%
+}}}
+
