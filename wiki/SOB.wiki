@@ -273,52 +273,9 @@ Used to copy the contents of a local file to the borker.  If sendflush is enable
 || {{{TCL_ERROR}}} || Failure. An error occurred. See the server log for more information. ||
 
 ==Best Practices==
-The size of each sob file, combined with the number of clients and number of sob calls on a page can decrease performance and/or cause socket drops and timeouts. The AOLserver stats interface can be used to measure RPC socket performance and should be monitored regularly.
-
 Caching should be used where possible to optimize performance. The AOLserver Stats interface has insight to Cache-hit-rate information and should be used to measure the performance of the sob cache.  A high cache-hit-rate is preferred.
 
 You might find that flowing content one way per server gives better performance.  For example, one server brokering data from the tool server to the frontned, and a second from the frontend to the tool server would perform better than one server doing both.
 
+When connecting over dcirpc, the size of each sob file combined with the number of clients and number of sob calls on a page can decrease performance and/or cause socket drops and timeouts. The AOLserver stats interface can be used to measure RPC socket performance and should be monitored regularly.
 
-==RPC Configuration==
-tbd
-
-==Debugging RPC Connections==
-By using nsob.debug and tailing the server logs, you can gain insight into the status of the rpc connection, as well as  other useful information that will help you debug problems.  Dcirpc uses a reverse connection.  When a sob client starts up, it begins to listen on its rpc port:
-{{{
-    [05/Jan/2007:15:45:16][25101.2684407744][-main-] Notice: rpc: listening on 127.0.0.1:9800
-}}}
-The sob server then connects:
-{{{
-    [05/Jan/2007:15:46:50][25101.25191424][-rpclisten-] Notice: rpc[nsobc:sob:0]: accepted connection: 127.0.0.1
-}}}
-The connection is also seen in the sob server log:
-{{{
-    [05/Jan/2007:15:46:50][25103.25190400][rps:nsobc:sob] Notice: frontend: connected to 127.0.0.1:9800
-}}}
-By turning on nsob.debug on the client, we can see each nsob request:
-{{{
-    [05/Jan/2007:15:52:33][25101.25169920][-nscp:1-] Notice: sob: sob: get file.xml - ok
-    [05/Jan/2007:15:55:20][25101.25169920][-nscp:1-] Notice: sob: sob: get file.xml - ok (cached)
-}}}
-You can see that the first time the file was fetched it was fetched from the server.  The second time, it was found in cache.  A similar log entry was made on server indicating it read the contents from disk:
-{{{
-    [05/Jan/2007:15:52:33][25103.25190400][rps:nsobc:sob] Notice: read: file.xml
-}}}
-If the client server goes down, you can see the connection drop, and an attempt to reconnect:
-{{{
-    [05/Jan/2007:15:57:24][25103.25190400][rps:nsobc:sob] Warning: frontend: dropped
-    [05/Jan/2007:15:57:25][25103.25190400][rps:nsobc:sob] Warning: frontend: connect to 127.0.0.1:9800 failed
-}}}
-Connection retires will occur every few seconds.  When the client comes back up, and a connection is reestablished, the client's cache is empty:
-{{{
-    [05/Jan/2007:16:02:55][25111.25169920][-nscp:1-] Notice: sob: sob: get file.xml - ok
-}}}
-However, the sob server never went down, so it has the file in cahce and does not need to read from disk:
-{{{
-    [05/Jan/2007:16:02:55][25103.25190400][rps:nsobc:sob] Notice: read: file.xml (cached)
-}}}
-
-If sendflush is turned on, the server will send a flush message to the client when it establishes a connection to ensure that old cache entries are not used.  Also, keep in mind that dcirpc uses a reverse connection. The server connect to the clients.  This is true off all services running on dcirpc (tally, nrate, sob, etc).
-
-If a timeout happens, the client will drop the connection.  The server will then reestablish the connection.  Use the rpc stats to gain insight into socket performance.  See "Best Practices" section for more information.
