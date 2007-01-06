@@ -43,6 +43,7 @@ Creates a named cache, pruned by size. *NOTE:* The Cache API allows the creation
 }}}
 
 ===cache.createTimed===
+Creates a named cache, pruned by time. *NOTE:* The Cache API allows the creation of multiple caches of the same name, essentialy overwritting the previous cache causing a memory leak.
 
 *cache.createSized* _cacheName timeout_
 
@@ -59,7 +60,26 @@ Creates a named cache, pruned by size. *NOTE:* The Cache API allows the creation
 --------------------------------------------------------------------------------
 }}}
 
-cache.deleteEntry cache.findEntry cache.flushEntry cache.getValue cache.lock cache.setValue cache.timedWait cache.unlock cache.unsetValue
+===cache.deleteEntry==
+Removes an entry from the named cache. *NOTE:* This command does not free the memory associated with the cache entry's value. To delete an entry and free its current value, you must call _cache.flushEntry_.
+
+===cache.findEntry===
+Retrieves the entry handle in a named cache for _key_.
+
+===cache.flushEntry===
+Deletes an entry from the named cache after first unsetting the current value (if any).
+
+===cache.getValue===
+
+===cache.lock===
+
+===cache.setValue===
+
+===cache.timedWait===
+
+===cache.unlock===
+
+===cache.unsetValue===
 
 ==Usage==
 The following AOLserver Control Port session is meant to give an overview only. Please see the "Best Practices" section on how to safly use the Cache API.
