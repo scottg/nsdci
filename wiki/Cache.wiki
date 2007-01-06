@@ -114,18 +114,65 @@ Deletes an entry from the named cache after first unsetting the current value (i
 }}}
 
 ===cache.getValue===
+Retrieves the string value of an entry handle returned by _cache.findEntry_ The dataVariable argument is then updated with the value if the value is not NULL. If the value is not NULL a "1" is returned, else "0".
+
+*cache.getValue* _entry dataVariable_
+
+|| *Argument* || *Description* ||
+|| _entry_ || String. The handle to the value returned by _cache.findEntry_. ||
+|| _dataVariable || String. The name of the variable to set the result in. ||
+
+
+|| *Return* || * Description* ||
+|| {{{boolean}}} || Success. 1 the value was found and _dataVariable_ was set. ||
+|| {{{dataVariable}}} || String. This variable is self initializing and only set if the value is not NULL. ||
+|| {{{TCL_ERROR}}} || Failure. An error occurred. See the server log for more information. ||
+
+{{{
+--------------------------------------------------------------------------------
+}}}
 
 ===cache.lock===
+Locks the named cache. The lock is an exclusion lock (mutex). *Note:* See "Best Practices" for proper implementation.
+
+*cache.lock* _cacheName_
+
+|| *Argument* || *Description* ||
+|| _cacheName_ || String. The name of the cache. ||
+
+|| *Return* || * Description* ||
+|| {{{NULL}}} || Success. The cache has been locked. ||
+|| {{{TCL_ERROR}}} || Failure. An error occurred. See the server log for more information. ||
+
+{{{
+--------------------------------------------------------------------------------
+}}}
 
 ===cache.setValue===
+Updates the cache entry's value, freeing the existing value if exists.
 
-===cache.timedWait===
+*cache.setValue* _entry value_
+
+|| *Argument* || *Description* ||
+|| _entry_ || String. The handle returned by _cache.createEntry_ or _cache.findEntry_. ||
+|| _value_ || String. The value to set. ||
+
+
+|| *Return* || * Description* ||
+|| {{{NULL}}} || Success. The value was set. ||
+|| {{{TCL_ERROR}}} || Failure. An error occurred. See the server log for more information. ||
+
+{{{
+--------------------------------------------------------------------------------
+}}}
 
 ===cache.unlock===
 
 ===cache.unsetValue===
 
 ===cache.wait===
+
+===cache.timedWait===
 
 ===cache.broadcast===
 
