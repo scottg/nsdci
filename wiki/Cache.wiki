@@ -7,7 +7,7 @@ The Cache API provides a mechanism to create size-based and time-based cache buc
 ==TCL API==
 
 ===cache.createEntry===
-Creates an entry in a named cache identified by _key_.  _newVariable_ is updated with 1 if an entry for the given key already exists. A handle to the entry is returned.
+Creates an entry handle in a named cache identified by _key_.  _newVariable_ is updated with 1 if an entry for the given key already exists. A handle to the entry is returned.
 
 *cache.createEntry* _cacheName key newVariable_
 
@@ -18,7 +18,7 @@ Creates an entry in a named cache identified by _key_.  _newVariable_ is updated
 
 
 || *Return* || * Description* ||
-|| {{{String}}} || Success. The memory address of the entry was returned. ||
+|| {{{String}}} || Success. The handle of the entry. ||
 || {{{TCL_ERROR}}} || Failure. An error occurred. See the server log for more information. ||
 
 {{{
@@ -36,7 +36,7 @@ Creates a named cache, pruned by size. *NOTE:* The Cache API allows the creation
 
 
 || *Return* || * Description* ||
-|| {{{VOID}}} || Success. The cache bucket was created. ||
+|| {{{NULL}}} || Success. The cache bucket was created. ||
 || {{{TCL_ERROR}}} || Failure. An error occurred. See the server log for more information. ||
 
 {{{
@@ -54,7 +54,7 @@ Creates a named cache, pruned by time. *NOTE:* The Cache API allows the creation
 
 
 || *Return* || * Description* ||
-|| {{{VOID}}} || Success. The cache bucket was created. ||
+|| {{{NULL}}} || Success. The cache bucket was created. ||
 || {{{TCL_ERROR}}} || Failure. An error occurred. See the server log for more information. ||
 
 {{{
@@ -63,6 +63,20 @@ Creates a named cache, pruned by time. *NOTE:* The Cache API allows the creation
 
 ===cache.deleteEntry==
 Removes an entry from the named cache. *NOTE:* This command does not free the memory associated with the cache entry's value. To delete an entry and free its current value, you must call _cache.flushEntry_.
+
+*cache.deleteEntry* _entry_
+
+|| *Argument* || *Description* ||
+|| _entry_ || String. The handle returned by _cache.createEntry_ ||
+
+
+|| *Return* || * Description* ||
+|| {{{NULL}}} || Success. The entry was removed from the named cache. ||
+|| {{{TCL_ERROR}}} || Failure. An error occurred. See the server log for more information. ||
+
+{{{
+--------------------------------------------------------------------------------
+}}}
 
 ===cache.findEntry===
 Retrieves the entry handle in a named cache for _key_.
