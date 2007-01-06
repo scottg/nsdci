@@ -1,11 +1,25 @@
 = Remote Procedure Call (rpc)=
 
 ==Introduction==
+Explain why it is needed, what it is used for (np, np2, nt, sob, etc)
 
-==Configuration==
 
-===DCIRPC===
 
-===HTTP===
+==DCI-RPC==
+Legacy info. Reverse connections. socket info. Drawbacks
+
+===DCI-RPC Configuration===
+Specific rpc sections and params
+
+
+
+==HTTP-RPC==
+Bennifits
+
+===HTTP-RPC Configuration===
+Specific sections and params
+
+
 
 ==Logging & Debugging==
+
