@@ -125,6 +125,12 @@ Deletes an entry from the named cache after first unsetting the current value (i
 
 ===cache.unsetValue===
 
+===cache.wait===
+
+===cache.broadcast===
+
+===cache.signal===
+
 ==Usage==
 The following AOLserver Control Port session is meant to give an overview only. Please see the "Best Practices" section on how to safly use the Cache API.
 {{{
