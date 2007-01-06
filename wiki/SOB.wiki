@@ -9,6 +9,15 @@ The bundled configuration has a single AOLserver instance configured to serve ma
 ===Server (sob)===
 The last section does not have any params, but it is still required.
 {{{
+    ns_section "ns/server/$server/modules"
+        ns_param nssock nssock.so
+        ns_param dci dci.so
+
+    ns_section "ns/server/$server/module/nssock"
+        ns_param hostname $hostName
+        ns_param address $address
+        ns_param port $httpPort
+
     ns_section "ns/server/$server/module/dci/sob"
         ns_param debug 1
  
@@ -44,8 +53,8 @@ The last section does not have any params, but it is still required.
         ns_param port $thisRpcPort
 
     ns_section "ns/server/$server/module/dci/rpc/client/nsobc:sob"
-        ns_param address $sobAddress
-        ns_param port $sobRpcPort 
+        ns_param address $sobHostAddress
+        ns_param port $sobHostHttpPort 
         ns_param httpkeepalive true
         ns_param httpnumconnections 1
 }}}
