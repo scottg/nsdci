@@ -113,7 +113,7 @@ The following AOLserver Control Port session is meant to give an overview only. 
 
     frontend:nscp 2> cache.lock myCache
 
-    frontend:nscp 3> cache.createEntry myCache foo notUsed
+    frontend:nscp 3> cache.createEntry myCache foo existsBoolean
     eid0x619088
     frontend:nscp 4> cache.setValue eid0x619088 "my value"
 
@@ -137,7 +137,7 @@ Creating a cache entry and setting a value in that entry MUST be made as a singl
 {{{
     if {[catch {
         cache.lock $cacheName
-        set entry [cache.createEntry $cacheName $key notused]
+        set entry [cache.createEntry $cacheName $key existsBoolean]
         cache.setValue $entry $value
         cache.unlock $cacheName
     }]} {
