@@ -60,7 +60,7 @@ The Cache API provides a mechanism to create size-based and time-based cache buc
 cache.deleteEntry cache.findEntry cache.flushEntry cache.getValue cache.lock cache.setValue cache.timedWait cache.unlock cache.unsetValue
 
 ==Usage==
-The Cache API functions at a very low level and great care should be taken in its use.  The following AOLserver Control Port session is meant to give an overview only. Please see the "Best Practices" section on how to safly use the Cache API.
+The following AOLserver Control Port session is meant to give an overview only. Please see the "Best Practices" section on how to safly use the Cache API.
 {{{
     [neon:local/aolserver/etc] Michael% telnet localhost 9900
     Trying 127.0.0.1...
