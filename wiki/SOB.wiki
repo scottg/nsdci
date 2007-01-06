@@ -5,6 +5,8 @@ nsdci/dcicommon/sob.c
 The Networked Small Object Broker (nsob) is used to broker content between servers.  The following article will discuss the TCL API, configuration, usage, caching, and best practices.
 
 ==TCL API==
+The api is only exposed when properly configured. See the "Configuration" section for more information.
+
 ===nsob.put===
 Used to put data from a client to the broker. If sendflush is enabled, a ncf message will be sent to all clients.
 
