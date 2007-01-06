@@ -17,7 +17,7 @@ The Cache API provides a mechanism to create size-based and time-based cache buc
 
 || *Return* || * Description* ||
 || {{{String}}} || Success. The memory address of the entry was returned. ||
-|| {{{TCL_ERROR}}} || Failure. See the AOLserver server log for more information. ||
+|| {{{TCL_ERROR}}} || Failure. An error occurred. See the server log for more information. ||
 
 }}}
 --------------------------------------------------------
