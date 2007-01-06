@@ -25,6 +25,7 @@ Creates an entry in a named cache identified by _key_.  _newVariable_ is updated
 }}}
 
 ===cache.createSized===
+Creates a named cache, pruned by size. *NOTE:* The Cache API allows the creation of multiple caches of the same name, essentialy overwritting the previous cache causing a memory leak.
 
 *cache.createSized* _cacheName size_
 
@@ -112,4 +113,7 @@ Creating a cache entry and setting a value in that entry MUST be made as an atom
     }
 }}}
 
+The Cache API allows the reation of multiple caches of the same name, essentialy overwritting the previous cache causing a memory leak. So do not to re-create a cache bucket once createsd.
+
 Need to document the BPs for wait, broadcast, and signal
+
