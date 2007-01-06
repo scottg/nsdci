@@ -148,6 +148,6 @@ Creating a cache entry and setting a value in that entry MUST be made as a singl
     }
 }}}
 
-The Cache API allows the reation of multiple caches of the same name, essentialy overwritting the previous cache causing a memory leak. So do not to re-create a cache bucket once createsd.
+The Cache API allows the creation of multiple caches of the same name, essentialy overwritting the previous cache causing a memory leak. So do not to re-create a cache bucket once createsd.
 
 Need to document the BPs for wait, broadcast, and signal
