@@ -62,7 +62,7 @@ The Cache API functions at a very low level and great care should be taken in it
 }}}
 
 ==Best Practices==
-Creating a cache entry and setting a value in that entry MUST be made as an atomic action. An exclusion lock is provided to ensure this.  However, if an error is thrown during this action, the cache would remain locked.  A catch can be used around these actions to ensure proper unwinding of the entry and lock:
+Creating a cache entry and setting a value in that entry MUST be made as an atomic action. An exclusion lock is provided to ensure this.  If an error is thrown during this action, the cache would remain locked.  A catch should be used around these actions to ensure proper unwinding of the entry and the lock:
 {{{
     if {[catch {
         cache.lock $cacheName
@@ -76,5 +76,4 @@ Creating a cache entry and setting a value in that entry MUST be made as an atom
         error $errorString
     }
 }}}
-
 
