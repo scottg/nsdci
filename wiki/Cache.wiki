@@ -142,7 +142,7 @@ Creating a cache entry and setting a value in that entry MUST be made as a singl
         cache.unlock $cacheName
     }]} {
         set errorString ${::errorInfo}
-        catch {cache.deleteEntry $entry}
+        catch {cache.flushEntry $entry}
         catch {cache.unlock $cacheName}
         error $errorString
     }
