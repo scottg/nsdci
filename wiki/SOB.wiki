@@ -7,6 +7,7 @@ The Networked Small Object Broker (nsob) is used to broker content between serve
 The bundled configuration has a single AOLserver instance configured to serve many SOBs.  You could easily break out each SOB to its own AOLserver instance.  Below is a simple configuration.  You must also configure [RPC] and [NCF]:
 
 ===Server (sob)=== 
+
 There are no params for the last section, but the section is required. 
 {{{
     ns_section "ns/server/$server/module/dci/sob"
