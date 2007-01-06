@@ -38,6 +38,9 @@ The bundled configuration has a single AOLserver instance configured to serve ma
 
 ===Client (frontend, tool)===
 {{{
+    ns_section "ns/server/$server/modules"
+        ns_param dci dci.so
+
     ns_section "ns/server/$server/module/dci/sob"
         ns_param debug 1
 
