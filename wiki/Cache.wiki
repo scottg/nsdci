@@ -34,6 +34,7 @@ The Cache API provides a mechanism to create size-based and time-based cache buc
 
 || *Return* || * Description* ||
 || {{{VOID}}} || Success. The cache bucket was created. ||
+|| {{{TCL_ERROR}}} || Failure. An error occurred. See the server log for more information. ||
 
 {{{
 --------------------------------------------------------------------------------
@@ -50,6 +51,7 @@ The Cache API provides a mechanism to create size-based and time-based cache buc
 
 || *Return* || * Description* ||
 || {{{VOID}}} || Success. The cache bucket was created. ||
+|| {{{TCL_ERROR}}} || Failure. An error occurred. See the server log for more information. ||
 
 {{{
 --------------------------------------------------------------------------------
