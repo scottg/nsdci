@@ -115,13 +115,13 @@ There are significant performance gains from caching. Consider a fetch to "file.
     tool:nscp 3> 
 }}}
 
-If dubugging is turned on, you will see the following log entries in the tool.server.log file:
+In ther above example, if dubugging is turned on, you will see the following log entries in the tool.server.log file:
 {{{
     [04/Jan/2007:20:47:47][24410.25212928][-nscp:3-] Notice: sob: sob: get file.xml - ok
     [04/Jan/2007:20:48:02][24410.25212928][-nscp:3-] Notice: sob: sob: get file.xml - ok (cached)
 }}}
 
-The first entry shows that the data was fetched from the server, the second shows the data was retrieved from cache.   Similar notices can be seen on the server:
+The first entry shows that the data was fetched from the server, the second shows the data was retrieved from cache.   Similar notices can be seen on the server in the sob.server.log file:
 
 {{{
     [04/Jan/2007:20:48:02][25809.25191424][-conn:0-] Notice: read: file.xml
