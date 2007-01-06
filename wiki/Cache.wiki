@@ -14,7 +14,7 @@ Creates an entry handle in _cacheName_ identified by _key_.  _newVariable_ is up
 || *Argument* || *Description* ||
 || _cacheName_ || String. The name of the cache bucket. ||
 || _key_ || String. The key name to be used. ||
-|| _newVariable_ || Boolean. 1 if "key" already exists, 0 if not. ||
+|| _newVariable_ || String. Variable name to put _boolean_ new entry indicator. ||
 
 
 || *Return* || * Description* ||
