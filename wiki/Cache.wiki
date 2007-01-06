@@ -148,6 +148,6 @@ Creating a cache entry and setting a value in that entry MUST be made as a singl
     }
 }}}
 
-The Cache API allows the creation of multiple caches of the same name, essentialy overwritting the previous cache causing a memory leak. So do not to re-create a cache bucket once createsd.
+Special attention should be paid to when and hown named caches are created.  The Cache API allows the creation of multiple caches of the same name, essentialy overwritting the previous cache causing a memory leak.  Because of this, the safest place for cache creation is at server startup, not in a procedure or page code.
 
 Need to document the BPs for wait, broadcast, and signal
