@@ -1,6 +1,6 @@
 =Cache API=
 
 ==Introduction==
-The Cache API provides a mechanism to create size-based or time-based cache buckets.
+The Cache API provides a mechanism to create size-based and time-based cache buckets.  The Network Cache Flush API ([NCF]) is used to send cache flush messages to client servers where these buckets have been created.  Together they provide a powerful, high performance cache-messaging service.
 
 ==Usage==
