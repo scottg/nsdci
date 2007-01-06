@@ -126,7 +126,7 @@ The first entry shows that the data was fetched from the server, the second show
 {{{
     [04/Jan/2007:20:48:02][25809.25191424][-conn:0-] Notice: read: file.xml
 }}}
-or 
+    or 
 {{{
     [04/Jan/2007:20:48:02][25809.25191424][-conn:0-] Notice: read: file.xml (cached)
 }}}
