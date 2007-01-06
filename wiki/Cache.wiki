@@ -1,6 +1,6 @@
 =Cache API=
 
-==Introduction== 
+==Introduction==
 The Cache API provides a mechanism to create size-based or time-based cache buckets.
 
 ==Usage==
