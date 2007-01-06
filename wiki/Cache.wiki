@@ -133,7 +133,7 @@ The following AOLserver Control Port session is meant to give an overview only. 
 }}}
 
 ==Best Practices==
-Creating a cache entry and setting a value in that entry MUST be made as an atomic action. An exclusion lock is provided to ensure this.  If an error is thrown during this action, the cache would remain locked.  A catch should be used around these actions to ensure proper unwinding of the entry and the lock:
+Creating a cache entry and setting a value in that entry MUST be made as a single transaction. An exclusion lock is provided to ensure this.  If an error is thrown during this action, the cache would remain locked.  A catch should be used around these actions to ensure proper unwinding of the entry and the lock:
 {{{
     if {[catch {
         cache.lock $cacheName
