@@ -2,8 +2,6 @@
 
 Explain why it is needed, what it is used for (np, np2, nt, sob, etc), bennifits of HTTP? touch on old dcirpc?
 
+Explain here that each service (np, np2, nt, sob, etc.) sets up their own rpc client - we should include those sections and params in the config section of each article.
 
-Since each service (np, np2, nt, sob) sets up their own rpc client - we should include that in the config section of each service.
-
-
-In this config - the nssock of the tool server is also accepting rpc connections.  Should we how to set up a separate nssock for rpc?
+In this bundled configuration the nssock of the tool server is also accepting rpc connections.  Should we show how to set up a separate nssock for rpc?
