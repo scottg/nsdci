@@ -19,9 +19,9 @@ The Cache API provides a mechanism to create size-based and time-based cache buc
 || {{{String}}} || Success. The memory address of the entry was returned. ||
 || {{{TCL_ERROR}}} || Failure. An error occurred. See the server log for more information. ||
 
-}}}
---------------------------------------------------------
 {{{
+--------------------------------------------------------
+}}}
 
 cache.createSized cache.createTimed cache.deleteEntry cache.findEntry cache.flushEntry cache.getValue cache.lock cache.setValue cache.timedWait cache.unlock cache.unsetValue
 
