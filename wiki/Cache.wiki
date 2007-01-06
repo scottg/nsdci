@@ -4,6 +4,11 @@ nsdci/dcicommon/cache.c
 ==Introduction==
 The Cache API provides a mechanism to create size-based and time-based named caches.  The Network Cache Flush API ([NCF]) is used to send cache flush messages.  Together they provide a powerful, high performance cache-messaging service.  The Cache API functions at a very low level and great care should be taken in its use. See the  "Best Practices" section for examples of how to effectively use the Cache API.
 
+|| *Table of Contents ||
+|| TCL_API ||
+|| Usage ||
+|| Best Practices ||
+
 ==TCL API==
 
 ===cache.createEntry===
