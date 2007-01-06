@@ -19,7 +19,7 @@ Creates an entry handle in _cacheName_ identified by _key_.  _newVariable_ is up
 
 || *Return* || * Description* ||
 || {{{String}}} || Success. The handle of the entry. ||
-|| {{{_newVairable_}}} || Boolean. 1 if an entry for the given key already exists, 0 if not. ||
+|| {{{newVariable}}} || Boolean. 1 if an entry for the given key already exists, 0 if not. ||
 || {{{TCL_ERROR}}} || Failure. An error occurred. See the server log for more information. ||
 
 {{{
