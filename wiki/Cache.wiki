@@ -79,10 +79,38 @@ Removes an entry from the named cache. *NOTE:* This command does not free the me
 }}}
 
 ===cache.findEntry===
-Retrieves the entry handle in a named cache for _key_.
+Finds a cache entry identified by _key_ in _cacheName_. A handle to this entry is returned.
+
+*cache.findEntry* _cacheName key_ 
+
+|| *Argument* || *Description* ||
+|| _cacheName_ || String. The name of the cache. ||
+|| _key_ || String. The identifing key in the named cache. ||
+
+
+|| *Return* || * Description* ||
+|| {{{String}}} || Success. The handle of the cache entry.||
+|| {{{TCL_ERROR}}} || Failure. An error occurred. See the server log for more information. ||
+
+{{{
+--------------------------------------------------------------------------------
+}}}
 
 ===cache.flushEntry===
 Deletes an entry from the named cache after first unsetting the current value (if any).
+
+*cache.flushEntry* _entry_
+
+|| *Argument* || *Description* ||
+|| _entry_ || String. The handle to the value in the named cache. ||
+
+|| *Return* || * Description* ||
+|| {{{NULL}}} || Success. The value was unset, the memory released, and the entry removed. ||
+|| {{{TCL_ERROR}}} || Failure. An error occurred. See the server log for more information. ||
+
+{{{
+--------------------------------------------------------------------------------
+}}}
 
 ===cache.getValue===
 
