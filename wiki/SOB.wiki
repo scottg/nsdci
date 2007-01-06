@@ -4,6 +4,129 @@ nsdci/dcicommon/sob.c
 ==Introduction==
 The Networked Small Object Broker (nsob) is used to broker content between servers.  The following article will discuss configuration, usage, caching, the TCL API, and best practices.
 
+==TCL API==
+===nsob.put===
+Used to put data from a client to the broker. If sendflush is enabled, a ncf message will be sent to all clients.
+
+*nsob.put * _server key value_
+
+|| *Argument* || *Description* ||
+|| _server_ || String. The name of the sob server. ||
+|| _key_ || String. The file name or key of the data. ||
+|| _value_ || String. The data to be put. ||
+ 
+
+|| *Result* || *Description* ||
+|| {{{NULL}}} || Success ||
+|| {{{TCL_ERROR}}} || Failure. An error occurred. See the server log for more information. ||
+
+{{{
+--------------------------------------------------------------------------------
+}}}
+
+===nsob.append===
+Used to append data on the broker. If sendflush is enabled, a ncf message will be sent to all clients.
+
+*nsob.append* _server key value_
+
+|| *Argument* || *Description* ||
+|| _server_ || String. The name of the sob server. ||
+|| _key_ || String. The file name or key of the data. ||
+|| _value_ || String. The data to be appended. ||
+ 
+
+|| *Result* || *Description* ||
+|| {{{NULL}}} || Success ||
+|| {{{TCL_ERROR}}} || Failure. An error occurred. See the server log for more information. ||
+
+{{{
+--------------------------------------------------------------------------------
+}}}
+
+===nsob.get ===
+Used to fetch data from the broker. If caching is enabled, the API will fetch from cache if exists, and make a cache entry if it does not.
+
+*nsob.get* _server key_
+
+|| *Argument* || *Description* ||
+|| _server_ || String. The name of the sob server. ||
+|| _key_ || String. The file name or key of the data. ||
+
+
+|| *Result* || *Description* ||
+|| {{{STRING}}} || Success. The contents of the file. ||
+|| {{{NULL}}} || Success. The communication was successful, but there was no such key. ||
+|| {{{TCL_ERROR}}} || Failure. An error occurred. See the server log for more information. ||
+
+{{{
+--------------------------------------------------------------------------------
+}}}
+
+===nsob.delete===
+Used to remove data from the broker. If sendflush is enabled, a ncf message will be sent to all clients.
+
+*nsob.delete* _server key_
+
+|| *Argument* || *Description* ||
+|| _server_ || String. The name of the sob server. ||
+|| _key_ || String. The file name or key of the data. ||
+ 
+
+|| *Result* || *Description* ||
+|| {{{NULL}}} || Success. The file has been deleted. ||
+|| {{{TCL_ERROR}}} || Failure. An error occurred. See the server log for more information. ||
+
+{{{
+--------------------------------------------------------------------------------
+}}}
+
+===nsob.names===
+Used to list the names of the configured SOBs.  Both clients and servers are listed.
+
+*nsob.names*
+
+|| *Result* || *Description* ||
+|| {{{String}}} || Success. The names of the configured SOBs in TCL_LIST format. ||
+|| {{{TCL_ERROR}}} || Failure. An error occurred. See the server log for more information. ||
+
+
+{{{
+--------------------------------------------------------------------------------
+}}}
+
+===nsob.debug===
+Used to toggle debug mode. Debug mode adds log messages for many nsob commands.
+
+*nsob.debug* _?boolean?_
+
+|| *Argument* || *Description* ||
+|| _?boolean?_ || Boolean. Optional. Specifies whether or not debugging is enabled. ||
+
+
+|| *Result* || *Description* ||
+|| {{{1}}} || Success. Returned if boolean was specified. ||
+|| {{{boolean}}} || Success. If a boolean was not specified, then the current debug value is returned. ||
+
+{{{
+--------------------------------------------------------------------------------
+}}}
+
+===nsob.copy===
+Used to copy the contents of a local file to the borker.  If sendflush is enabled, a ncf message will be sent to all clients.
+
+*nsob.copy* _localFile server key_
+
+|| *Argument* || *Description* ||
+|| _localFile_ || String. The complete file path to the file. ||
+|| _server_ || String. The name of the sob server. ||
+|| _key_ || String. The file name or key of the data. ||
+
+
+|| *Result* || *Description* ||
+|| {{{NULL}}} || Success. The file was copied to the server. ||
+|| {{{TCL_ERROR}}} || Failure. An error occurred. See the server log for more information. ||
+
+
 ==Configuration==
 The bundled configuration has a single AOLserver instance configured to serve many SOBs.  You could easily break out each SOB to its own AOLserver instance.  Below is a simple configuration that creates a SOB service called "sob":
 
@@ -150,132 +273,10 @@ or
     [04/Jan/2007:20:48:02][25809.25191424][-conn:0-] Notice: read: file.xml (cached)
 }}}
 
-==TCL API==
-
-===nsob.put===
-Used to put data from a client to the broker. If sendflush is enabled, a ncf message will be sent to all clients.
-
-*nsob.put * _server key value_
-
-|| *Argument* || *Description* ||
-|| _server_ || String. The name of the sob server. ||
-|| _key_ || String. The file name or key of the data. ||
-|| _value_ || String. The data to be put. ||
- 
-
-|| *Result* || *Description* ||
-|| {{{NULL}}} || Success ||
-|| {{{TCL_ERROR}}} || Failure. An error occurred. See the server log for more information. ||
-
-{{{
---------------------------------------------------------------------------------
-}}}
-
-===nsob.append===
-Used to append data on the broker. If sendflush is enabled, a ncf message will be sent to all clients.
-
-*nsob.append* _server key value_
-
-|| *Argument* || *Description* ||
-|| _server_ || String. The name of the sob server. ||
-|| _key_ || String. The file name or key of the data. ||
-|| _value_ || String. The data to be appended. ||
- 
-
-|| *Result* || *Description* ||
-|| {{{NULL}}} || Success ||
-|| {{{TCL_ERROR}}} || Failure. An error occurred. See the server log for more information. ||
-
-{{{
---------------------------------------------------------------------------------
-}}}
-
-===nsob.get ===
-Used to fetch data from the broker. If caching is enabled, the API will fetch from cache if exists, and make a cache entry if it does not.
-
-*nsob.get* _server key_
-
-|| *Argument* || *Description* ||
-|| _server_ || String. The name of the sob server. ||
-|| _key_ || String. The file name or key of the data. ||
-
-
-|| *Result* || *Description* ||
-|| {{{STRING}}} || Success. The contents of the file. ||
-|| {{{NULL}}} || Success. The communication was successful, but there was no such key. ||
-|| {{{TCL_ERROR}}} || Failure. An error occurred. See the server log for more information. ||
-
-{{{
---------------------------------------------------------------------------------
-}}}
-
-===nsob.delete===
-Used to remove data from the broker. If sendflush is enabled, a ncf message will be sent to all clients.
-
-*nsob.delete* _server key_
-
-|| *Argument* || *Description* ||
-|| _server_ || String. The name of the sob server. ||
-|| _key_ || String. The file name or key of the data. ||
- 
-
-|| *Result* || *Description* ||
-|| {{{NULL}}} || Success. The file has been deleted. ||
-|| {{{TCL_ERROR}}} || Failure. An error occurred. See the server log for more information. ||
-
-{{{
---------------------------------------------------------------------------------
-}}}
-
-===nsob.names===
-Used to list the names of the configured SOBs.  Both clients and servers are listed.
-
-*nsob.names*
-
-|| *Result* || *Description* ||
-|| {{{String}}} || Success. The names of the configured SOBs in TCL_LIST format. ||
-|| {{{TCL_ERROR}}} || Failure. An error occurred. See the server log for more information. ||
-
-
-{{{
---------------------------------------------------------------------------------
-}}}
-
-===nsob.debug===
-Used to toggle debug mode. Debug mode adds log messages for many nsob commands.
-
-*nsob.debug* _?boolean?_
-
-|| *Argument* || *Description* ||
-|| _?boolean?_ || Boolean. Optional. Specifies whether or not debugging is enabled. ||
-
-
-|| *Result* || *Description* ||
-|| {{{1}}} || Success. Returned if boolean was specified. ||
-|| {{{boolean}}} || Success. If a boolean was not specified, then the current debug value is returned. ||
-
-{{{
---------------------------------------------------------------------------------
-}}}
-
-===nsob.copy===
-Used to copy the contents of a local file to the borker.  If sendflush is enabled, a ncf message will be sent to all clients.
-
-*nsob.copy* _localFile server key_
-
-|| *Argument* || *Description* ||
-|| _localFile_ || String. The complete file path to the file. ||
-|| _server_ || String. The name of the sob server. ||
-|| _key_ || String. The file name or key of the data. ||
-
-
-|| *Result* || *Description* ||
-|| {{{NULL}}} || Success. The file was copied to the server. ||
-|| {{{TCL_ERROR}}} || Failure. An error occurred. See the server log for more information. ||
-
 ==Best Practices==
 Caching should be used where possible to optimize performance. The AOLserver Stats interface has insight to Cache-hit-rate information and should be used to measure the performance of the sob cache.  A high cache-hit-rate is preferred.
 
 You might find that flowing content one way per server gives better performance.  For example, one server brokering data from the tool server to the frontned, and a second from the frontend to the tool server.  This could perform better than one server doing both.
 
 When connecting over dcirpc, the size of each sob file combined with the number of clients and number of sob calls on a page can decrease performance and/or cause socket drops and timeouts. The AOLserver stats interface can be used to measure RPC socket performance and should be monitored regularly.
+
