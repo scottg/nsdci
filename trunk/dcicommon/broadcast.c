@@ -105,6 +105,7 @@ static Ns_Callback StopBroadcasters;
 static int StatsObjCmd(ClientData arg, Tcl_Interp *interp, int objc, Tcl_Obj *CONST objv[]);
 static int ClientsObjCmd(ClientData arg, Tcl_Interp *interp, int objc, Tcl_Obj *CONST objv[]);
 static int DumpObjCmd(ClientData arg, Tcl_Interp *interp, int objc, Tcl_Obj *CONST objv[]);
+static int NamesObjCmd(ClientData arg, Tcl_Interp *interp, int objc, Tcl_Obj *CONST objv[]);
 
 
 
@@ -197,6 +198,7 @@ AddCmds(Tcl_Interp *interp, void *ignored)
     Tcl_CreateObjCommand(interp, "broadcast.stats", StatsObjCmd, NULL, NULL);
     Tcl_CreateObjCommand(interp, "broadcast.clients", ClientsObjCmd, NULL, NULL);
     Tcl_CreateObjCommand(interp, "broadcast.dump", DumpObjCmd, NULL, NULL);
+    Tcl_CreateObjCommand(interp, "broadcast.names", NamesObjCmd, NULL, NULL);
     return TCL_OK;
 }
 
@@ -946,6 +948,24 @@ ClientInfoListObj(Tcl_Interp *interp, Tcl_Obj *listPtr, Client *cPtr)
             Tcl_NewStringObj(cPtr->host, -1));
     Tcl_ListObjAppendElement(interp, listPtr,
             Tcl_NewStringObj(state, -1));
+
+    return TCL_OK;
+}
+
+static int
+NamesObjCmd(ClientData arg, Tcl_Interp *interp, int objc, Tcl_Obj *CONST objv[])
+{
+    Broadcast *bPtr;
+
+    bPtr = firstBroadcastPtr;
+    while (bPtr != NULL) {
+        Tcl_Obj *objPtr = Tcl_NewObj();
+
+        Tcl_ListObjAppendElement(interp, objPtr, Tcl_NewStringObj(bPtr->name, -1)); 
+        Tcl_ListObjAppendElement(interp, Tcl_GetObjResult(interp), objPtr);
+
+        bPtr = bPtr->nextPtr;
+    }
 
     return TCL_OK;
 }
