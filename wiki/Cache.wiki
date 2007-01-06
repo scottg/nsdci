@@ -39,7 +39,23 @@ The Cache API provides a mechanism to create size-based and time-based cache buc
 --------------------------------------------------------------------------------
 }}}
 
-cache.createTimed cache.deleteEntry cache.findEntry cache.flushEntry cache.getValue cache.lock cache.setValue cache.timedWait cache.unlock cache.unsetValue
+===cache.createTimed===
+
+*cache.createSized* _cacheName timeout_
+
+|| *Argument* || *Description* ||
+|| _cacheName_ || String. The name of the cache bucket. ||
+|| _timeout_ || Integer. The TTL in minutes. ||
+
+
+|| *Return* || * Description* ||
+|| {{{VOID}}} || Success. The cache bucket was created. ||
+
+{{{
+--------------------------------------------------------------------------------
+}}}
+
+cache.deleteEntry cache.findEntry cache.flushEntry cache.getValue cache.lock cache.setValue cache.timedWait cache.unlock cache.unsetValue
 
 ==Usage==
 The Cache API functions at a very low level and great care should be taken in its use.  The following AOLserver Control Port session is meant to give an overview only. Please see the "Best Practices" section on how to safly use the Cache API.
