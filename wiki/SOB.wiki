@@ -49,8 +49,8 @@ The last section does not have any params, but it is still required.
 
     ns_section "ns/server/$server/module/dci/rpc"
         ns_param debug 1
-        ns_param address $thisAddress
-        ns_param port $thisRpcPort
+        ns_param address $address
+        ns_param port $rpcPort
 
     ns_section "ns/server/$server/module/dci/rpc/client/nsobc:sob"
         ns_param address $sobHostAddress
