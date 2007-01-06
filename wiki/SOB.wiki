@@ -262,6 +262,10 @@ Caching should be used where possible to optimize performance. The AOLserver Sta
 
 You might find that flowing content one way per server gives better performance.  For example, one server brokering data from the tool server to the frontned, and a second from the frontend to the tool server would perform better than one server doing both.
 
+
+==RPC Configuration==
+tbd
+
 ==Debugging RPC Connections==
 By using nsob.debug and tailing the server logs, you can gain insight into the status of the rpc connection, as well as  other useful information that will help you debug problems.  Dcirpc uses a reverse connection.  When a sob client starts up, it begins to listen on its rpc port:
 {{{
