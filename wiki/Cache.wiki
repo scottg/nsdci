@@ -167,8 +167,35 @@ Updates the cache entry's value, freeing the existing value if exists.
 }}}
 
 ===cache.unlock===
+Unlocks the named cache. *Note:* See "Best Practices" for proper implementation.
+
+*cache.unlock* _cacheName_
+
+|| *Argument* || *Description* ||
+|| _cacheName_ || String. The name of the cache. ||
+
+|| *Return* || * Description* ||
+|| {{{NULL}}} || Success. The cache has been unlocked. ||
+|| {{{TCL_ERROR}}} || Failure. An error occurred. See the server log for more information. ||
+
+{{{
+--------------------------------------------------------------------------------
+}}}
 
 ===cache.unsetValue===
+Unsets the string value of a given cache entry, freeing the data and resetting the value to NULL. This does not delete the entry itself.
+
+|| *Argument* || *Description* ||
+|| _entry_ || String. The handle returned by _cache.createEntry_ or _cache.findEntry_. ||
+
+
+|| *Return* || * Description* ||
+|| {{{NULL}}} || Success. The value was unset. ||
+|| {{{TCL_ERROR}}} || Failure. An error occurred. See the server log for more information. ||
+
+{{{
+--------------------------------------------------------------------------------
+}}}
 
 ===cache.wait===
 
