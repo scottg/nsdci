@@ -6,13 +6,14 @@ The Cache API provides a mechanism to create size-based and time-based cache buc
 ==TCL API==
 
 ===cache.createEntry===
+Creates an entry in a named cache identified by _key_.  _newVariable_ is updated with 1 if an entry for the given key already exists. A handle to the entry is returned.
 
 *cache.createEntry* _cacheName key newVariable_
 
 || *Argument* || *Description* ||
 || _cacheName_ || String. The name of the cache bucket. ||
 || _key_ || String. The key name to be used. ||
-|| _newVariable_ || Not Used ||
+|| _newVariable_ || Boolean. 1 if "key" already exists, 0 if not. ||
 
 
 || *Return* || * Description* ||
