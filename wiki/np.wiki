@@ -29,7 +29,7 @@ Used to send a choice for a named poll to the poll server.  Returns a tcl list w
 }}}
 
 ===npc2.vote===
-Used to adjust the poll standings. This is an admin utility and should not be used cast votes.  The choice is adjusted by the amount specified and the same number of "total poll votes" are taken away. See the "Usage" section for examples.
+Used to adjust the poll standings. This is an admin utility and should not be used cast votes.  The choice is adjusted as is the total votes of the poll. See the "Usage" section for examples.
 
 *npc2.vote* _poll choice adjust_
 
