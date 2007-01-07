@@ -7,7 +7,7 @@ nsdci/dcicommon/otally.c
 ==Introduction==
 Networked Tally provides a simple mechanism for collecting counts from remote servers. Counts are stored for user-defined keys, which are grouped in buckets. Clients update tally counts for keys within buckets, with the data processed by the server.
 
-Clients have configurable buffer which allows tallies to be collected even if the server is not available. The server stores data on disk for persistent storage across restarts. It's important to note, however, that the backup file is only written at server exit in the case of a proper shutdown, or if additional code is written to explicitly backup the data.
+Clients have a configurable buffer which allows tallies to be collected even if the server is not available. The server stores data on disk for persistent storage across restarts. It's important to note, however, that the backup file is only written at server exit in the case of a proper shutdown, or if additional code is written to explicitly backup the data.
 
 ==Tcl API==
 
@@ -34,13 +34,13 @@ Used to set key/value pairs for a given bucket name.
 *nt.send* _bucket_ _key_ _value_ 
 
 || *Argument* || *Description* ||
-|| _bucket_ || String. Name of the tally bucket. ||
+|| _bucket_ || String. Name of the tally bucket. Buckets are self initializing. ||
 || _key_ || String. Name of the key to set in the specified bucket. ||
-|| _value_ || Integer. The count to set for the specified key, in the specified bucket. ||
+|| _value_ || Integer. The count to add to the specified key, in the specified bucket. ||
 
 
 || *Result* || *Description* ||
-|| {{{NULL}}} || Success. The result was successfully written to the nt server. Buckets are created and initialized on the fly as needed. ||
+|| {{{NULL}}} || Success. The result was successfully written to the nt server. ||
 || {{{TCL_ERROR}}} || Failure. An error occurred. See the server log for more information. ||
 
 {{{
@@ -48,15 +48,40 @@ Used to set key/value pairs for a given bucket name.
 }}}
 
 ==nt.dump==
-Used to dump the contents of a bucket. This does not reset the bucket.
+Used to dump the contents of a bucket. This does not reset the bucket. The results is a tcl list of tcl lists. Each list has key name, and number of votes, total points. Since each vote can give n points, votes do not have to equal total points.
 
-*nt.dump* _?boolean?_ 
+*nt.dump* _bucket_
+
+|| *Argument* || *Description* ||
+|| _bucket_ || String. Name of the tally bucket. Buckets are self initializing. ||
+
+
+|| *Result* || *Description* ||
+|| {{{String}}} || Success. Returns a tcl list of lists. ||
+|| {{{TCL_ERROR}}} || Failure. An error occurred. See the server log for more information. ||
 
 {{{
 --------------------------------------------------------------------------------
 }}}
 
-nt.exists nt.get nt.read nt.buckets nt.debug nt.write nt.peek nt.send
+==nt.exists==
+Checks to see _bucket_ exists. Since client tallies are buffered before being sent to the server, it is possible that the bucket has been initialized on a client, but has not yet been flushed to the server.
+
+*nt.exists* _bucket_
+
+|| *Argument* || *Description* ||
+|| _bucket_ || String. Name of the tally bucket. Buckets are self initializing. ||
+
+
+|| *Result* || *Description* ||
+|| {{{boolean}} || Success. 1 the bucket exists. 0 the bucket does not exist. ||
+|| {{{TCL_ERROR}}} || Failure. An error occurred. See the server log for more information. ||
+
+{{{
+--------------------------------------------------------------------------------
+}}}
+
+nt.get nt.read nt.buckets nt.debug nt.write nt.peek nt.send
 
 ==Configuration==
 
