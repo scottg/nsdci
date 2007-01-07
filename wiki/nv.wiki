@@ -1,10 +1,13 @@
 #summary Networked Variable api
+#labels Phase-Implementation
 
 =Networked Variable (nv)=
 nsdci/dcicommon/nv.c
 
 ==Introduction==
-The Networked Variable api (nv) is used to stream key-value updates to remote clients. It is an in-memory array on multiple servers.  The array is networked, so a set or update on the origin server is reflected on the clients.
+The Networked Variable api (nv) is used to stream key-value updates to remote clients. It is an in-memory array on multiple servers.  The array is networked, so array manipulation on the origin server is reflected on the clients. The array has the option to be flushed to disk for persistent storage across restarts.  Clients will receive the entire array from the origin server on startup.
+
+Additionl reading: [broadcaster].
 
 ==TCL API==
 
