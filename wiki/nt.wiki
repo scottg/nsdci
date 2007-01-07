@@ -108,8 +108,7 @@ nt.get nt.read nt.buckets nt.debug nt.write nt.peek nt.send
         ns_param max 1000
 }}}
 
-==Usage==
-The server will accumulate 
+==Usage== 
 Each bucket is "swept" by the server using a bucket-specific callback, called by nt.get bucket callback. The following example adds the current key, count, totals of a bucket to a [nv].
 
 *tallyCallback* _key_ _count_ _total_
