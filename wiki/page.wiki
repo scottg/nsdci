@@ -1,13 +1,15 @@
 #summary Page Value api
+#labels Phase-Implementation
 
-= Introduction =
+=Page Value (page)=
+nsdci/dcicommon/page.c
 
-Add your content here.
+==Introduction==
 
+==TCL API==
 
-= Details =
+==Configuration==
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+==Usage==
+
+==Best Practices==
