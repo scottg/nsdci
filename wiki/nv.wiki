@@ -11,6 +11,8 @@ Addition Reading: [broadcaster], [receiver].
 
 ==TCL API==
 
+nv.exists nv.incr nv.set nv.file nv.tget nv.stats nv.names nv.setSleep nv.lappend nv.get nv.dump nv.debug nv.listen nv.flush nv.append nv.unset nv.cset nv.arrays nv.create nv.load nv.connect nv.cget
+
 ==Configuration==
 ====Server:====
 Create the nv array, create the nv server, specify which arrays the nv server can serve, then configure the clients:
@@ -130,4 +132,3 @@ In the frontend AOLserver Control Port read the keys that were set by the tool s
 Since clients receive the entire array on startup. Attention should be paid to the number of nv clients an origin server has, the size of those arrays, and how many arrays each client has connected.  The combination of number and size can decrease performance on a cold start.
 
 Try to keep nv arrays bounded. Unbounded arrays will grow over time and cause the performance issues described above.
-
