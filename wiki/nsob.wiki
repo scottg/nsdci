@@ -31,7 +31,7 @@ Used to put data from a client to the broker. If sendflush is enabled (default),
 }}}
 
 ===nsob.append===
-Used to append data on the broker. If sendflush is enabled (default), a [NCF] message will be sent to all clients.
+Used to append data on the broker. If sendflush is enabled (default), a [ncf] message will be sent to all clients.
 
 *nsob.append* _server key value_
 
@@ -50,7 +50,7 @@ Used to append data on the broker. If sendflush is enabled (default), a [NCF] me
 }}}
 
 ===nsob.get ===
-Used to fetch data from the broker. If caching is enabled, the API will fetch from cache if exists, and make a cache entry if it does not.
+Used to fetch data from the broker. If caching is enabled (default), the API will fetch from cache if exists, and make a cache entry if it does not.
 
 *nsob.get* _server key_
 
@@ -69,7 +69,7 @@ Used to fetch data from the broker. If caching is enabled, the API will fetch fr
 }}}
 
 ===nsob.delete===
-Used to remove data from the broker. If sendflush is enabled (default), a [NCF] message will be sent to all clients.
+Used to remove data from the broker. If sendflush is enabled (default), a [ncf] message will be sent to all clients.
 
 *nsob.delete* _server key_
 
@@ -118,7 +118,7 @@ Used to toggle debug mode. Debug mode adds log messages for many nsob commands.
 }}}
 
 ===nsob.copy===
-Used to copy the contents of a local file to the borker.  If sendflush is enabled (default), a [NCF] message will be sent to all clients.
+Used to copy the contents of a local file to the borker.  If sendflush is enabled (default), a [ncf] message will be sent to all clients.
 
 *nsob.copy* _localFile server key_
 
