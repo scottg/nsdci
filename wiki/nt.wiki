@@ -29,7 +29,7 @@ Used to retrieve the current debug value, or to set a new debug value.
 }}}
 
 ===nt.send==
-Used to add _value_ to the _key_ in _bucket_ (Client only).
+Used to add _value_ to the _key_ in _bucket_.
 
 *nt.send* _bucket_ _key_ _value_
 
@@ -65,7 +65,7 @@ Used to dump the contents of a bucket. This does not reset the bucket. The resul
 }}}
 
 ==nt.exists==
-Checks to see _bucket_ exists. Since client tallies are buffered before being sent to the server, it is possible that the bucket has been initialized on a client, but has not yet been flushed to the server.
+Checks to see _bucket_ exists.
 
 *nt.exists* _bucket_
 
