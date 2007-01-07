@@ -7,7 +7,7 @@ nsdci/dcicommon/otally.c
 ==Introduction==
 Networked Tally provides a simple mechanism for collecting counts from remote servers. Counts are stored for user-defined keys, which are grouped in buckets. Clients update tally counts for keys within buckets, with the data processed by the server.
 
-Clients have a configurable buffer which allows tallies to be collected even if the server is not available. The server stores data on disk for persistent storage across restarts. It's important to note, however, that the backup file is only written at server exit in the case of a proper shutdown, or if additional code is written to explicitly backup the data. The api is only exposed when properly configured. Some commands are only availbale to a "tally server" or a "tally client".  See the "Configuration" section for more information.
+Clients have a configurable buffer which allows tallies to be collected even if the server is not available. The server stores data on disk for persistent storage across restarts. It's important to note, however, that the backup file is only written at server exit in the case of a proper shutdown, or if additional code is written to explicitly backup the data. The api is only exposed when properly configured. See the "Configuration" section for more information.
 
 ==Tcl API==
 
@@ -29,14 +29,14 @@ Used to retrieve the current debug value, or to set a new debug value.
 }}}
 
 ===nt.send==
-Used to set key/value pairs for a given bucket name.
+Used to add _value_ to the _key_ in _bucket_. The is buffered on the client and then queued to send the server. The server then adds the _value_ to the running total it is keeping. See _nt.get_ for information on sweeping the running total and resetting the bucket.
 
-*nt.send* _bucket_ _key_ _value_ 
+*nt.send* _bucket_ _key_ _value_
 
 || *Argument* || *Description* ||
 || _bucket_ || String. Name of the tally bucket. Buckets are self initializing. ||
 || _key_ || String. Name of the key to set in the specified bucket. ||
-|| _value_ || Integer. The count to add to the specified key, in the specified bucket. ||
+|| _value_ || Integer. The value to add to the specified key, in the specified bucket. ||
 
 
 || *Result* || *Description* ||
