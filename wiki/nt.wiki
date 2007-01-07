@@ -134,42 +134,48 @@ Each bucket is "swept" using a bucket-specific callback executed by *nt.get* _bu
     }   
 }}}
 
-Buckets are self initializing.  Using the AOLserver Control Port, send some votes to the tally server. 
+Using the frontend AOLserver Control Port, send some votes to the tally server:
 
 {{{
-    % telnet localhost 9900
+    [neon:~] Michael% telnet 127.0.0.1 9900
     Trying 127.0.0.1...
     Connected to localhost.
     Escape character is '^]'.
     login: 
     Password: 
  
-    Welcome to frontend running at /usr/local/aolserver/bin/nsd (pid 24171)
+    Welcome to frontend running at /usr/local/aolserver/bin/nsd (pid 6288)
     AOLserver/4.5.0 (aolserver4_5) for osx built on Jan  4 2007 at 17:11:28
     CVS Tag: $Name:  $
     frontend:nscp 1> nt.send myBucket bar 5
  
     frontend:nscp 2> nt.send myBucket dork 1
+
+    frontend:nscp 3> exit
+
+    Goodbye!
+    Connection closed by foreign host.
+    [neon:~] Michael%
 }}}
 
-You can dump the tally bucket on the tool server to get a quick look at what will be processed:
+Using the tool AOLserver's Control Port, dump the bucket to see what will be processed:
 
 {{{
-    telnet 127.0.0.1 8900
+    [neon:~] Michael% telnet 127.0.0.1 8900
     Trying 127.0.0.1...
     Connected to localhost.
     Escape character is '^]'.
     login: 
     Password: 
- 
-    Welcome to tool running at /usr/local/aolserver/bin/nsd (pid 24173)
+
+    Welcome to tool running at /usr/local/aolserver/bin/nsd (pid 6287)
     AOLserver/4.5.0 (aolserver4_5) for osx built on Jan  4 2007 at 17:11:28
     CVS Tag: $Name:  $
     tool:nscp 1> nt.dump myBucket
-    {dork 1 1} {bar 1 5}
+    {foo 1 5} {dork 2 2} {bar 2 10}
 }}}
 
-To process a bucket:
+Now process the bucket by using _nt.get_ and the callback:
 
 {{{
     tool:nscp 2> nt.get myBucket generic.processTallies
@@ -185,6 +191,10 @@ The runtime data structure has been updated and the tally reset. In this example
     tool:nscp 4> nt.dump myBucket
 
     tool:nscp 5> exit
+
+    Goodbye!
+    Connection closed by foreign host.
+    [neon:~] Michael% 
 }}}
 You can use the ns schedule API to schedule the sweep as needed.
 
