@@ -1,6 +1,6 @@
 #summary Caching api
 
-=Cache API=
+=Cache API (cache)=
 nsdci/dcicommon/cache.c
 
 ==Introduction==
