@@ -16,3 +16,6 @@ Addition Reading: [broadcaster], [receiver].
 ==Usage==
 
 ==Best Practices==
+Since clients receive the entire array on startup. Attention should be paid to the number of nv clients an origin server has, the size of those arrays, and how many arrays each client has connected.  The combination of number and size can decrease performance on a cold start.
+
+Try to keep nv arrays bounded. Unbounded arrays will grow over time and cause the performance issues described above.
