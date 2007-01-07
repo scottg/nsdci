@@ -48,6 +48,10 @@ Used to retrieve the current debug value, or to set a new debug value.
 ===ncf.flushOnConnect===
 Deprecated. See _ncf.addFlushCache_.
 
+{{{
+--------------------------------------------------------------------------------
+}}}
+
 ===ncf.send===
 Sends a cache flush message to all configured clients.
 
