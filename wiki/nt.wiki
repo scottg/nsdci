@@ -1,13 +1,62 @@
 #summary Networked Tally api
 #labels Phase-Implementation
 
-= Networked Tally (nt) =
+=Networked Tally (nt)=
 nsdci/dcicommon/otally.c
 
-== Introduction: ==
+==Introduction==
 Networked Tally provides a simple mechanism for collecting counts from remote servers. Counts are stored for user-defined keys, which are grouped in buckets. Clients update tally counts for keys within buckets, with the data processed by the server.
 
 Clients have configurable buffer which allows tallies to be collected even if the server is not available. The server stores data on disk for persistent storage across restarts. It's important to note, however, that the backup file is only written at server exit in the case of a proper shutdown, or if additional code is written to explicitly backup the data.
+
+==Tcl API==
+
+===nt.debug===
+Used to retrieve the current debug value, or to set a new debug value.
+
+*nt.debug* _?boolean?_
+
+|| *Argument* || *Description* ||
+|| _?boolean?_ || Boolean. Optional. Specifies whether or not debugging is enabled. ||
+
+
+|| *Result* || *Description* ||
+|| {{{1}}} || Success. Returned if a boolean was specified. ||
+|| {{{BOOLEAN}}} || Success. If a boolean was not specified, then the current debug value is returned. ||
+
+{{{
+--------------------------------------------------------------------------------
+}}}
+
+===nt.send==
+Used to set key/value pairs for a given bucket name.
+
+*nt.send* _bucket_ _key_ _value_ 
+
+|| *Argument* || *Description* ||
+|| _bucket_ || String. Name of the tally bucket. ||
+|| _key_ || String. Name of the key to set in the specified bucket. ||
+|| _value_ || Integer. The count to set for the specified key, in the specified bucket. ||
+
+
+|| *Result* || *Description* ||
+|| {{{NULL}}} || Success. The result was successfully written to the nt server. Buckets are created and initialized on the fly as needed. ||
+|| {{{TCL_ERROR}}} || Failure. An error occurred. See the server log for more information. ||
+
+{{{
+--------------------------------------------------------------------------------
+}}}
+
+==nt.dump==
+Used to dump the contents of a bucket. This does not reset the bucket.
+
+*nt.dump* _?boolean?_ 
+
+{{{
+--------------------------------------------------------------------------------
+}}}
+
+nt.exists nt.get nt.read nt.buckets nt.debug nt.write nt.peek nt.send
 
 ==Configuration==
 
@@ -34,9 +83,8 @@ Clients have configurable buffer which allows tallies to be collected even if th
         ns_param max 1000
 }}}
 
-== Usage: ==
-
-In order to effectively use tally, you'll need to write your own callback Tcl function to handle the processing of the tallies on the server side in conjunction with *nt.get*. 
+==Usage==
+In order to effectively use tally, you'll need to write your own callback Tcl function to handle the processing of the tallies on the server side in conjunction with _nt.get_. 
 
 *tallyCallback* _key_ _count_ _total_
 
@@ -45,7 +93,7 @@ In order to effectively use tally, you'll need to write your own callback Tcl fu
 || _count_ || Integer. Current count for the specified key. ||
 || _total_ || Integer. Total count for all keys. ||
 
-The following example *adds* the current counts and totals of a bucket to an *existing* [NV].
+The following example adds the current counts and totals of a bucket to an existing [nv].
 
 {{{
     proc tallyCallback {key count total} {
@@ -104,7 +152,7 @@ To process a bucket:
     1
 }}}
 
-Notice that the runtime data structure has been updated and the tally reset. In this example, [NV] has been used as the runtime data structure.
+The runtime data structure has been updated and the tally reset. In this example, [nv] has been used as the runtime data structure.
 
 {{{
     tool:nscp 3> nv.dump nv
@@ -114,104 +162,6 @@ Notice that the runtime data structure has been updated and the tally reset. In 
 
     tool:nscp 5> exit
 }}}
-
 You can use the ns schedule API to schedule the sweep as needed.
-
-== Tcl API: ==
-
-== nt.debug (client, server) ==
-
-Used to retrieve the current debug value, or to set a new debug value.
-
-*nt.debug* _?boolean?_
-
-|| *Argument* || *Description* ||
-|| _?boolean?_ || Boolean. Optional. Specifies whether or not debugging is enabled. ||
-
-
-|| *Result* || *Description* ||
-|| {{{1}}} || Success. Returned if a boolean was specified. ||
-|| {{{BOOLEAN}}} || Success. If a boolean was not specified, then the current debug value is returned. ||
-
-=== Examples ===
-{{{
-    nt.debug
-    nt.debug false
-}}}
-
-{{{
---------------------------------------------------------------------------------
-}}}
-
-== nt.send (client)==
-
-Used to set key/value pairs for a given bucket name.
-
-=== Prototype ===
-
-*nt.send* _bucket_ _key_ _value_ 
-
-=== Arguments ===
-
-|| *Argument* || *Description* ||
-|| _bucket_ || String. Name of the tally bucket. ||
-|| _key_ || String. Name of the key to set in the specified bucket. ||
-|| _value_ || Integer. The count to set for the specified key, in the specified bucket. ||
-
-
-=== Results ===
-
-|| *Result* || *Description* ||
-|| {{{NULL}}} || Success. The result was successfully written to the nt server. Buckets are created and initialized on the fly as needed. ||
-|| {{{TCL_ERROR}}} || Failure. An error occurred. See the server log for more information. ||
-
-
-=== Examples ===
-
-{{{
-nt.send clicks index 1
-nt.send clicks photos.html 10
-}}}
-
-{{{
---------------------------------------------------------------------------------
-}}}
-
-== nt.dump (server) ==
-
-Used to dump the contents of a bucket. This does not reset the bucket.
-
-=== Prototype ===
-
-*nt.dump* _?boolean?_ 
-
-=== Arguments ===
-
-=== Results ===
-
-{{{
---------------------------------------------------------------------------------
-}}}
-
-*nt.exists* _bucket_
-
-
-*nt.dump:* Used to dump the contents of a bucket. This does not reset the bucket.
-
-*nt.exists:* Used to test the existence of a tally bucket
-
-*nt.get:* Gets the current buckets contents and calls the specified callback for processing 
-
-nt.read 
-
-nt.buckets 
-
-nt.debug 
-
-nt.write 
-
-nt.peek
-
-nt.send
 
 = Best Practices =
