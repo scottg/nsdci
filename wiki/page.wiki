@@ -9,6 +9,58 @@ The Page Value api (page) is used as a "global array". It is available to all ad
 
 ==TCL API==
 
+===page.getValue===
+Used to get the value of _key_. If _key_ does not exist, an empty string is returned.
+
+*page.getValue* _key_
+
+|| *Argument* || *Description* ||
+|| _key_ || String. The key to be read. ||
+
+
+|| * Result* || *Description|| 
+|| {{{String}}} || Success. The value of _key_ ||
+|| {{{TCL_ERROR}}} || Failure. An error occurred. See the server log for more information. ||
+
+{{{
+--------------------------------------------------------------------------------
+}}}
+
+===page.appendValue===
+Used to append _value_ to _key_.  If _key is not set, it will set _key_ to _value_.
+
+*page.appendValue* _key value_
+
+|| *Argument* || *Description* ||
+|| _key_ || String. The key to append. ||
+|| _value_ || String. The value to append to _key_. ||
+
+
+|| * Result* || *Description|| 
+|| {{{NULL}}} || Success. The key was appened. ||
+|| {{{TCL_ERROR}}} || Failure. An error occurred. See the server log for more information. ||
+
+{{{
+--------------------------------------------------------------------------------
+}}}
+
+===page.setValue===
+Used to set _key_ to _value_. If _key_ exists it will overwrite the value of _key_.
+
+*page.setValue* _key value_
+
+|| *Argument* || *Description* ||
+|| _key_ || String. The key to set. ||
+|| _value_ || String. The value to set. ||
+
+|| * Result* || *Description|| 
+|| {{{NULL}}} || Success. The key was set. ||
+|| {{{TCL_ERROR}}} || Failure. An error occurred. See the server log for more information. ||
+
+{{{
+--------------------------------------------------------------------------------
+}}}
+
 ==Usage==
 The following example shows a page value being set by 2 adp call frames:
 
