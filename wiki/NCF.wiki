@@ -11,6 +11,20 @@ Addition Reading: [Broadcaster], [Receiver].
 ===ncf.addFlushCache===
 Used to register named caches on the client for flush-on-connect. The entire cache will be flushed.  This is useful if there are nTier ncf repeaters in the topology.  If the ncf repeater was down, it may have not forwarded ncf messages to their clients. This will ensure out of date cache entries are not used by the client after a reconnect.
 
+*ncf.addFlushCache* _cache_
+
+|| *Argument* || *Description* ||
+|| _cache_ || String. The named cache to be registerd. ||
+
+
+|| *Result* || *Description* ||
+|| {{{NULL}} || Success. The cache was registered. ||
+|| {{{TCL_ERROR}}} || Failure. ||
+
+
+
+
+
 ===ncf.debug===
 
 ===ncf.flushOnConnect===
