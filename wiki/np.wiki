@@ -1,11 +1,34 @@
 #summary Networked Poll api
+#labels Phase-Implementation
 
 = Networked Poll (nps, nps2, npc, npc2) =
 nsdci/dcicommon/poll.c
 
 == Introduction ==
+The Networked Poll api (npc, npc2, nps, nps2) is is used to maintain votes for specific keys in a bucket. Similar to Networked Tally api ([nt]), Networked Poll keeps a running total, but not for user-defined keys.  Instead, it accumulates votes for up to 20 choices. And unlike Networked Tally, the bucket does not need to be "swept".  The api is only exposed when properly configured. See the "Configuration" section for more information.
 
 == TCL API ==
+
+===npc.vote===
+Used to send a choice for a named poll to the poll server.  Returns a tcl list with the current standings. A choice > 20 or < 0 will return the current standing without adding a vote.  See the "Usage" section for examples.
+
+*npc.vote* _poll choice_
+
+|| *Argument* || *Description* ||
+|| _poll_ || String. The name of the poll. Polls are self initializing. ||
+|| _choice_ || Integer. The choice selected one through 20. ||
+
+|| *Result* || *Description* ||
+|| {{{TCL_LIST}}} || Success. The choice was tallied and the current standings retunred. ||
+|| {{{TCL_ERROR}}} || Failure. An error occurred. See the server log for more information. ||
+
+{{{
+--------------------------------------------------------------------------------
+}}}
+
+npc2.vote
+
+npc.debug
 
 == Configuration ==
 
