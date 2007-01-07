@@ -1,4 +1,6 @@
+#summary Compiling AOLserver, tcl, and nsdci
 #labels Phase-Deploy,Featured
+
 = File System Layout =
 {{{
 ~shmooved/
