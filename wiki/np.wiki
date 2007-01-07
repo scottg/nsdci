@@ -155,3 +155,5 @@ The total votes for choice 4 has been decreased by 2, as has the total number of
 
 ==Best Practices==
 For security, you should not configure the np clients with the npc2 api. This will avoid giving adjustment access to voting clients.
+
+You can dynamically create polls in adp pages by creating a poll.adp page which would request poll data with the poll name and questions, based on url query data, from another resource and use the npc api to cast votes and reconcile the results with the questions.
