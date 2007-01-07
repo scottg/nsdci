@@ -5,7 +5,7 @@
 nsdci/dcicommon/sob.c
 
 ==Introduction==
-The Networked Small Object Broker (nsob) is used to broker data between servers.  You must set up a "SOB client" to send and request data, and a "SOB server" to broker data. The api is only exposed when properly configured. See the "Configuration" section for more information.
+The Networked Small Object Broker (nsob) is used to broker data between servers.  You must set up a "nsob client" to send and request data, and a "nsob server" to broker data. The api is only exposed when properly configured. See the "Configuration" section for more information.
 
 Additional Reading: [rpc], [ncf]
 
@@ -134,7 +134,7 @@ Used to copy the contents of a local file to the borker.  If sendflush is enable
 
 
 ==Configuration==
-The bundled configuration has a single AOLserver instance configured to broker many SOBs.  You could easily break out each SOB to its own AOLserver instance.  Below is a simple configuration that creates a SOB service called "sob":
+The bundled configuration has a single AOLserver instance configured with more than one nsob server.  You could easily break out each nsob server to its own AOLserver instance.  Below is a simple configuration that creates a nsob server called "sob".
 
 ====Server:====
 {{{
@@ -192,7 +192,7 @@ The bundled configuration has a single AOLserver instance configured to broker m
 }}}
 
 ==Usage==
-Any client can "put" data on the broker. Use the "tool" AOLserver Control Port to test _nsob.put_:
+Any client can "put" data on the server. Use the "tool" AOLserver Control Port to test _nsob.put_:
 
 {{{
     [neon:/usr/local/aolserver] Michael% telnet 127.0.0.1 8900
@@ -214,7 +214,7 @@ Any client can "put" data on the broker. Use the "tool" AOLserver Control Port t
     [neon:/usr/local/aolserver] Michael% 
 }}}
 
-Any client can "get" data from the broker. Use the "frontend" AOLserver Control Port to test _nsob.get_.
+Any client can "get" data from the server. Use the "frontend" AOLserver Control Port to test _nsob.get_.
 
 {{{
     [neon:/usr/local/aolserver] Michael% telnet 127.0.0.1 9900
@@ -240,7 +240,7 @@ Any client can "get" data from the broker. Use the "frontend" AOLserver Control 
 ==Caching and Network Cache Flush==
 To optimize performance, nsob has the ability to cache at both the server and client. With caching enabled (default), the initial client request first looks into its own cache. If no entry is found it will make a call to the server.  If the server has caching enabled (default), it will first look in its cache.  If no entry is found, it will read from disk, make a cache entry, and return the data. The client API will make a cache entry and return the data.  
 
-Network Cache Flush ([ncf]) is another service availble in nsdci.  With the SOBs configured to send cache flush messages (default), the remote client cache will be flushed when a sob entry is addded or changed. Note: You must configure [ncf] on the AOLserver instance hosting the SOBs in order for the SOBs to send cache flush messages.
+Network Cache Flush ([ncf]) is another service availble in nsdci.  With the SOBs configured to send cache flush messages (default), the remote client cache will be flushed when a sob entry is addded or changed. Note: You must configure [ncf] on the AOLserver instance hosting the nsob server in order to send cache flush messages.
 
 There are significant performance gains from caching. Consider a fetch to "file.xml" which is 8KB:
 
@@ -279,8 +279,6 @@ or
 }}}
 
 ==Best Practices==
-Caching should be used where possible to optimize performance. The AOLserver Stats interface has insight to Cache-hit-rate information and should be used to measure the performance of the sob cache.  A high cache-hit-rate is preferred.
+Caching should be used where possible to optimize performance. The AOLserver Stats interface has insight to cache-hit-rate information and should be used to measure the performance of the nsob cache.  A high cache-hit-rate is preferred.
 
-You might find that flowing content one way per server gives better performance.  For example, one server brokering data from the tool server to the frontned, and a second from the frontend to the tool server.  This could perform better than one server doing both.
-
-When connecting over dcirpc, the size of each sob file combined with the number of clients and number of sob calls on a page can decrease performance and/or cause socket drops and timeouts. The AOLserver stats interface can be used to measure RPC socket performance and should be monitored regularly.
+You might find that flowing content one way per server gives better performance.  For example, one server brokering data from the tool server to the frontned, and a second from the frontend to the tool server.  This could perform better than one nsob server doing both.
