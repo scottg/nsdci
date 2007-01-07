@@ -85,7 +85,7 @@ nt.get nt.read nt.buckets nt.debug nt.write nt.peek nt.send
 
 ==Configuration==
 
-====Server====
+====Server:====
 {{{
     ns_section ns/server/$server/module/dci/nt
         ns_param debug 1
@@ -97,7 +97,7 @@ nt.get nt.read nt.buckets nt.debug nt.write nt.peek nt.send
         ns_param frontend $rpcAddress:$rpcPort
 }}}
 
-====Client====
+====Client:====
 {{{
     ns_section ns/server/$server/module/dci/nt
         ns_param debug 1
