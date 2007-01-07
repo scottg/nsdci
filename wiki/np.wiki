@@ -63,7 +63,6 @@ Used to retrieve the current debug value, or to set a new debug value.
 }}}
 
 == Configuration ==
-
 ====Server:====
 {{{
     ns_section "ns/server/$server/modules"
@@ -106,6 +105,53 @@ Used to retrieve the current debug value, or to set a new debug value.
 }}}
 
 ==Usage==
+When using _npc.vote_ you are selecting one choice out of 20.  The index is 0 based so you select 0 through 19.  Each vote adds to the total votes which is in the first position of the returned list.  Using the frontend AOLserver Control Port send some votes to the poll server (see [Topology] for more detail):
+{{{
+    [neon:~/svn/nsdci/wiki] Michael% cd ~
+    [neon:~] Michael% telnet 127.0.0.1 9900
+    Trying 127.0.0.1...
+    Connected to localhost.
+    Escape character is '^]'.
+    login: 
+    Password: 
+
+    Welcome to frontend running at /usr/local/aolserver/bin/nsd (pid 6928)
+    AOLserver/4.5.0 (aolserver4_5) for osx built on Jan  4 2007 at 17:11:28
+    CVS Tag: $Name:  $
+    frontend:nscp 1> npc.vote myPoll 3
+    1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+    frontend:nscp 2> npc.vote myPoll 13
+    2 0 0 0 1 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0
+    frontend:nscp 3> npc.vote myPoll 0
+    3 1 0 0 1 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0
+}}}
+
+The first vote was for choice 4 (remember the index is 0 based). The result of that command was the current standings with the total number of votes across the poll in the first position.  The second vote was for the choice 14. The third for choice 1. Each time the current standing was returned and the total number of votes increased. Add more votes:
+
+{{{
+    frontend:nscp 4> npc.vote myPoll 3
+    4 1 0 0 2 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0
+    frontend:nscp 5>  npc.vote myPoll 3
+    5 1 0 0 3 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0
+    frontend:nscp 6>  npc.vote myPoll 3
+    6 1 0 0 4 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0
+    frontend:nscp 7>  npc.vote myPoll 3
+    7 1 0 0 5 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0
+    frontend:nscp 8>  npc.vote myPoll 3
+    8 1 0 0 6 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0
+    frontend:nscp 9>  npc.vote myPoll 3
+    9 1 0 0 7 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0
+}}}
+
+At this point we have 9 total votes and choice 4 is leading the pack with 7 out 9 votes.  You can use the npc2 admin api to adjust or reset the poll. See "Best Practices" for more detail:
+
+{{{
+    frontend:nscp 10> npc2.vote myPoll 3 -2
+    7 1 0 0 5 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0
+}}}
+
+The total votes for choice 4 has been decreased by 2, as has the total number of votes on the poll.
+
 
 ==Best Practices==
 For security, you should not configure the np clients with the npc2 api. This will avoid giving adjustment access to voting clients.
