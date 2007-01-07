@@ -1,4 +1,6 @@
+#summary Bundled Topology Information
 #labels Phase-Design,Phase-Implementation
+
 = Topology =
 
 The bundled setup comes with three servers.
