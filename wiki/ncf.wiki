@@ -45,7 +45,39 @@ Used to retrieve the current debug value, or to set a new debug value.
 --------------------------------------------------------------------------------
 }}}
 
-ncf.flushOnConnect ncf.send ncf.sendAll
+===ncf.flushOnConnect===
+Deprecated. See _ncf.addFlushCache_.
+
+===ncf.send===
+Sends a cache flush message to all configured clients.
+
+*ncf.send* _cache key_
+
+|| *Argument* || *Description* ||
+|| _cache_ || String. The named cache created by the [cache] api. ||
+|| _key_ || String. The key in the named cache. ||
+
+
+|| *Result* || *Description* ||
+|| {{{NULL}}} || Success. The flush message was sent. ||
+|| {{{TCL_ERROR}}} || Failure. An error occurred. See the server log for more information. ||
+
+{{{
+--------------------------------------------------------------------------------
+}}}
+
+===ncf.sendAll===
+Sends a cache flush message to all configured clients. Flushes all keys in the cache.
+
+*ncf.sendAll* _cache_
+
+|| *Argument* || *Description* ||
+|| _cache_ || String. The named cache created by the [cache] api. ||
+
+
+|| *Result* || *Description* ||
+|| {{{NULL}}} || Success. The flush message was sent. ||
+|| {{{TCL_ERROR}}} || Failure. An error occurred. See the server log for more information. ||
 
 ==Configuration==
 
