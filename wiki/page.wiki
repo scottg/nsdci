@@ -5,7 +5,7 @@
 nsdci/dcicommon/page.c
 
 ==Introduction==
-The Page Value api (page) is used as a "global array". It is available to any call frame. It can be used to create data structures at the beginning of a connection to make available later in the connection, keep state during a connection, or pass values between call frames.
+The Page Value api (page) is used as a "global array". It is available to all adp call frames within a connection. It can be used to create data structures at the beginning of a connection to make available later in the connection, keep state during a connection, or pass values between call frames.  It does not keep state between connections.
 
 ==TCL API==
 
@@ -34,5 +34,4 @@ The output of main.adp would be:
     The value of "foo" is now: 2
     
 ==Best Practices==
-
 
