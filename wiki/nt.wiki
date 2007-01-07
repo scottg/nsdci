@@ -48,7 +48,7 @@ Used to add _value_ to the _key_ in _bucket_ (Client only).
 }}}
 
 ==nt.dump==
-Used to dump the contents of a bucket. This does not reset the bucket. The results is a tcl list of tcl lists. Each list has key name, number of votes, and the total count.  Since each vote can add any numeric value (see _nt.send_), the number of votes do not have to equal total count.
+Used to dump the contents of a bucket. This does not reset the bucket. The results is a tcl list of tcl lists. Each list has key name, number of votes, and the total count.  Since each vote can add any numeric value (see _nt.send_ ), the number of votes do not have to equal total count.
 
 *nt.dump* _bucket_
 
