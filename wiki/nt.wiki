@@ -2,18 +2,16 @@
 #labels Phase-Implementation
 
 = Networked Tally (nt) =
+nsdci/dcicommon/otally.c
 
 == Introduction: ==
+Networked Tally provides a simple mechanism for collecting counts from remote servers. Counts are stored for user-defined keys, which are grouped in buckets. Clients update tally counts for keys within buckets, with the data processed by the server.
 
-Networked Tally provides a simple mechanism for collecting counts from remote servers. Counts are stored for user-defined keys, which are grouped in buckets. 
+Clients have configurable buffer which allows tallies to be collected even if the server is not available. The server stores data on disk for persistent storage across restarts. It's important to note, however, that the backup file is only written at server exit in the case of a proper shutdown, or if additional code is written to explicitly backup the data.
 
-The basic model is that front-end clients update tally counts for keys within buckets, with the data processed by the back-end server. 
+==Configuration==
 
-Client servers have configurable buffer which allows tallies to be collected even if the back-end server is not available. The back-end server stores data on disk for persistent storage across restarts. It's important to note, however, that the backup file is only written at server exit in the case of a proper shutdown, or if additional code is written to explicitly backup the data.
-
-== Configuration: ==
-
-=== Server (tool) ===
+===Server===
 {{{
     ns_section ns/server/$server/module/dci/nt
         ns_param debug 1
@@ -25,7 +23,7 @@ Client servers have configurable buffer which allows tallies to be collected eve
         ns_param frontend $rpcAddress:$rpcPort
 }}}
 
-=== Client (frontend) ===
+===Client===
 {{{
     ns_section ns/server/$server/module/dci/nt
         ns_param debug 1
