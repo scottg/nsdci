@@ -83,6 +83,10 @@ Sends a cache flush message to all configured clients. Flushes all keys in the c
 || {{{NULL}}} || Success. The flush message was sent. ||
 || {{{TCL_ERROR}}} || Failure. An error occurred. See the server log for more information. ||
 
+{{{
+--------------------------------------------------------------------------------
+}}}
+
 ==Configuration==
 
 ====Server:====
