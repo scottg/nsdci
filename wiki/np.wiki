@@ -5,10 +5,10 @@ nsdci/dcicommon/poll.c
 
 == Introduction ==
 
+== TCL API ==
+
 == Configuration ==
 
 == Usage ==
-
-== TCL API ==
 
 == Best Practices ==
