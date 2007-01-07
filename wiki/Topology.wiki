@@ -1,4 +1,4 @@
-#summary Bundled Topology Information
+#summary Topology Information
 #labels Phase-Design,Phase-Implementation
 
 = Topology =
