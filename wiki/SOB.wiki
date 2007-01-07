@@ -1,7 +1,7 @@
 #summary The Networked Small Object Broker (nsob)
 #labels Phase-Implementation
 
-=Networked SOB (nsob)=
+=Networked Small Object Broker (nsob)=
 nsdci/dcicommon/sob.c
 
 ==Introduction==
