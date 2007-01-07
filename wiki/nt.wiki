@@ -109,7 +109,7 @@ nt.get nt.read nt.buckets nt.debug nt.write nt.peek nt.send
 }}}
 
 ==Usage==
-Each bucket is "swept" by the server using a bucket-specific callback. The following example adds the current key, count, totals of a bucket to a [nv].
+Each bucket is "swept" by the server using a bucket-specific callback. The following example adds the current key, count, totals of a bucket to a [nv]:
 
 *tallyCallback* _key_ _count_ _total_
 
@@ -177,11 +177,11 @@ Using the tool AOLserver's Control Port, dump the bucket to see what will be pro
 Now process the bucket by using _nt.get_ and the callback:
 
 {{{
-    tool:nscp 2> nt.get myBucket generic.processTallies
+    tool:nscp 2> nt.get myBucket tallyCallback
     1
 }}}
 
-The runtime data structure has been updated and the tally reset. In this example, [nv] has been used as the runtime data structure.
+The [nv] has been updated and the bucket reset:
 
 {{{
     tool:nscp 3> nv.dump nv
@@ -196,5 +196,3 @@ The runtime data structure has been updated and the tally reset. In this example
     [neon:~] Michael% 
 }}}
 You can use the ns schedule API to schedule the sweep as needed.
-
-= Best Practices =
