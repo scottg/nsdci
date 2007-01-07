@@ -12,7 +12,7 @@ Additional Reading: [rpc]
 == TCL API ==
 npc and npc2 commands are exposed on the client, while nps and nps2 commands are exposed on the server.
 ===npc.vote, nps.vote===
-Used to send a choice for a named poll to the poll server.  Returns a tcl list with the current standings. A choice > 20 or < 0 will return the current standing without adding a vote.  See the "Usage" section for examples.  When using _nps.vote_ choice is optional. If no _choice_ is given the current standings are returned.
+Used to send a choice for a named poll to the poll server.  Returns a tcl list with the current standings. A choice > 20 or < 0 will return the current standing without adding a vote.  See the "Usage" section for examples.  When using _nps.vote_ the _choice_ argument is optional. If no _choice_ argument is given the current standings are returned.
 
 *npc.vote* _poll choice_
 
