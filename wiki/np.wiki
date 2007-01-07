@@ -26,9 +26,41 @@ Used to send a choice for a named poll to the poll server.  Returns a tcl list w
 --------------------------------------------------------------------------------
 }}}
 
-npc2.vote
+===npc2.vote===
+Used to adjust the poll standings. This is an admin utility and should not be used cast votes.  The choice is adjusted by the amount specified and the same number of "total poll votes" are taken away. See the "Usage" section for examples.
 
-npc.debug
+*npc2.vote* _poll choice adjust_
+
+|| *Argument* || *Description* ||
+|| _poll_ || String. The name of the poll. Polls are self initializing. ||
+|| _choice_ || Integer. The choice selected one through 20. ||
+|| _adjust_ || Integer. The amount + or - to adjust. ||
+
+
+|| *Result* || *Description* ||
+|| {{{TCL_LIST}}} || Success. The choice was adjusted, the total was adjusted, and the adjusted standings retunred. ||
+|| {{{TCL_ERROR}}} || Failure. An error occurred. See the server log for more information. ||
+
+{{{
+--------------------------------------------------------------------------------
+}}}
+
+===npc.debug===
+Used to retrieve the current debug value, or to set a new debug value.
+
+*npc.debug* _?boolean?_
+
+|| *Argument* || *Description* ||
+|| _?boolean?_ || Boolean. Optional. Specifies whether or not debugging is enabled. ||
+
+
+|| *Result* || *Description* ||
+|| {{{1}}} || Success. Returned if a boolean was specified. ||
+|| {{{BOOLEAN}}} || Success. If a boolean was not specified, then the current debug value is returned. ||
+
+{{{
+--------------------------------------------------------------------------------
+}}}
 
 == Configuration ==
 
