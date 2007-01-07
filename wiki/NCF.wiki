@@ -21,6 +21,9 @@ Used to register named caches on the client for flush-on-connect. The entire cac
 || {{{NULL}}} || Success. The cache was registered. ||
 || {{{TCL_ERROR}}} || Failure. An error occurred. See the server log for more information. ||
 
+{{{
+--------------------------------------------------------------------------------
+}}}
 
 ===ncf.debug===
 
