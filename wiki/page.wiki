@@ -34,3 +34,4 @@ The output of main.adp would be:
     The value of "foo" is now: 2
     
 ==Best Practices==
+The page value api should only be used in adp pages.  Writing TCL procedures that expect page values to be set is bad practice. Always explicitly pass values to procedures as arguments, use TCL upvar, or use a TCL global.
