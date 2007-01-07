@@ -7,6 +7,8 @@ nsdci/dcicommon/poll.c
 == Introduction ==
 The Networked Poll api (npc, npc2, nps, nps2) is is used to maintain votes for specific positions in a bucket of 20 choices. Similar to Networked Tally api ([nt]), Networked Poll keeps a running total, but not for user-defined keys. And unlike Networked Tally, the bucket does not need to be "swept".  The api is only exposed when properly configured. See the "Configuration" section for more information.
 
+Additional Reading: [rpc]
+
 == TCL API ==
 
 ===npc.vote===
