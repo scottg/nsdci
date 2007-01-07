@@ -1,4 +1,4 @@
-#summary Network Cache Flush
+#summary Network Cache Flush API
 
 = Network Cache Flush (ncf)=
 nsdci/dcicommon/flush.c
