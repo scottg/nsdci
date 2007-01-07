@@ -28,7 +28,24 @@ Used to register named caches on the client for flush-on-connect. The entire cac
 --------------------------------------------------------------------------------
 }}}
 
-ncf.debug ncf.flushOnConnect ncf.send ncf.sendAll
+===ncf.addFlushCache===
+Used to retrieve the current debug value, or to set a new debug value.
+
+*ncf.debug* _boolean_
+
+|| *Argument* || *Description* ||
+|| _?boolean?_ || Boolean. Optional. Specifies whether or not debugging is enabled. ||
+
+
+|| *Result* || *Description* ||
+|| {{{1}}} || Success. Returned if a boolean was specified. ||
+|| {{{BOOLEAN}}} || Success. If a boolean was not specified, then the current debug value is returned. ||
+
+{{{
+--------------------------------------------------------------------------------
+}}}
+
+ncf.flushOnConnect ncf.send ncf.sendAll
 
 ==Configuration==
 
