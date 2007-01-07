@@ -99,7 +99,7 @@ Used to retrieve the current debug value, or to set a new debug value.
     ns_section "ns/server/$server/module/dci/np/server/clients"
         # This section has no params but is still required.
 }}}
-====Client====
+====Client:====
 {{{
     ns_section "ns/server/$server/module/dci/np"
         ns_param debug 1
