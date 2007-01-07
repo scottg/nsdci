@@ -5,7 +5,7 @@
 nsdci/dcicommon/otally.c
 
 ==Introduction==
-Networked Tally provides a simple mechanism for collecting counts from remote servers. Counts are stored for user-defined keys, which are grouped in buckets. Clients update tally counts for keys within buckets, with the data processed by the server.
+Networked Tally provides a simple mechanism for collecting counts from remote servers. Clients send counts to the tally server.  The tally server stores them in user-defined keys, which are grouped into buckets. The tally server then processes or "sweeps" each bucket using a callback.
 
 Clients have a configurable buffer which allows tallies to be collected even if the server is not available. The server stores data on disk for persistent storage across restarts. It's important to note, however, that the backup file is only written at server exit in the case of a proper shutdown, or if additional code is written to explicitly backup the data. The api is only exposed when properly configured. See the "Configuration" section for more information.
 
