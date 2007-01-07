@@ -1,4 +1,4 @@
-#summary Running The Topology
+#summary Starting Servers
 #labels Phase-Deploy,Featured
 
 = File System Layout =
