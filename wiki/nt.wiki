@@ -29,7 +29,7 @@ Used to retrieve the current debug value, or to set a new debug value.
 }}}
 
 ===nt.send==
-Used to add _value_ to the _key_ in _bucket_.
+Used to add _value_ to the _key_ in _bucket_ (Client only).
 
 *nt.send* _bucket_ _key_ _value_
 
@@ -48,7 +48,7 @@ Used to add _value_ to the _key_ in _bucket_.
 }}}
 
 ==nt.dump==
-Used to dump the contents of a bucket. This does not reset the bucket. The results is a tcl list of tcl lists. Each list has key name, and number of votes, total points. Since each vote can give n points, votes do not have to equal total points.
+Used to dump the contents of a bucket. This does not reset the bucket. The results is a tcl list of tcl lists. Each list has key name, number of votes, and the total count.  Since each vote can add any numeric value (see _nt.send_), the number of votes do not have to equal total count.
 
 *nt.dump* _bucket_
 
