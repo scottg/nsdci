@@ -1,4 +1,4 @@
-#summary Network Tally api
+#summary Networked Tally api
 
 = Networked Tally (nt) =
 
