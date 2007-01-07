@@ -30,10 +30,12 @@ Used to send a choice for a named poll to the poll server.  Returns a tcl list w
 --------------------------------------------------------------------------------
 }}}
 
-===npc2.vote===
-Used to adjust the poll standings. This is an admin utility and should not be used cast votes.  The choice is adjusted as is the total votes of the poll. See the "Usage" section for examples.
+===npc2.vote, nps2.vote===
+Used to adjust the poll standings. This is an admin utility and should not be used cast votes.  The choice is adjusted as is the total votes of the poll. See the "Usage" section for examples. When using nps2.vote the _choice_ argument and the _adjust_ argument are optional. If no _choice_ and _adjust_ arguments are given the current standings are returned.
 
 *npc2.vote* _poll choice adjust_
+
+*nps2.vote* _poll ?choice? ?adjust?_
 
 || *Argument* || *Description* ||
 || _poll_ || String. The name of the poll. Polls are self initializing. ||
@@ -68,7 +70,7 @@ Used to retrieve the current debug value, or to set a new debug value.
 --------------------------------------------------------------------------------
 }}}
 
-nps.database  nps.find nps.backup nps2.vote nps.vote nps.delete
+nps.database nps.find nps.backup nps.delete
 
 == Configuration ==
 ====Server:====
