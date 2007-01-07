@@ -1,9 +1,11 @@
+#summary Remote Procedure Call
+
 = Remote Procedure Call (rpc)=
 
 Notes:
 
 Explain why it is needed, what it is used for (np, np2, nt, sob, etc), bennifits of HTTP? touch on old dcirpc?
 
-Explain here that each service (np, np2, nt, sob, etc.) sets up their own rpc client - we should include those sections and params in the config section of each article. See [SOB] as an example.
+Explain here that each service (np, np2, nt, sob, etc.) sets up their own rpc client - we should include those sections and params in the config section of each article. See [nsob] as an example.
 
 In this bundled configuration the nssock of the tool server is also accepting rpc connections.  Should we show how to set up a separate nssock for rpc? Can we do that? I looked at the rpc server code and I did not see where to specify WHICH nssock port to use.
