@@ -28,13 +28,7 @@ Used to register named caches on the client for flush-on-connect. The entire cac
 --------------------------------------------------------------------------------
 }}}
 
-===ncf.debug===
-
-===ncf.flushOnConnect===
-
-===ncf.send==
-
-==ncf.sendAll===
+ncf.debug ncf.flushOnConnect ncf.send ncf.sendAll
 
 ==Configuration==
 
@@ -54,7 +48,6 @@ Used to register named caches on the client for flush-on-connect. The entire cac
     ns_section "ns/server/$server/module/dci/nfs"
         ns_param debug 1
 }}}
-
 ====Client:====
 {{{
     ns_section "ns/server/$server/module/dci/receiver"
@@ -66,6 +59,4 @@ Used to register named caches on the client for flush-on-connect. The entire cac
         ns_param client 1
 }}}
 
-== Usage ==
-
-== Best Practices ==
+==Usage==
