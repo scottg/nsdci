@@ -157,8 +157,7 @@ Using the frontend AOLserver Control Port, send some votes to the tally server:
     [neon:~] Michael%
 }}}
 
-Using the tool AOLserver's Control Port, dump the bucket to see what will be processed. The results is a tcl list of tcl lists. Each list has key name, number of votes, and the total count. Since each vote can add any numeric value (see nt.send ), the number of votes do not have to equal total count:
-
+Using the tool AOLserver's Control Port, dump the bucket to see what will be processed:
 {{{
     [neon:~] Michael% telnet 127.0.0.1 8900
     Trying 127.0.0.1...
@@ -174,7 +173,7 @@ Using the tool AOLserver's Control Port, dump the bucket to see what will be pro
     {dork 1 1} {bar 1 5}
 }}}
 
-Now process the bucket by using _nt.get_ and the callback:
+The results is a tcl list of tcl lists. Each list has key name, number of votes, and the total count. Since each vote can add any numeric value (see nt.send ), the number of votes do not have to equal total count. Now process the bucket by using _nt.get_ and the callback:
 
 {{{
     tool:nscp 2> nt.get myBucket tallyCallback
