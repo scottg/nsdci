@@ -136,7 +136,7 @@ Used to copy the contents of a local file to the borker.  If sendflush is enable
 ==Configuration==
 The bundled configuration has a single AOLserver instance configured to broker many SOBs.  You could easily break out each SOB to its own AOLserver instance.  Below is a simple configuration that creates a SOB service called "sob":
 
-===Server:===
+====Server:====
 {{{
     ns_section "ns/server/$server/modules"
         ns_param nssock nssock.so
@@ -165,8 +165,7 @@ The bundled configuration has a single AOLserver instance configured to broker m
     ns_section "ns/server/$server/module/dci/sob/server/sob/clients"
         # This section is required but has no params.
 }}}
-
-===Client:===
+====Client:====
 {{{
     ns_section "ns/server/$server/modules"
         ns_param dci dci.so
