@@ -109,7 +109,8 @@ nt.get nt.read nt.buckets nt.debug nt.write nt.peek nt.send
 }}}
 
 ==Usage==
-In order to effectively use tally, you'll need to write your own callback Tcl function to handle the processing of the tallies on the server side in conjunction with _nt.get_. 
+The server will accumulate 
+Each bucket is "swept" using a bucket-specific callback executed by *nt.get* _bucket callback_.  The following example adds the current key, count, totals of a bucket to a [nv].
 
 *tallyCallback* _key_ _count_ _total_
 
@@ -117,8 +118,6 @@ In order to effectively use tally, you'll need to write your own callback Tcl fu
 || _key_ || String. Name of the key. ||
 || _count_ || Integer. Current count for the specified key. ||
 || _total_ || Integer. Total count for all keys. ||
-
-The following example adds the current counts and totals of a bucket to an existing [nv].
 
 {{{
     proc tallyCallback {key count total} {
