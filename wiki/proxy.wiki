@@ -1,12 +1,15 @@
 #summary Proxy api
-= Introduction =
+#labels Phase-Implementation
 
-Add your content here.
+=Proxy (proxy)=
+nsdci/dcicommon/proxy.c
 
+==Introduction==
 
-= Details =
+==TCL API==
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+==Configuration==
+
+==Usage==
+
+==Best Practices==
