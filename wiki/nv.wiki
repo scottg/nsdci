@@ -1,4 +1,4 @@
-#summary Networked Variable api
+#summary Networked Variable API
 #labels Phase-Implementation
 
 =Networked Variable (nv)=

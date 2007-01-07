@@ -1,4 +1,4 @@
-#summary Networked Tally api
+#summary Networked Tally API
 #labels Phase-Implementation
 
 =Networked Tally (nt)=
