@@ -1,6 +1,6 @@
 #summary Networked Variable
 
-=Networked Variable=
+=Networked Variable (nv)=
 nsdci/dcicommon/nv.c
 
 ==Introduction==
