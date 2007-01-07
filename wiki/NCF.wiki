@@ -1,3 +1,5 @@
+#summary Network Cache Flush
+
 = Network Cache Flush (ncf)=
 nsdci/dcicommon/flush.c
 
