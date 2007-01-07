@@ -2,7 +2,7 @@
 nsdci/dcicommon/sob.c
 
 ==Introduction==
-The Networked Small Object Broker (nsob) is used to broker data between servers.  You must set up a "SOB client" to write and request data and a "SOB server" to broker data. The api is only exposed when properly configured. See the "Configuration" section for more information.
+The Networked Small Object Broker (nsob) is used to broker data between servers.  You must set up a "SOB client" to send and request data and a "SOB server" to broker data. The api is only exposed when properly configured. See the "Configuration" section for more information.
 
 Additional Reading: [RPC], [NCF]
 
