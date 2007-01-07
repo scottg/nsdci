@@ -1,4 +1,4 @@
-#summary Networked Variable
+#summary Networked Variable api
 
 =Networked Variable (nv)=
 nsdci/dcicommon/nv.c
