@@ -146,9 +146,9 @@ Using the frontend AOLserver Control Port, send some votes to the tally server:
     Welcome to frontend running at /usr/local/aolserver/bin/nsd (pid 6288)
     AOLserver/4.5.0 (aolserver4_5) for osx built on Jan  4 2007 at 17:11:28
     CVS Tag: $Name:  $
-    frontend:nscp 1> nt.send myBucket bar 5
+    frontend:nscp 1> nt.send myBucket foo 5
  
-    frontend:nscp 2> nt.send myBucket dork 1
+    frontend:nscp 2> nt.send myBucket bar 1
 
     frontend:nscp 3> exit
 
@@ -170,7 +170,7 @@ Using the tool AOLserver Control Port, dump the bucket to see what will be proce
     AOLserver/4.5.0 (aolserver4_5) for osx built on Jan  4 2007 at 17:11:28
     CVS Tag: $Name:  $
     tool:nscp 1> nt.dump myBucket
-    {dork 1 1} {bar 1 5}
+    {bar 1 1} {foo 1 5}
 }}}
 
 The results is a tcl list of tcl lists. Each list has key name, number of votes, and the total count. Since each vote can add any numeric value (see nt.send ), the number of votes do not have to equal total count. Now process the bucket by using _nt.get_ and the callback:
@@ -184,7 +184,7 @@ The [nv] has been updated and the bucket reset:
 
 {{{
     tool:nscp 3> nv.dump nv
-    bar.count 1 dork.total 1 bar.total 5 dork.count 1
+    bar.count 1 bar.total 1 foo.total 5 foo.count 1
  
     tool:nscp 4> nt.dump myBucket
 
