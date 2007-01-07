@@ -21,7 +21,7 @@ The following example shows a page value being set by 2 adp call frames:
         ns_adp_puts "The value of \"foo\" is now: [page.getValue foo]"
     %>
 }}}
-====include1.inc====
+====include.inc====
 {{{
     <%
         page.setValue foo 2
@@ -34,4 +34,3 @@ The output of main.adp would be:
     The value of "foo" is now: 2
     
 ==Best Practices==
-
