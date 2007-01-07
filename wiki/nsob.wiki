@@ -12,7 +12,7 @@ Additional Reading: [rpc], [ncf]
 ==TCL API==
 
 ===nsob.put===
-Used to put data from a client to the broker. If sendflush is enabled (default), a [NCF] message will be sent to all clients.
+Used to put data from a client to the broker. If sendflush is enabled (default), a [ncf] message will be sent to all clients.
 
 *nsob.put * _server key value_
 
