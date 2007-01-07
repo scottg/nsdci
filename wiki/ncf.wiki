@@ -117,3 +117,39 @@ Sends a cache flush message to all configured clients. Flushes all keys in the c
 }}}
 
 ==Usage==
+Use the sob AOLserver Control Port to turn on debugging and send a cache flush (See [Topology] for more information):
+{{{
+    [neon:~] Michael% telnet 127.0.0.1 7900
+    Trying 127.0.0.1...
+    Connected to localhost.
+    Escape character is '^]'.
+    login:
+    Password:
+    Welcome to sob running at /usr/local/aolserver/bin/nsd (pid 6203)
+    AOLserver/4.5.0 (aolserver4_5) for osx built on Jan  4 2007 at 17:11:28
+    CVS Tag: $Name:  $
+    sob:nscp 1> ncf.debug 1
+    1
+    sob:nscp 2> ncf.send foo bar
+    sob:nscp 3> exit
+    Goodbye!
+    Connection closed by foreign host.
+    [neon:~] Michael%
+}}}
+
+You can see by the following log entries that the message was sent to all the configured ncf clients:
+
+{{{
+    [07/Jan/2007:12:51:59][6203.25191424][-nscp:2-] Notice: ncf: queue for send: foo[bar]
+    [07/Jan/2007:12:51:59][6203.25190400][broadcast:ncf] Notice: frontend: send complete
+    [07/Jan/2007:12:51:59][6203.25190400][broadcast:ncf] Notice: tool: send complete
+}}}
+
+Turn on debugging on a client, and you will see the following log entries:
+
+{{{
+    [07/Jan/2007:12:51:59][6288.25189376][-socks-] Notice: ncf: received flush foo[bar]
+    [07/Jan/2007:12:51:59][6288.25189376][-socks-] Notice: ncf: no such cache: foo
+}}}
+
+The client received the message but does not have a named cache called "foo" so the message is ignored.
