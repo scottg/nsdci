@@ -1,4 +1,4 @@
-#summary Networked Small Object Broker (nsob)
+#summary Networked Small Object Broker
 #labels Phase-Implementation
 
 =Networked Small Object Broker (nsob)=
