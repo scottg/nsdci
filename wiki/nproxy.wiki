@@ -1,1 +1,15 @@
 #summary Networked Proxy api
+#labels Phase-Implementation
+
+=Networked Proxy (nproxy)=
+nsdci/dcicommon/nproxy.c
+
+==Introduction==
+
+==TCL API==
+
+==Configuration==
+
+==Usage==
+
+==Best Practices==
