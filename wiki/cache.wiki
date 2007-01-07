@@ -1,4 +1,4 @@
-#summary Caching api
+#summary Caching API
 #labels Phase-Implementation
 
 =Cache API (cache)=

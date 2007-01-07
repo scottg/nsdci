@@ -1,4 +1,4 @@
-#summary Network Cache Flush api
+#summary Network Cache Flush API
 #labels Phase-Implementation
 
 = Network Cache Flush (ncf)=

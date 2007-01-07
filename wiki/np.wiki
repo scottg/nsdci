@@ -1,4 +1,4 @@
-#summary Networked Poll api
+#summary Networked Poll API
 #labels Phase-Implementation
 
 = Networked Poll (nps, nps2, npc, npc2) =

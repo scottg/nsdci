@@ -1,4 +1,4 @@
-#summary Proxy api
+#summary Proxy API
 #labels Phase-Implementation
 
 =Proxy (proxy)=

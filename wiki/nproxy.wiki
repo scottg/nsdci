@@ -1,4 +1,4 @@
-#summary Networked Proxy api
+#summary Networked Proxy API
 #labels Phase-Implementation
 
 =Networked Proxy (nproxy)=

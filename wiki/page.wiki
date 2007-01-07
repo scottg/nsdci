@@ -1,4 +1,4 @@
-#summary Page Value api
+#summary Page Value API
 #labels Phase-Implementation
 
 =Page Value (page)=
