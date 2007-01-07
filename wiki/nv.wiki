@@ -2,12 +2,14 @@
 
 nsdci/dcicommon/nv.c
 
-=Introduction=
+=Networked Variable=
 
-=TCL API=
+==Introduction==
 
-=Configuration=
+==TCL API==
 
-=Usage=
+==Configuration==
 
-=Best Practices=
+==Usage==
+
+==Best Practices==
