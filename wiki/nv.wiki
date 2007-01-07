@@ -59,7 +59,7 @@ Create the nv array, create the nv client, then specify which arrays the nv clie
         ns_param nv nv
 }}}
 ==Usage==
-The bundled set up comes with a pre-configured nv array called "nv" with the frontend server as a client. In the tool AOLserver Control Port, set some nv keys (See [Topology] for more detail):
+The bundled set up comes with a pre-configured nv array called "nv" with the frontend server as a client (See [Topology] for more detail). In the tool AOLserver Control Port, set some nv keys:
 {{{
     [neon:local/aolserver/etc] Michael% telnet 127.0.0.1 8900
     Trying 127.0.0.1...
@@ -130,5 +130,4 @@ In the frontend AOLserver Control Port read the keys that were set by the tool s
 Since clients receive the entire array on startup. Attention should be paid to the number of nv clients an origin server has, the size of those arrays, and how many arrays each client has connected.  The combination of number and size can decrease performance on a cold start.
 
 Try to keep nv arrays bounded. Unbounded arrays will grow over time and cause the performance issues described above.
-
 
