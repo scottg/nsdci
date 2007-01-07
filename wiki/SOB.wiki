@@ -1,6 +1,4 @@
-#summary Networked Small Object Broker (nsob)
 #labels Phase-Implementation
-
 =Networked SOB (nsob)=
 nsdci/dcicommon/sob.c
 
@@ -285,3 +283,5 @@ Caching should be used where possible to optimize performance. The AOLserver Sta
 You might find that flowing content one way per server gives better performance.  For example, one server brokering data from the tool server to the frontned, and a second from the frontend to the tool server.  This could perform better than one server doing both.
 
 When connecting over dcirpc, the size of each sob file combined with the number of clients and number of sob calls on a page can decrease performance and/or cause socket drops and timeouts. The AOLserver stats interface can be used to measure RPC socket performance and should be monitored regularly.
+
+#summary Networked Small Object Broker (nsob)
