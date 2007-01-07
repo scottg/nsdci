@@ -28,7 +28,7 @@ Used to register named caches on the client for flush-on-connect. The entire cac
 --------------------------------------------------------------------------------
 }}}
 
-===ncf.addFlushCache===
+===ncf.debug===
 Used to retrieve the current debug value, or to set a new debug value.
 
 *ncf.debug* _boolean_
