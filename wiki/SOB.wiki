@@ -131,7 +131,7 @@ Used to copy the contents of a local file to the borker.  If sendflush is enable
 
 
 ==Configuration==
-The bundled configuration has a single AOLserver instance configured to serve many SOBs.  You could easily break out each SOB to its own AOLserver instance.  Below is a simple configuration that creates a SOB service called "sob":
+The bundled configuration has a single AOLserver instance configured to broker many SOBs.  You could easily break out each SOB to its own AOLserver instance.  Below is a simple configuration that creates a SOB service called "sob":
 
 ===Server:===
 {{{
