@@ -29,7 +29,7 @@ Used to retrieve the current debug value, or to set a new debug value.
 }}}
 
 ===nt.send==
-Used to add _value_ to the _key_ in _bucket_. The is buffered on the client and then queued to send the server. The server then adds the _value_ to the running total it is keeping. See _nt.get_ for information on sweeping the running total and resetting the bucket.
+Used to add _value_ to the _key_ in _bucket_.
 
 *nt.send* _bucket_ _key_ _value_
 
