@@ -59,10 +59,57 @@ Create the nv array, create the nv client, then specify which arrays the nv clie
         ns_param nv nv
 }}}
 ==Usage==
+In the tool AOLserver Control Port, set some nv keys.  The bundled set up comes with a pre-configured nv array called "nv":
+{{{
+    [neon:local/aolserver/etc] Michael% telnet 127.0.0.1 8900
+    Trying 127.0.0.1...
+    Connected to localhost.
+    Escape character is '^]'.
+    login:
+    Password:
+
+    Welcome to tool running at /usr/local/aolserver/bin/nsd (pid 6799)
+    AOLserver/4.5.0 (aolserver4_5) for osx built on Jan  4 2007 at 17:11:28
+    CVS Tag: $Name:  $
+    tool:nscp 1> nv.set nv foo bar
+    bar
+    tool:nscp 2> nv.set nv myKey "some value"
+    some value
+    tool:nscp 3> exit
+
+    Goodbye!
+    Connection closed by foreign host.
+    [neon:local/aolserver/etc] Michael%
+}}}
+
+In the frontend AOLserver Control Port read the keys that were set by the tool server:
+
+{{{
+    [neon:local/aolserver/etc] Michael% telnet 127.0.0.1 9900
+    Trying 127.0.0.1...
+    Connected to localhost.
+    Escape character is '^]'.
+    login:
+    Password:
+
+    Welcome to frontend running at /usr/local/aolserver/bin/nsd (pid 6801)
+    AOLserver/4.5.0 (aolserver4_5) for osx built on Jan  4 2007 at 17:11:28
+    CVS Tag: $Name:  $
+    frontend:nscp 1> nv.get nv foo
+    bar
+    frontend:nscp 2> nv.get nv myKey
+    some value
+    frontend:nscp 3> nv.dump nv
+    foo bar fo bar myKey {some value}
+    frontend:nscp 4> exit
+
+    Goodbye!
+    Connection closed by foreign host.
+    [neon:local/aolserver/etc] Michael%
+}}}
 
 ==Best Practices==
 Since clients receive the entire array on startup. Attention should be paid to the number of nv clients an origin server has, the size of those arrays, and how many arrays each client has connected.  The combination of number and size can decrease performance on a cold start.
 
 Try to keep nv arrays bounded. Unbounded arrays will grow over time and cause the performance issues described above.
-
 
