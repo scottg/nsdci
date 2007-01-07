@@ -110,8 +110,8 @@ Used to toggle debug mode. Debug mode adds log messages for many nsob commands.
 
 
 || *Result* || *Description* ||
-|| {{{1}}} || Success. Returned if boolean was specified. ||
-|| {{{boolean}}} || Success. If a boolean was not specified, then the current debug value is returned. ||
+|| {{{1}}} || Success. Returned if a boolean was specified. ||
+|| {{{BOOLEAN}}} || Success. If a boolean was not specified, then the current debug value is returned. ||
 
 {{{
 --------------------------------------------------------------------------------
