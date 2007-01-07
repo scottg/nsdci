@@ -4,7 +4,7 @@ nsdci/dcicommon/flush.c
 == Introduction ==
 The Network Cache Flush api (ncf) is used to send and receive cache flush messages across a network.  It flushes size-based and time-based named caches created by the [Cache] api.  You must set up a "ncf server" to broadcast the flush and a "ncf client" to receive the flush. The api is only exposed when properly configured.  See the "Configuration" section for more information. See the "Configuration" section for more information. 
 
-Addition Reading: [Broadcaster], [Receiver].
+Addition Reading: [Broadcaster], [Receiver], [SOB].
 
 ==TCL API ==
 
