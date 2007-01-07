@@ -192,7 +192,7 @@ The bundled configuration has a single AOLserver instance configured to broker m
 }}}
 
 ==Usage==
-Any client can "put" data on the broker. The "put" command requires "server, key, and value" as arguments. Use the AOLserver Control Port to test the commands:
+Any client can "put" data on the broker. Use the "tool" AOLserver Control Port to test _nsob.put_:
 
 {{{
     [neon:/usr/local/aolserver] Michael% telnet 127.0.0.1 8900
@@ -214,7 +214,7 @@ Any client can "put" data on the broker. The "put" command requires "server, key
     [neon:/usr/local/aolserver] Michael% 
 }}}
 
-Any client can "get" data from the broker:
+Any client can "get" data from the broker. Use the "frontend" AOLserver Control Port to test _nsob.get_.
 
 {{{
     [neon:/usr/local/aolserver] Michael% telnet 127.0.0.1 9900
