@@ -1,11 +1,13 @@
-Networked Variable (nv) API
+#summary Networked Variable
 
-= Introduction =
+nsdci/dcicommon/nv.c
 
-= Configuration =
+=Introduction=
 
-= Usage =
+=TCL API=
 
-= TCL API =
+=Configuration=
 
-= Best Practices =
+=Usage=
+
+=Best Practices=
