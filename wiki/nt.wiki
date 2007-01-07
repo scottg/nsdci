@@ -1,4 +1,5 @@
-#summary Network Tally API
+#summary Network Tally
+
 = Networked Tally (nt) =
 
 == Introduction: ==
