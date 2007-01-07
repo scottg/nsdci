@@ -36,9 +36,9 @@ Used to register named caches on the client for flush-on-connect. The entire cac
 
 ==ncf.sendAll===
 
-== Configuration ==
+==Configuration==
 
-===Server:===
+====Server:====
 {{{
     ns_section "ns/server/$server/module/dci/broadcast"
         ns_param debug 1
@@ -55,7 +55,7 @@ Used to register named caches on the client for flush-on-connect. The entire cac
         ns_param debug 1
 }}}
 
-===Client:===
+====Client:====
 {{{
     ns_section "ns/server/$server/module/dci/receiver"
         ns_param address $address
