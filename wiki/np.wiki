@@ -31,7 +31,7 @@ Used to send a choice for a named poll to the poll server and return the current
 }}}
 
 ===npc2.vote, nps2.vote===
-Used to adjust the poll standings. This is an admin utility and should not be used cast votes.  The choice is adjusted as is the total votes of the poll. See the "Usage" section for examples. When using nps2.vote the _choice_ argument and the _adjust_ argument are optional. If no _choice_ and _adjust_ arguments are given the current standings are returned.
+Used to adjust the poll standing. This is an admin utility and should not be used cast votes.  The choice is adjusted as is the total votes of the poll. See the "Usage" section for examples. When using _nps2.vote_ the _choice_ argument and the _adjust_ argument are optional. If no _choice_ and _adjust_ arguments are given the current standing is  returned.
 
 *npc2.vote* _poll choice adjust_
 
