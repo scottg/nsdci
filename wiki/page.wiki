@@ -5,11 +5,34 @@
 nsdci/dcicommon/page.c
 
 ==Introduction==
+The Page Value api (page) is used as a "global array". It is available to any call frame. It can be used to create data structures at the beginning of a connection to make available later in the connection, keep state during a connection, or pass values between call frames.
 
 ==TCL API==
 
-==Configuration==
-
 ==Usage==
+The following example shows a page value being set by 2 adp call frames:
 
+====main.adp====
+{{{
+    <%
+        ns_adp_puts "Setting page value \"foo\" to 1..."
+        page.setValue foo 1
+        ns_adp_include include.inc
+        ns_adp_puts "The value of \"foo\" is now: [page.getValue foo]"
+    %>
+}}}
+====include1.inc====
+{{{
+    <%
+        page.setValue foo 2
+    %>
+}}}
+
+The output of main.adp would be:
+
+    Setting page value "foo" to 1...
+    The value of "foo" is now: 2
+    
 ==Best Practices==
+
+
