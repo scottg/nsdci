@@ -59,7 +59,7 @@ Create the nv array, create the nv client, then specify which arrays the nv clie
         ns_param nv nv
 }}}
 ==Usage==
-In the tool AOLserver Control Port, set some nv keys.  The bundled set up comes with a pre-configured nv array called "nv":
+The bundled set up comes with a pre-configured nv array called "nv" with the frontend server as a client. In the tool AOLserver Control Port, set some nv keys (See [Topology] for more detail):
 {{{
     [neon:local/aolserver/etc] Michael% telnet 127.0.0.1 8900
     Trying 127.0.0.1...
@@ -80,6 +80,24 @@ In the tool AOLserver Control Port, set some nv keys.  The bundled set up comes 
     Goodbye!
     Connection closed by foreign host.
     [neon:local/aolserver/etc] Michael%
+}}}
+
+With debugging turned on, in the frontend server log you will see the updates arrive and the array flush to disk:
+
+{{{
+    [07/Jan/2007:14:55:20][6801.25189376][-socks-] Notice: nvc[frontend]: array: nv = nv
+    [07/Jan/2007:14:55:20][6801.25189376][-socks-] Notice: nvc[frontend]: set nv[foo] = bar
+    [07/Jan/2007:14:55:40][6801.25190400][-nvf-] Notice: nvf[nv]: flushed
+    [07/Jan/2007:14:55:41][6801.25189376][-socks-] Notice: nvc[frontend]: array: nv = nv
+    [07/Jan/2007:14:55:41][6801.25189376][-socks-] Notice: nvc[frontend]: set nv[myKey] = some value
+    [07/Jan/2007:14:56:10][6801.25190400][-nvf-] Notice: nvf[nv]: flushed
+}}}
+
+Similar flush entries can bee seen in the tool's server log:
+
+{{{
+    [07/Jan/2007:14:55:36][6799.25191424][-nvf-] Notice: nvf[nv]: flushed
+    [07/Jan/2007:14:56:06][6799.25191424][-nvf-] Notice: nvf[nv]: flushed
 }}}
 
 In the frontend AOLserver Control Port read the keys that were set by the tool server:
@@ -112,4 +130,5 @@ In the frontend AOLserver Control Port read the keys that were set by the tool s
 Since clients receive the entire array on startup. Attention should be paid to the number of nv clients an origin server has, the size of those arrays, and how many arrays each client has connected.  The combination of number and size can decrease performance on a cold start.
 
 Try to keep nv arrays bounded. Unbounded arrays will grow over time and cause the performance issues described above.
+
 
