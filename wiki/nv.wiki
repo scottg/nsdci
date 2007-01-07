@@ -12,7 +12,7 @@ Addition Reading: [broadcaster], [receiver].
 ==TCL API==
 
 ==Configuration==
-====Server====
+====Server:====
 Create the nv array, create the nv server, specify which arrays the nv server can serve, then configure the clients:
 {{{
     ns_section "ns/server/$server/module/dci/nv"
@@ -25,7 +25,7 @@ Create the nv array, create the nv server, specify which arrays the nv server ca
         ns_param persist 1
 
     ns_section "ns/server/$server/module/dci/nv/servers"
-        ns_param $nsVerverName $nvServerName
+        ns_param $nvServerName $nvServerName
 
     ns_section "ns/server/$server/module/dci/nv/server/$nvServerName"
         ns_param login "nv"
@@ -37,9 +37,32 @@ Create the nv array, create the nv server, specify which arrays the nv server ca
         ns_param $nvClientName $clientAddress:$clientReceiverPort
 }}}
 
+====Cllient:====
+Create the nv array, create the nv client, then specify which arrays the nv client can receive.
+{{{
+    ns_section "ns/server/$server/module/dci/nv"
+        ns_param debug 1
+
+    ns_section "ns/server/$server/module/dci/nv/arrays"
+        ns_param nv nv
+
+    ns_section "ns/server/$server/module/dci/nv/array/nv"
+        ns_param persist 1
+
+    ns_section "ns/server/$server/module/dci/nv/clients"
+        ns_param $nvClientName $nvClientName
+
+    ns_section "ns/server/$server/module/dci/nv/client/$nvClientName"
+        ns_param login "nv"
+
+    ns_section "ns/server/$server/module/dci/nv/client/$nvClientName/arrays"
+        ns_param nv nv
+}}}
 ==Usage==
 
 ==Best Practices==
 Since clients receive the entire array on startup. Attention should be paid to the number of nv clients an origin server has, the size of those arrays, and how many arrays each client has connected.  The combination of number and size can decrease performance on a cold start.
 
 Try to keep nv arrays bounded. Unbounded arrays will grow over time and cause the performance issues described above.
+
+
