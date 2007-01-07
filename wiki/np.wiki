@@ -70,9 +70,15 @@ Used to retrieve the current debug value, or to set a new debug value.
 --------------------------------------------------------------------------------
 }}}
 
-nps.database nps.find nps.backup nps.delete
+===nps.database===
 
-== Configuration ==
+===nps.find===
+
+===nps.backup===
+
+===nps.delete===
+
+==Configuration==
 ====Server:====
 {{{
     ns_section "ns/server/$server/modules"
