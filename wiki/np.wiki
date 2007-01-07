@@ -51,6 +51,7 @@ Used to adjust the poll standings. This is an admin utility and should not be us
 Used to retrieve the current debug value, or to set a new debug value.
 
 *npc.debug* _?boolean?_
+
 *nps.debug* _?boolean?_
 
 || *Argument* || *Description* ||
