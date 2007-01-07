@@ -64,6 +64,48 @@ Used to retrieve the current debug value, or to set a new debug value.
 
 == Configuration ==
 
-== Usage ==
+====Server:====
+{{{
+    ns_section "ns/server/$server/modules"
+        ns_param nssock nssock.so        
+        ns_param dci dci.so
 
-== Best Practices ==
+    ns_section "ns/server/$server/module/nssock"
+        ns_param hostname $hostName
+        ns_param address $address
+        ns_param port $httpPort
+
+    ns_section "ns/server/$server/module/dci/np"
+        ns_param debug 1
+
+    ns_section "ns/server/$server/module/dci/rpc/server/np"
+        ns_param http 1
+
+    ns_section "ns/server/$server/module/dci/np/server/clients"
+        # This section has no params but is still required.
+}}}
+====Client====
+{{{
+    ns_section "ns/server/$server/module/dci/np"
+        ns_param debug 1
+
+    ns_section "ns/server/$server/module/dci/np/client"
+        ns_param $server $server
+
+    ns_section "ns/server/$server/module/dci/rpc/client/np"
+        ns_param address $npServerAddress
+        ns_param port $npServerHttpPort
+        ns_param httpkeepalive true
+        ns_param httpnumconnections 1
+
+    ns_section "ns/server/$server/module/dci/rpc/client/np2"
+        ns_param address $npServerAddress
+        ns_param port $npServerHttpPort
+        ns_param httpkeepalive true
+        ns_param httpnumconnections 1
+}}}
+
+==Usage==
+
+==Best Practices==
+For security, you should not configure the np clients with the npc2 api. This will avoid giving adjustment access to voting clients.
