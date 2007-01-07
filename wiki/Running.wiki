@@ -1,4 +1,6 @@
+#summary Running The Topology
 #labels Phase-Deploy,Featured
+
 = File System Layout =
 {{{
 ~shmooved/svn/nsdci    - nsdci source code
