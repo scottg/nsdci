@@ -1,4 +1,4 @@
-#summary Networked Poll
+#summary Networked Poll api
 
 = Networked Poll (nps, nps2, npc, npc2) =
 nsdci/dcicommon/poll.c
