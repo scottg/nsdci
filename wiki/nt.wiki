@@ -74,7 +74,7 @@ Checks to see _bucket_ exists.
 
 
 || *Result* || *Description* ||
-|| {{{boolean}} || Success. 1 the bucket exists. 0 the bucket does not exist. ||
+|| {{{boolean}}} || Success. 1 the bucket exists. 0 the bucket does not exist. ||
 || {{{TCL_ERROR}}} || Failure. An error occurred. See the server log for more information. ||
 
 {{{
