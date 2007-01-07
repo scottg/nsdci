@@ -1,4 +1,5 @@
 #summary Network Cache Flush api
+#labels Phase-Implementation
 
 = Network Cache Flush (ncf)=
 nsdci/dcicommon/flush.c
