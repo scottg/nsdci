@@ -14,6 +14,15 @@ Additional Reading: [rpc]
 ==Configuration==
 ====Server:====
 {{{
+    ns_section "ns/server/$server/modules"
+        ns_param nssock nssock.so
+        ns_param dci dci.so
+
+    ns_section "ns/server/$server/module/nssock"
+        ns_param hostname $hostName
+        ns_param address $address
+        ns_param port $httpPort
+
     ns_section "ns/server/$server/module/dci/rpc/server/nproxy"
         ns_param http 1
 
