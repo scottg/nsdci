@@ -194,7 +194,7 @@ The bundled configuration has a single AOLserver instance configured with more t
 }}}
 
 ==Usage==
-Any client can "put" data on the server. Use the "tool" AOLserver Control Port to test _nsob.put_:
+Any client can "put" data on the server. Use the tool AOLserver Control Port to send some data to the sob server:
 
 {{{
     [neon:/usr/local/aolserver] Michael% telnet 127.0.0.1 8900
@@ -216,7 +216,7 @@ Any client can "put" data on the server. Use the "tool" AOLserver Control Port t
     [neon:/usr/local/aolserver] Michael% 
 }}}
 
-Any client can "get" data from the server. Use the "frontend" AOLserver Control Port to test _nsob.get_.
+Any client can "get" data from the server. Use the frontend AOLserver Control Port to request data from the sob server.
 
 {{{
     [neon:/usr/local/aolserver] Michael% telnet 127.0.0.1 9900
