@@ -5,7 +5,7 @@
 nsdci/dcicommon/nproxy.c
 
 ==Introduction==
-The Networked Proxy API (nproxy) is used to send scripts or commands to remote servers for execution.  The result is sent back to the client.  This allows for distributed networking and the isolation of tasks.
+The Networked Proxy API (nproxy) is used to send scripts or commands to remote servers for execution.  The result is sent back to the client.
 
 ==TCL API==
 
