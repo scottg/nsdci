@@ -10,6 +10,7 @@ The Proxy API (proxy) manages modified tcl shells capable of communicating with 
 ==TCL API==
 
 ===proxy.start===
+Used to create a named proxy process pool.  Processes are initialized on demand, not as a result of this command.
 
 *proxy.start* _name num ?init?_
 
@@ -21,6 +22,25 @@ The Proxy API (proxy) manages modified tcl shells capable of communicating with 
 
 || * Result* || *Description* ||
 || {{{VOID}}} || Success. The pool was created. ||
+|| {{{TCL_ERROR}}} || Failure. An error occurred. See the server log for more information. ||
+
+{{{
+--------------------------------------------------------------------------------
+}}} 
+
+===proxy.send===
+Send a script to a proxy process for execution. If there are no proxy processes from the pool initialized and idle, a new proxy process will initialize.
+
+*proxy.send* _pool script ?timeout?_
+
+|| *Argument* || *Description* ||
+|| _name_ || String. The name of the proxy pool. ||
+|| _script_ || String. The script to be evaluated by the proxy process. ||
+|| _?timeout?_ || Integer. The time to wait before timing out. ||
+
+
+|| * Result* || *Description* ||
+|| {{{String}}} || Success. The result of the script. ||
 || {{{TCL_ERROR}}} || Failure. An error occurred. See the server log for more information. ||
 
 {{{
