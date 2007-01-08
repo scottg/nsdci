@@ -173,7 +173,7 @@ Using the tool AOLserver Control Port, dump the bucket to see what will be proce
     {bar 1 1} {foo 1 5}
 }}}
 
-The results is a tcl list of tcl lists. Each list has key name, number of votes, and the total count. Since each vote can add any numeric value (see nt.send ), the number of votes do not have to equal total count. Now process the bucket by using _nt.get_ and the callback:
+The result is a tcl list of tcl lists. Each list has key name, number of votes, and the total count. Since each vote can add any numeric value (see nt.send ), the number of votes do not have to equal total count. Now process the bucket by using _nt.get_ and the callback:
 
 {{{
     tool:nscp 2> nt.get myBucket tallyCallback
