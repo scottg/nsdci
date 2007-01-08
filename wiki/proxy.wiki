@@ -9,6 +9,24 @@ The Proxy API (proxy) manages modified tcl shells capable of communicating with 
 
 ==TCL API==
 
+===proxy.start===
+
+*proxy.start* _name num ?init?_
+
+|| *Argument* || *Description* ||
+|| _name_ || String. The name of the proxy pool. ||
+|| _num_ || Integer. The number of proxy processes available to the pool. ||
+|| _?script?_ || String. Optional. The name of a script to source at startup. ||
+
+
+|| * Result* || *Description* ||
+|| {{{VOID}}} || Success. The pool was created. ||
+|| {{{TCL_ERROR}}} || Failure. An error occurred. See the server log for more information. ||
+
+{{{
+--------------------------------------------------------------------------------
+}}} 
+
 ==Usage==
 Create a script called /proxy.cmds with the following tcl procedure:  
 
