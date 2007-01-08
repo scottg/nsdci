@@ -5,6 +5,7 @@
 nsdci/dcicommon/proxy.c
 
 ==Introduction==
+The Proxy API (proxy) manages modified tcl shells capable of communicating with AOLserver over pipes. These processes are created on demand and maintained in pools. Each pool can source a start-up script which could extend the proxy with tcl procedures. The Proxy API is useful for isolating code that is not thread-safe, executing code that changes environmental variables, or creating a forkable light-weght process.
 
 ==TCL API==
 
