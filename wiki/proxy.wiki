@@ -71,7 +71,7 @@ Create a script called /proxy.cmds with the following tcl procedure:
     }
 }}}
 
-The procedure execs the UNIX _ps_ command.  Depending on the process size of our AOLserver, we might not want that to be executed inside the AOLserver process space.  Instead we will create a proxy pool and source the procedure there. Using the AOLserver Control Port create a proxy pool which will source that script.  Then run the command in the proxy:
+The procedure execs the UNIX _ps_ command.  Depending on the process size of our AOLserver, we might not want that to be executed inside the AOLserver process space.  Instead we will create a proxy pool and source the procedure there:
 
 {{{
     [neon:~] Michael% telnet 127.0.0.1 8900
