@@ -23,7 +23,7 @@ Used to send a choice for a named poll to the poll server and return the current
 || _choice_ || Integer. The choice selected one through 20. ||
 
 || *Result* || *Description* ||
-|| {{{TCL_LIST}}} || Success. The choice was tallied and the current standings retunred. ||
+|| {{{TCL_LIST}}} || Success. The choice was tallied and the current standings returned. ||
 || {{{TCL_ERROR}}} || Failure. An error occurred. See the server log for more information. ||
 
 {{{
