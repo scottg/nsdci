@@ -1,4 +1,4 @@
-#summary Compiling AOLserver, tcl, and nsdci
+#summary Compiling AOLserver, Tcl, and nsdci
 #labels Phase-Deploy,Featured
 
 = File System Layout =
