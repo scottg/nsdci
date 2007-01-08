@@ -131,6 +131,3 @@ There is no returned result for a log notice. But if you look in the tool server
     [08/Jan/2007:15:30:08][7884.25210880][-conn:0-] Notice: Sent this from the frontend server.
 }}}
 
-==Best Practices==
-
-
