@@ -29,7 +29,7 @@ Used to create a named proxy pool.  Processes are initialized on demand, not as 
 }}} 
 
 ===proxy.send===
-Send a script to a proxy process for execution. If there are no proxy processes from the pool initialized and idle, a new proxy process will initialize.
+Send a script to a proxy process for execution. If there are no processes from the pool initialized and idle, a new  process will initialize.
 
 *proxy.send* _pool script ?timeout?_
 
@@ -44,7 +44,7 @@ Send a script to a proxy process for execution. If there are no proxy processes 
 || {{{TCL_ERROR}}} || Failure. An error occurred. See the server log for more information. ||
 
 || *Side Effects* ||
-|| If there are no proxy processes from the pool initialized and idle, a new proxy process will initialize. ||
+|| If there are no processes from the pool initialized and idle, a new process will initialize. ||
 
 {{{
 --------------------------------------------------------------------------------
