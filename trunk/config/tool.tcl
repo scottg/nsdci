@@ -9,3 +9,4 @@ source nvServer.tcl
 source ntServer.tcl
 source npServer.tcl
 source nrateServer.tcl
+source nproxyServer.tcl
