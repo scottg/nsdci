@@ -11,3 +11,4 @@ source ntClient.tcl
 source npClient.tcl
 source nrateClient.tcl
 source ncbClient.tcl
+source nproxyClient.tcl
