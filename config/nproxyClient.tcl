@@ -1,4 +1,4 @@
-ns_section "ns/server/$server/module/dci/rpc/client/nproxy"
+ns_section "ns/server/$server/module/dci/rpc/client/nproxy:myProxy"
     ns_param address [topology.getValue "httpAddress" "tool"]
     ns_param port [topology.getValue "httpPort" "tool"]
     ns_param httpkeepalive true
