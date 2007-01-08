@@ -172,15 +172,6 @@ The bundled configuration has a single AOLserver instance configured with more t
     ns_section "ns/server/$server/modules"
         ns_param dci dci.so
 
-    ns_section "ns/server/$server/module/dci/sob"
-        ns_param debug 1
-
-    ns_section "ns/server/$server/module/dci/sob/clients"
-        ns_param sob sob
-
-    ns_section "ns/server/$server/module/dci/sob/client/sob"
-        ns_param timeout 1
-
     ns_section "ns/server/$server/module/dci/rpc"
         ns_param debug 1
         ns_param address $address
@@ -191,6 +182,15 @@ The bundled configuration has a single AOLserver instance configured with more t
         ns_param port $sobHostHttpPort 
         ns_param httpkeepalive true
         ns_param httpnumconnections 1
+
+    ns_section "ns/server/$server/module/dci/sob"
+        ns_param debug 1
+
+    ns_section "ns/server/$server/module/dci/sob/clients"
+        ns_param sob sob
+
+    ns_section "ns/server/$server/module/dci/sob/client/sob"
+        ns_param timeout 1
 }}}
 
 ==Usage==
