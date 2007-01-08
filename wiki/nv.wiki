@@ -7,7 +7,7 @@ nsdci/dcicommon/nv.c
 ==Introduction==
 The Networked Variable api (nv) is used to stream key-value updates to remote clients. It is an in-memory array on multiple servers.  The array is networked, so array manipulation on the origin server is reflected on the clients. The array has the option to be flushed to disk for persistent storage across restarts.  Clients will receive the entire array from the origin server on startup.
 
-Addition Reading: [broadcaster], [receiver].
+Additional Reading: [broadcaster], [receiver].
 
 ==TCL API==
 
@@ -39,7 +39,7 @@ Create the nv array, create the nv server, specify which arrays the nv server ca
         ns_param $nvClientName $clientAddress:$clientReceiverPort
 }}}
 
-====Cllient:====
+====Client:====
 Create the nv array, create the nv client, then specify which arrays the nv client can receive.
 {{{
     ns_section "ns/server/$server/module/dci/nv"
@@ -129,6 +129,6 @@ In the frontend AOLserver Control Port read the keys that were set by the tool s
 }}}
 
 ==Best Practices==
-Since clients receive the entire array on startup. Attention should be paid to the number of nv clients an origin server has, the size of those arrays, and how many arrays each client has connected.  The combination of number and size can decrease performance on a cold start.
+Since clients receive the entire array on startup, attention should be paid to the number of nv clients an origin server has, the size of those arrays, and how many arrays each client has connected.  The combination of number and size can decrease performance on a cold start.
 
 Try to keep nv arrays bounded. Unbounded arrays will grow over time and cause the performance issues described above.
