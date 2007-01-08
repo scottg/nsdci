@@ -5,18 +5,21 @@
 nsdci/dcicommon/neval.c
 
 ==Introduction==
-The Network Eval API (neval) is used to evaluate a script on a remote host.
+The Network Eval API (neval) is used to evaluate a script on a remote host.  No result is returned.
 
 ==TCL API==
-
+{{{
+--------------------------------------------------------------------------------
+}}}
 ===neval.send===
-
+Sends a script or command to a remote host. No result is returned.
 *neval.send* _host port pass script ?timeout?_
 
 || *Argument* || *Description* ||
 || _host_ || String. The IP address of the remote client. ||
 || _port_ || String. The port configured for neval on the remote client. ||
 || _pass_ || String. The neval password configured on the remote client. ||
+|| _script_|| String. The script or command to evaluate. ||
 || _?timeout?_ || Integer. The time in seconds to wait brefore timing out. ||
 
 

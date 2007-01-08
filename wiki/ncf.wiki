@@ -10,7 +10,9 @@ The Network Cache Flush api (ncf) is used to send and receive cache flush messag
 Addition Reading: [broadcaster], [receiver], [nsob].
 
 ==TCL API ==
-
+{{{
+--------------------------------------------------------------------------------
+}}}
 ===ncf.addFlushCache===
 Used to register named caches on the client for flush-on-connect. The entire cache will be flushed. This is useful if there are n-tier ncf repeaters in the topology. If a ncf repeater was down, it may have not forwarded ncf messages to its clients. This will ensure out of date cache entries are not used by the client after a reconnect. This is default behavior for clients connected to ncf repeaters.
 

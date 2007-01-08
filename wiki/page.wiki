@@ -8,7 +8,9 @@ nsdci/dcicommon/page.c
 The Page Value api (page) is used as a "global array". It is available to all adp call frames within a connection. It can be used to create data structures at the beginning of a connection to make available later in the connection, keep state during a connection, or pass values between call frames.  It does not keep state between connections.
 
 ==TCL API==
-
+{{{
+--------------------------------------------------------------------------------
+}}}
 ===page.getValue===
 Used to get the value of _key_. If _key_ does not exist, an empty string is returned.
 
