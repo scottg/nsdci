@@ -17,7 +17,7 @@ Used to create a named proxy process pool.  Processes are initialized on demand,
 || *Argument* || *Description* ||
 || _name_ || String. The name of the proxy pool. ||
 || _num_ || Integer. The number of proxy processes available to the pool. ||
-|| _?script?_ || String. Optional. The name of a script to source when a proxy process is initialized. ||
+|| _?init?_ || String. Optional. The name of a script to source when a proxy process is initialized. ||
 
 
 || * Result* || *Description* ||
