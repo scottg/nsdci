@@ -43,6 +43,21 @@ Send a script to a proxy process for execution. If there are no proxy processes 
 || {{{String}}} || Success. The result of the script. ||
 || {{{TCL_ERROR}}} || Failure. An error occurred. See the server log for more information. ||
 
+|| *Side Effects* ||
+|| If there are no proxy processes from the pool initialized and idle, a new proxy process will initialize. ||
+
+{{{
+--------------------------------------------------------------------------------
+}}} 
+
+===proxy.pools===
+Lists all the proxy pools by name.
+
+*proxy.pools*
+
+|| * Result* || *Description* ||
+|| {{{TCL_LIST}}} || A list of proxy pool names. ||
+
 {{{
 --------------------------------------------------------------------------------
 }}} 
