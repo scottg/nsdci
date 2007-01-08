@@ -8,7 +8,9 @@ nsdci/dcicommon/cache.c
 The Cache API provides a mechanism to create size-based and time-based named caches.  The Network Cache Flush API ([ncf]) is used to send cache flush messages.  Together they provide a powerful, high performance cache-messaging service.  The Cache API functions at a very low level and great care should be taken in its use. See the  "Best Practices" section for examples of how to effectively use the Cache API.
 
 ==TCL API==
-
+{{{
+--------------------------------------------------------------------------------
+}}}
 ===cache.createEntry===
 Creates an entry handle in _cacheName_ identified by _key_.  _newVariable_ is updated with 1 if an entry for the given key already exists. A handle to the entry is returned.
 
