@@ -87,12 +87,12 @@ Used to remove data from the broker. If sendflush is enabled (default), a [ncf] 
 }}}
 
 ===nsob.names===
-Used to list the names of the configured SOBs.  Both clients and servers are listed.
+Used to list the names of the configured sobs.  Both clients and servers are listed.
 
 *nsob.names*
 
 || *Result* || *Description* ||
-|| {{{String}}} || Success. The names of the configured SOBs in TCL_LIST format. ||
+|| {{{String}}} || Success. The names of the configured sobs in TCL_LIST format. ||
 || {{{TCL_ERROR}}} || Failure. An error occurred. See the server log for more information. ||
 
 
@@ -240,7 +240,7 @@ Any client can "get" data from the server. Use the "frontend" AOLserver Control 
 ==Caching and Network Cache Flush==
 To optimize performance, nsob has the ability to cache at both the server and client. With caching enabled (default), the initial client request first looks into its own cache. If no entry is found it will make a call to the server.  If the server has caching enabled (default), it will first look in its cache.  If no entry is found, it will read from disk, make a cache entry, and return the data. The client API will make a cache entry and return the data.  
 
-Network Cache Flush ([ncf]) is another service availble in nsdci.  With the SOBs configured to send cache flush messages (default), the remote client cache will be flushed when a sob entry is addded or changed. Note: You must configure [ncf] on the AOLserver instance hosting the nsob server in order to send cache flush messages.
+Network Cache Flush ([ncf]) is another service availble in nsdci.  With the sobs configured to send cache flush messages (default), the remote client cache will be flushed when a sob entry is addded or changed. Note: You must configure [ncf] on the AOLserver instance hosting the nsob server in order to send cache flush messages.
 
 There are significant performance gains from caching. Consider a fetch to "file.xml" which is 8KB:
 
@@ -279,6 +279,6 @@ or
 }}}
 
 ==Best Practices==
-Caching should be used where possible to optimize performance. The AOLserver Stats interface has insight to cache-hit-rate information and should be used to measure the performance of the nsob cache.  A high cache-hit-rate is preferred.
+Caching should be used where possible to optimize performance. The AOLserver Stats interface has insight to cache hit-rate information and should be used to measure the performance of the nsob cache.  A high cache hit-rate is preferred.
 
-You might find that flowing content one way per server gives better performance.  For example, one server brokering data from the tool server to the frontned, and a second from the frontend to the tool server.  This could perform better than one nsob server doing both.
+You might find that flowing content one way per server gives better performance.  For example, one server brokering data from the tool server to the frontend, and a second from the frontend to the tool server.  This could perform better than one nsob server doing both.
