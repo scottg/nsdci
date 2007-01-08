@@ -80,3 +80,4 @@ There is now a proxy process running and idle, so there is no need to start anot
 There were no log notices indicating a new proxy process was started because the previous one was available.  Only if the currently initialized proxy processes are in use will another one be initialized from the pool.  If the max number of proxy processes available to a pool are all busy, the proxy.send command will wait until the specified timeout value and then timeout.    
 
 ==Best Practices==
+There is a performance hit when a proxy starts. You might consider starting at least one proxy from your pool at server start-up. This will ensure there is at least one proxy initialized when needed.
