@@ -9,8 +9,74 @@ The Proxy API (proxy) manages modified tcl shells capable of communicating with 
 
 ==TCL API==
 
-==Configuration==
-
 ==Usage==
+Create a script called /proxy.cmds with the following tcl procedure:  
+
+{{{
+    proc execPs {} {
+        return [exec ps]
+    }
+}}}
+
+The procedure execs the UNIX _ps_ command.  Depending on the process size of our AOLserver, we might not want that to be executed inside the AOLserver process space.  Instead we will create a proxy pool and source the procedure there.  When we need it, we will execute the command from inside the proxy.  Using the AOLserver Control Port create a proxy pool which will source that script.  Then run the command in the proxy:
+
+{{{
+    [neon:~] Michael% telnet 127.0.0.1 8900
+    Trying 127.0.0.1...
+    Connected to localhost.
+    Escape character is '^]'.
+    login: 
+    Password:
+
+    Welcome to tool running at /usr/local/aolserver/bin/nsd (pid 7231)
+    AOLserver/4.5.0 (aolserver4_5) for osx built on Jan  4 2007 at 17:11:28
+    CVS Tag: $Name:  $
+    tool:nscp 1> proxy.start myProxyPool 5 /proxy.cmds
+
+    tool:nscp 2> proxy.send myProxyPool execPs
+     PID  TT  STAT      TIME COMMAND
+     7193  p1  S      0:00.05 -tcsh
+     7239  p1  S+     0:00.01 telnet 127.0.0.1 8900
+     6145  p3  S      0:00.05 -tcsh
+     7231  p3  S+     0:00.13 ./bin/nsd -ft ./etc/tool.tcl
+     7240  p3  S+     0:00.02 /usr/local/aolserver/bin/dcitclx -P myProxyPool /prox
+     6197  p5  S      0:00.04 -tcsh
+     6929  p5  S+     0:00.07 ./bin/nsd -ft ./etc/sob.tcl
+     6202  p6  S      0:00.04 -tcsh
+     6928  p6  S+     0:00.15 ./bin/nsd -ft ./etc/frontend.tcl
+    tool:nscp 3>
+}}}
+
+The first command created the proxy pool with a max of 5 processes.  These processes will initialize on demand, so when we use _prxy.send_ for the first time, it will create the proxy process, execute the command in the proxy process, and return the result.  We see the following log entries in the server log when a proxy process is started:
+
+{{{
+    [07/Jan/2007:19:26:24][7231.25210880][-nscp:2-] Notice: proxy[myProxyPool]: starting /usr/local/aolserver/bin/dcitclx /proxy.cmds
+    [07/Jan/2007:19:26:24][7240.2684407744][dcitclx:proxy] Notice: starting
+    [07/Jan/2007:19:26:24][7240.2684407744][dcitclx:proxy] Notice: sourced: /proxy.cmds
+    [07/Jan/2007:19:26:24][7240.2684407744][dcitclx:proxy] Notice: running
+}}}
+
+There is now a proxy process running and idle, so there is no need to start another one from the pool of 5 when the command issued again:
+
+{{{
+    tool:nscp 3> proxy.send myProxyPool execPs
+     PID  TT  STAT      TIME COMMAND
+     7193  p1  S      0:00.05 -tcsh
+     7239  p1  S+     0:00.01 telnet 127.0.0.1 8900
+     6145  p3  S      0:00.05 -tcsh
+     7231  p3  S+     0:00.13 ./bin/nsd -ft ./etc/tool.tcl
+     7240  p3  S+     0:00.02 /usr/local/aolserver/bin/dcitclx -P myProxyPool /prox
+     6197  p5  S      0:00.04 -tcsh
+     6929  p5  S+     0:00.07 ./bin/nsd -ft ./etc/sob.tcl
+     6202  p6  S      0:00.04 -tcsh
+     6928  p6  S+     0:00.15 ./bin/nsd -ft ./etc/frontend.tcl
+    tool:nscp 4> exit
+
+    Goodbye!
+    Connection closed by foreign host.
+    [neon:~] Michael%
+}}}
+
+There were no log notices indicating a new proxy process was started because the previous one was available.  Only if the currently initialized proxy processes are in use will another one be initialized from the pool.  If the max number of proxy processes available to a pool are all busy, the proxy.send command will wait until the specified timeout value and then timeout.    
 
 ==Best Practices==
