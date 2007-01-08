@@ -29,10 +29,10 @@ nsdci/dcicommon/nproxy.c
 ====Client:====
 {{{
     ns_section "ns/server/$server/module/dci/rpc/client/nproxy:${$nproxyServerName}"
-    ns_param address $nproxyServerAddress
-    ns_param port $nproxyServerPort
-    ns_param httpkeepalive true
-    ns_param httpnumconnections 1
+        ns_param address $nproxyServerAddress
+        ns_param port $nproxyServerPort
+        ns_param httpkeepalive true
+        ns_param httpnumconnections 1
 
 ns_section "ns/server/$server/module/dci/nproxy"
     ns_param debug 1
