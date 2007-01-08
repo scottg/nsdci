@@ -194,7 +194,7 @@ The bundled configuration has a single AOLserver instance configured with more t
 }}}
 
 ==Usage==
-Any client can "put" data on the server. Use the tool AOLserver Control Port to send some data to the sob server:
+Any client can "put" data on the broker. Use the tool AOLserver Control Port to send some data to the sob broker:
 
 {{{
     [neon:/usr/local/aolserver] Michael% telnet 127.0.0.1 8900
