@@ -48,7 +48,7 @@ Creates a named cache, pruned by size. *NOTE:* The Cache API allows the creation
 }}}
 
 ===cache.createTimed===
-Creates a named cache, pruned by time. *NOTE:* The Cache API allows the creation of multiple caches of the same name, essentialy overwritting the previous cache causing a memory leak.
+Creates a named cache, pruned by time. *NOTE:* The Cache API allows the creation of multiple caches of the same name, essentially overwriting the previous cache causing a memory leak.
 
 *cache.createSized* _cacheName timeout_
 
