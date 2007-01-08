@@ -11,6 +11,27 @@ Additional Reading: [rpc]
 
 ==TCL API==
 
+===nproxy.send===
+Used to send scripts or commands to a named nproxy.  See the "Configuration" section for more information.
+
+*nproxy.send* _server script ?timeout?_
+
+|| *Argument* || *Description* ||
+|| _server_ || String. A named nproxy server. See the "Configuration" section for more information. ||
+|| _script_ || String, The script or command to send. ||
+|| _?timeout?_ || Integer. How long to wait for the result. ||
+
+
+|| *Result* || Description ||
+|| {{{String}}} || Success. The result of script or command. ||
+|| {{{TCL_ERROR}}} || Failure. An error occurred. See the server log for more information. ||
+
+{{{
+--------------------------------------------------------------------------------
+}}}
+
+===nproxy.debug===
+
 ==Configuration==
 ====Server:====
 {{{
