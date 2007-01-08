@@ -149,14 +149,14 @@ The bundled configuration has a single AOLserver instance configured with more t
         ns_param address $address
         ns_param port $httpPort
 
+    ns_section "ns/server/$server/module/dci/rpc/server/nsobc:sob"
+        ns_param http 1
+
     ns_section "ns/server/$server/module/dci/sob"
         ns_param debug 1
  
     ns_section "ns/server/$server/module/dci/sob/servers"
         ns_param sob sob
- 
-    ns_section "ns/server/$server/module/dci/rpc/server/nsobc:sob"
-        ns_param http 1
 
     ns_section "ns/server/$server/module/dci/sob/server/sob"
         ns_param root $sobRoot
