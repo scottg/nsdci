@@ -31,6 +31,21 @@ Used to send scripts or commands to a named nproxy.  See the "Configuration" sec
 }}}
 
 ===nproxy.debug===
+Used to retrieve the current debug value, or to set a new debug value.
+
+*nt.proxy* _?boolean?_
+
+|| *Argument* || *Description* ||
+|| _?boolean?_ || Boolean. Optional. Specifies whether or not debugging is enabled. ||
+
+
+|| *Result* || *Description* ||
+|| {{{1}}} || Success. Returned if a boolean was specified. ||
+|| {{{BOOLEAN}}} || Success. If a boolean was not specified, then the current debug value is returned. ||
+
+{{{
+--------------------------------------------------------------------------------
+}}}
 
 ==Configuration==
 ====Server:====
