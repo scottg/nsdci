@@ -9,6 +9,40 @@ nsdci/dcicommon/nproxy.c
 ==TCL API==
 
 ==Configuration==
+====Server:====
+{{{
+    ns_section "ns/server/$server/module/dci/rpc/server/nproxy"
+        ns_param http 1
+
+    ns_section "ns/server/$server/module/dci/nproxy"
+        ns_param debug 1
+
+    ns_section "ns/server/$server/module/dci/nproxy/servers"
+        ns_param $nproxyServerName $nproxyServerName
+
+    ns_section "ns/server/$server/module/dci/nproxy/server/$nproxyServerName"
+        ns_param handshakeName $nproxyServerName
+
+    ns_section "ns/server/$server/module/dci/nproxy/server/$nproxyServerName/clients"
+        # This section has no params but is required
+}}}
+====Client:====
+{{{
+    ns_section "ns/server/$server/module/dci/rpc/client/nproxy:${$nproxyServerName}"
+    ns_param address $nproxyServerAddress
+    ns_param port $nproxyServerPort
+    ns_param httpkeepalive true
+    ns_param httpnumconnections 1
+
+ns_section "ns/server/$server/module/dci/nproxy"
+    ns_param debug 1
+
+ns_section "ns/server/$server/module/dci/nproxy/clients"
+    ns_param $nproxyServerName $nproxyServerName
+
+ns_section "ns/server/$server/module/dci/nproxy/client/$nproxyServerName"
+    ns_param timeout 1
+}}}
 
 ==Usage==
 
