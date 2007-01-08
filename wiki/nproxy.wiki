@@ -93,5 +93,44 @@ Used to retrieve the current debug value, or to set a new debug value.
 }}}
 
 ==Usage==
+Use the frontend AOLserver Control Port to send a command to the tool server:
+{{{
+    Last login: Mon Jan  8 10:43:12 on ttyp5
+    Welcome to Darwin!
+    [neon:~] Michael% telnet 127.0.0.1 9900
+    Trying 127.0.0.1...
+    Connected to localhost.
+    Escape character is '^]'.
+    login: 
+    Password: 
+
+    Welcome to frontend running at /usr/local/aolserver/bin/nsd (pid 7893)
+    AOLserver/4.5.0 (aolserver4_5) for osx built on Jan  4 2007 at 17:11:28
+    CVS Tag: $Name:  $
+    frontend:nscp 1> nproxy.send tool "expr 2 + 2"
+    4
+    frontend:nscp 2> 
+}}}
+If you tail the tool server log you will see the following notice:
+{{{
+    [08/Jan/2007:15:28:54][7884.25210880][-conn:0-] Notice: eval: 0 expr 2 + 2 ...
+}}}
+The tool server accepted the request and evaluated the script. The result was sent back to the frontend server and was seen in the frontend AOLserver Control Port.  Send a log notice to the tool server:
+{{{
+    frontend:nscp 2> nproxy.send tool {ns_log notice "Sent this from the frontend server."}
+
+    frontend:nscp 3> exit
+
+    Goodbye!
+    Connection closed by foreign host.
+    [neon:~] Michael% 
+}}}
+There is no returned result for a log notice. But if you look in the tool server log you will see the evaluation notice as well as the result of the script:
+{{{
+    [08/Jan/2007:15:30:08][7884.25210880][-conn:0-] Notice: eval: 0 ns_log notice "Sent this from the fronte ...
+    [08/Jan/2007:15:30:08][7884.25210880][-conn:0-] Notice: Sent this from the frontend server.
+}}}
 
 ==Best Practices==
+
+
