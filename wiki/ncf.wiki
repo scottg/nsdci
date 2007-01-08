@@ -17,7 +17,7 @@ Used to register named caches on the client for flush-on-connect. The entire cac
 *ncf.addFlushCache* _cache_
 
 || *Argument* || *Description* ||
-|| _cache_ || String. The named cache to be registerd. ||
+|| _cache_ || String. The named cache to be registered. ||
 
 
 || *Result* || *Description* ||
