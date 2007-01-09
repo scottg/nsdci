@@ -1,4 +1,4 @@
-#summary Networked Ratings
+#summary Networked Ratings API
 #labels Phase-Implementation
 
 =Networked Ratings (nrate)=
