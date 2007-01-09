@@ -49,7 +49,7 @@ typedef struct Rps {
     void *arg;	    	    	    /* Callback data. */
     char name[DCI_RPCNAMESIZE+1];   /* Server name. */
     char handshake[DCI_RPCNAMESIZE+1]; /* Connect handshake name. */
-    int checkAllowed;               /* */
+    int checkAcl;					/* Flag for ACL checking. */
     Tcl_HashTable allowed;          /* Table of allowed peer addresses. */
 } Rps;
 
@@ -190,7 +190,7 @@ static Ns_Callback RpcStartListener;
 static Ns_Callback RpcStopListener;
 static void RpcAccept(Listener *listenerPtr);
 static Ns_OpProc RpsRequest;
-static int RpcClientIsAllowed(Rps *rps, char *host);
+static int RpcHostIsAllowed(Rps *rps, char *host);
 
 static Dci_ServerProc RpsProc;
 static Tcl_CmdProc RpcStatsCmd;
@@ -419,9 +419,8 @@ Dci_RpcCreateServer(char *server, char *module, char *name, char *handshake,
 {
     Rps *rpsPtr;
     Ns_DString ds;
-    Ns_Set *set;
-    char *path, *method, *host;
-    int i, new, checkAllowed;;
+    char *path, *method, *allow, *p;
+    int i, n, new, checkAcl;
     
     if (name == NULL || strlen(name) >= DCI_RPCNAMESIZE) {
 	Ns_Log(Error, "rps: invalid name: %s", name);
@@ -437,21 +436,35 @@ Dci_RpcCreateServer(char *server, char *module, char *name, char *handshake,
 
     rpsPtr = ns_calloc(1, sizeof(Rps));
 
-    checkAllowed = 0;
+    path = Ns_ConfigGetPath(server, module, "rpc/server", name, "acl", NULL);
+    allow = Ns_ConfigGetValue(path, "allow");
+    checkAcl = 0;
     Tcl_InitHashTable(&rpsPtr->allowed, TCL_STRING_KEYS);
-    path = Ns_ConfigGetPath(server, module, "rpc/server", name, "allowed", NULL);
-    set = Ns_ConfigGetSection(path);
-    for (i = 0; set != NULL && i < Ns_SetSize(set); ++i) {
-        checkAllowed = 1;
-        host = Ns_SetValue(set, i);
-        Tcl_CreateHashEntry(&rpsPtr->allowed, host, &new);
-        Ns_Log(Notice, "rpc[%s]: adding acl: %s (%s)", name, host, Ns_SetKey(set, i)); 
+    if (allow != NULL) {
+        checkAcl = 1;
+        allow = ns_strdup(allow);
+        p = allow;
+        n = 1;
+    
+        while ((p = (strchr(p, ','))) != NULL) {
+            ++n;
+            ++p;
+        }
+        for (i = 0; i < n; ++i) {
+            p = strchr(allow, ',');
+            if (p != NULL) {
+                *p++ = '\0';
+            }
+            Tcl_CreateHashEntry(&rpsPtr->allowed, allow, &new);
+            Ns_Log(Notice, "rpc[%s]: added host to acl: %s (allow)", name, allow);
+            allow = p;
+        }
     }
 
     path = Ns_ConfigGetPath(server, module, "rpc/server", name, NULL);
     strcpy(rpsPtr->name, name);
     strcpy(rpsPtr->handshake, handshake);
-    rpsPtr->checkAllowed = checkAllowed;
+    rpsPtr->checkAcl = checkAcl;
     rpsPtr->arg = arg;
     rpsPtr->proc = proc;
     Ns_DStringInit(&ds);
@@ -1579,7 +1592,7 @@ RpsProc(Dci_Client *client, void *arg, int why)
 }
 
 static int 
-RpcClientIsAllowed(Rps *rps, char *host)
+RpcHostIsAllowed(Rps *rps, char *host)
 {
     Tcl_HashEntry *hPtr;
     Tcl_HashSearch search;
@@ -1612,12 +1625,12 @@ RpsRequest(void *arg, Ns_Conn *conn)
     char *connectHdr, *peer;
     int keepFlag = 0;
 
-    if (rpsPtr->checkAllowed) { 
+    if (rpsPtr->checkAcl) { 
         peer = Ns_ConnPeer(conn);
-        allowed = RpcClientIsAllowed(rpsPtr, peer);
+        allowed = RpcHostIsAllowed(rpsPtr, peer);
 
         if (!allowed) {
-            Ns_Log(Error, "rps[%s]: request from host not allowed (%s)", rpsPtr->name, peer);
+            Ns_Log(Error, "rps[%s]: request not allowed (%s)", rpsPtr->name, peer);
             return NS_ERROR; 
         } 
     }
