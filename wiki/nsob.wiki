@@ -194,7 +194,7 @@ The bundled configuration has a single AOLserver instance configured with more t
 }}}
 
 ==Usage==
-Any client can "put" data on the server. Use the tool AOLserver Control Port to send some data to the sob server:
+Any client can "put" data on the server. Use the tool server's [http://code.google.com/p/aolserver/wiki/nscp  Control Port] to send some data to the sob server:
 
 {{{
     [neon:/usr/local/aolserver] Michael% telnet 127.0.0.1 8900
@@ -216,7 +216,7 @@ Any client can "put" data on the server. Use the tool AOLserver Control Port to 
     [neon:/usr/local/aolserver] Michael% 
 }}}
 
-Any client can "get" data from the server. Use the frontend AOLserver Control Port to request data from the sob server.
+Any client can "get" data from the server. Use the frontend's [http://code.google.com/p/aolserver/wiki/nscp Control Port] to request data from the sob server.
 
 {{{
     [neon:/usr/local/aolserver] Michael% telnet 127.0.0.1 9900
@@ -284,3 +284,4 @@ or
 Caching should be used where possible to optimize performance. The AOLserver Stats interface has insight to cache hit-rate information and should be used to measure the performance of the nsob cache.  A high cache hit-rate is preferred.
 
 You might find that flowing content one way per server gives better performance.  For example, one server brokering data from the tool server to the frontend, and a second from the frontend to the tool server.  This could perform better than one nsob server doing both.
+
