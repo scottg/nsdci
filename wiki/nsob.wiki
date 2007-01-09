@@ -14,7 +14,7 @@ Additional Reading: [rpc], [ncf]
 --------------------------------------------------------------------------------
 }}}
 ===nsob.put===
-Used to put data from a client to the broker. If sendflush is enabled (default), a [ncf] message will be sent to all clients.
+Used to put data from a client to the server. If sendflush is enabled (default), a [ncf] message will be sent to all clients.
 
 *nsob.put * _server key value_
 
@@ -33,7 +33,7 @@ Used to put data from a client to the broker. If sendflush is enabled (default),
 }}}
 
 ===nsob.append===
-Used to append data on the broker. If sendflush is enabled (default), a [ncf] message will be sent to all clients.
+Used to append data on the server. If sendflush is enabled (default), a [ncf] message will be sent to all clients.
 
 *nsob.append* _server key value_
 
@@ -52,7 +52,7 @@ Used to append data on the broker. If sendflush is enabled (default), a [ncf] me
 }}}
 
 ===nsob.get ===
-Used to fetch data from the broker. If caching is enabled (default), the API will fetch from cache if exists, and make a cache entry if it does not.
+Used to fetch data from the server. If caching is enabled (default), the API will fetch from cache if exists, and make a cache entry if it does not.
 
 *nsob.get* _server key_
 
@@ -71,7 +71,7 @@ Used to fetch data from the broker. If caching is enabled (default), the API wil
 }}}
 
 ===nsob.delete===
-Used to remove data from the broker. If sendflush is enabled (default), a [ncf] message will be sent to all clients.
+Used to remove data from the server. If sendflush is enabled (default), a [ncf] message will be sent to all clients.
 
 *nsob.delete* _server key_
 
@@ -194,7 +194,7 @@ The bundled configuration has a single AOLserver instance configured with more t
 }}}
 
 ==Usage==
-Any client can "put" data on the broker. Use the tool AOLserver Control Port to send some data to the sob broker:
+Any client can "put" data on the server. Use the tool AOLserver Control Port to send some data to the sob server:
 
 {{{
     [neon:/usr/local/aolserver] Michael% telnet 127.0.0.1 8900
