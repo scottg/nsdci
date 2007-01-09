@@ -11,6 +11,34 @@ Additional Reading: [rpc]
 
 ==TCL API==
 
+===nrates.find===
+Used to return a list of keys in the  nrate database file.  If a pattern is given glob-style patten matching is used.
+
+*nrates.find* _?pattern?_
+
+|| *Argument* || *Description* ||
+|| _?pattern?_ || String. Optional. The glob-style pattern to use. ||
+
+
+|| *Result* || *Description* ||
+|| {{{TCL_LIST}}} || Success. All the keys in the db file or the keys that matched _?pattern?_ ||
+||
+|| {{{TCL_ERROR}}} || Failure. An error occurred. See the server log for more information. ||
+
+{{{
+--------------------------------------------------------------------------------
+}}}
+
+===nrates.backup===
+
+===nrates.database===
+
+===nrates.delete===
+
+===nrates.debug===
+
+===nrates.add===
+
 ==Configuration==
 
 ==Best Practices==
