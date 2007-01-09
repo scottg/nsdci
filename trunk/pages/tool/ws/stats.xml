@@ -1,0 +1,13 @@
+<%
+set option [ns_queryget option]
+
+switch $option {
+    "rpc" {
+        ns_adp_include inc/$option.inc
+    }
+    default {
+        ns_returnbadrequest "invalid option: $option"
+        ns_adp_abort
+    }
+}
+%>
