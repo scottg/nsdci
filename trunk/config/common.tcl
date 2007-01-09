@@ -12,6 +12,7 @@ ns_section "ns/parameters"
 ns_section "ns/mimetypes"
     ns_param default "*/*"
     ns_param .adp "text/html; charset=iso-8859-1"
+    ns_param .json "text/json"
 
 ns_section "ns/encodings"
     ns_param adp "iso8859-1"
@@ -34,6 +35,8 @@ ns_section "ns/server/$server"
 
 ns_section "ns/server/$server/adp"
     ns_param map "/*.adp"
+    ns_param map "/*.xml"
+    ns_param map "/*.json"
 
 ns_section "ns/server/$server/modules"
     ns_param nssock nssock.so
