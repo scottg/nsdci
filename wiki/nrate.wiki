@@ -1,0 +1,16 @@
+#summary Networked Ratings
+#labels Phase-Implementation
+
+=Networked Ratings (nrate)=
+nsdci/dcicommon/nrate.c
+
+==Introduction==
+The Networked Ratings API (nrate) keeps track of counts and totals to determine the average to a given precision.  The api is only exposed when properly configured. See the "Configuration" section for more information.
+
+Additional Reading: [rpc]
+
+==TCL API==
+
+==Configuration==
+
+==Best Practices==
