@@ -14,14 +14,42 @@ function getData() {
             var statsNode = document.getElementById('stats')  
             statsNode.innerHTML = ''
 
+            var clientHeaders = data.headers.clients
+            var socksHeaders = data.headers.socks
+
+            var shNode = document.createElement('s_h')
+
+            for (i in clientHeaders) {
+                var slNode = document.createElement('s_l')
+                var hdrValue = clientHeaders[i]
+       
+                slNode.appendChild(document.createTextNode(hdrValue))
+                shNode.appendChild(slNode)
+            }
+
+            statsNode.appendChild(shNode)
+            
+            var n = 0
+
             for (client in data.clients) {
                 var srNode = document.createElement('s_r')
+
+                if (n == 0) {
+                    n = 1
+                    class = 'even'
+                } else {
+                    n = 0
+                    class = 'odd'
+                }
 
                 for (field in data.clients[client]) {
                     var scNode = document.createElement('s_c')
                     var value = data.clients[client][field]
 
+                    scNode.className = class
+
                     if (field == 'socks') {
+                        continue
                         var sockStNode = document.createElement('s_t')
 
                         for (j = 0; j < value.length; j++) {

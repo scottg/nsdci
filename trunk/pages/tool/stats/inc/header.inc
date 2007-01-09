@@ -9,7 +9,7 @@ set debug [ns_queryget debug "false"]
 <html>
 <head>
     <title><%=$title%></title>
-    <link rel="stylesheet" type="text/css" href="/css/global.css">
+    <link rel="stylesheet" type="text/css" href="/tool/css/global.css">
     <script type="text/javascript">
     djConfig = { 
         isDebug: <%=$debug%>
