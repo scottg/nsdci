@@ -8,9 +8,8 @@ ns_section "ns/server/$server/module/dci/server"
 ns_section "ns/server/$server/module/dci/rpc/server/nsobc:sob"
     ns_param http 1
 
-ns_section "ns/server/$server/module/dci/rpc/server/nsobc:sob/allowed"
-    ns_param frontend "127.0.0.1"
-    ns_param tool "127.0.0.1"
+ns_section "ns/server/$server/module/dci/rpc/server/nsobc:sob/acl"
+    ns_param allow "127.0.0.1"
 
 ns_section "ns/server/$server/module/dci/broadcast"
     ns_param debug 1
