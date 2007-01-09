@@ -205,7 +205,7 @@ Unsets the string value of a given cache entry, freeing the data and resetting t
 cache.wait cache.timedWait cache.broadcast cache.signal
 
 ==Usage==
-The following AOLserver Control Port session is meant to give an overview only. Please see the "Best Practices" section on how to safely use the Cache API.
+The following [http://code.google.com/p/aolserver/wiki/nscp  Control Port] session is meant to give an overview only. Please see the "Best Practices" section on how to safely use the Cache API.
 {{{
     [neon:local/aolserver/etc] Michael% telnet localhost 9900
     Trying 127.0.0.1...

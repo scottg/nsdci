@@ -38,7 +38,7 @@ Sends a script or command to a remote host. No result is returned.
 }}}
 
 ==Usage==
-In the tool AOLserver Control Port send a command to the frontend server (See [Topology] for more detail):
+In the tool [http://code.google.com/p/aolserver/wiki/nscp  Control Port] to send a command to the frontend server (See [Topology] for more detail):
 {{{
     [neon:~/svn/nsdci/wiki] Michael% telnet 127.0.0.1 8900
     Trying 127.0.0.1...

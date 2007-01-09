@@ -124,7 +124,7 @@ Used to retrieve the current debug value, or to set a new debug value.
 }}}
 
 ==Usage==
-When using _npc.vote_ you are selecting one choice out of 20.  The index is 0 based so you select 0 through 19.  Each vote adds to the total votes which is in the first position of the returned list.  Using the frontend AOLserver Control Port send some votes to the poll server (see [Topology] for more detail):
+When using _npc.vote_ you are selecting one choice out of 20.  The index is 0 based so you select 0 through 19.  Each vote adds to the total votes which is in the first position of the returned list.  Using the frontend [http://code.google.com/p/aolserver/wiki/nscp  Control Port] send some votes to the poll server (see [Topology] for more detail):
 {{{
     [neon:~/svn/nsdci/wiki] Michael% cd ~
     [neon:~] Michael% telnet 127.0.0.1 9900

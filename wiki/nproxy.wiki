@@ -95,7 +95,7 @@ Used to retrieve the current debug value, or to set a new debug value.
 }}}
 
 ==Usage==
-Use the frontend AOLserver Control Port to send a command to the tool server:
+Use the frontend [http://code.google.com/p/aolserver/wiki/nscp  Control Port] to send a command to the tool server:
 {{{
     Last login: Mon Jan  8 10:43:12 on ttyp5
     Welcome to Darwin!

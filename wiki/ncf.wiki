@@ -119,7 +119,7 @@ Sends a cache flush message to all configured clients. Flushes all keys in the c
 }}}
 
 ==Usage==
-Use the sob AOLserver Control Port to turn on debugging and send a cache flush (See [Topology] for more information):
+Use the sob [http://code.google.com/p/aolserver/wiki/nscp  Control Port] to turn on debugging and send a cache flush (See [Topology] for more information):
 {{{
     [neon:~] Michael% telnet 127.0.0.1 7900
     Trying 127.0.0.1...

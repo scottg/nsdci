@@ -63,7 +63,7 @@ Create the nv array, create the nv client, then specify which arrays the nv clie
         ns_param nv nv
 }}}
 ==Usage==
-The bundled set up comes with a pre-configured nv array called "nv" with the frontend server as a client (See [Topology] for more detail). In the tool AOLserver Control Port, set some nv keys:
+The bundled set up comes with a pre-configured nv array called "nv" with the frontend server as a client (See [Topology] for more detail). In the tool [http://code.google.com/p/aolserver/wiki/nscp  Control Port], set some nv keys:
 {{{
     [neon:local/aolserver/etc] Michael% telnet 127.0.0.1 8900
     Trying 127.0.0.1...
