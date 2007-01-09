@@ -93,14 +93,16 @@ Used to retrieve the current debug value, or to set a new debug value.
         ns_param address $address
         ns_param port $httpPort
 
-    ns_section "ns/server/$server/module/dci/np"
-        ns_param debug 1
-
     ns_section "ns/server/$server/module/dci/rpc/server/np"
         ns_param http 1
 
+    ns_section "ns/server/$server/module/dci/np"
+        ns_param debug 1
+
     ns_section "ns/server/$server/module/dci/np/server/clients"
-        # This section has no params but is still required.
+        # This section has no params but is required.
+        # Legacy client list before HTTP RPC.
+        # See the rpc/server acl section above. 
 }}}
 ====Client:====
 {{{

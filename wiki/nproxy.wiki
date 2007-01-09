@@ -64,6 +64,9 @@ Used to retrieve the current debug value, or to set a new debug value.
     ns_section "ns/server/$server/module/dci/rpc/server/nproxy"
         ns_param http 1
 
+    ns_section "ns/server/$server/module/dci/rpc/server/nproxy/acl"
+        ns_param allow 127.0.0.1
+
     ns_section "ns/server/$server/module/dci/nproxy"
         ns_param debug 1
 
@@ -74,7 +77,9 @@ Used to retrieve the current debug value, or to set a new debug value.
         ns_param handshakeName $nproxyServerName
 
     ns_section "ns/server/$server/module/dci/nproxy/server/$nproxyServerName/clients"
-        # This section has no params but is required
+        # This section has no params but is required.
+        # Legacy client list before HTTP RPC.
+        # See the rpc/server acl section above. 
 }}}
 ====Client:====
 {{{
