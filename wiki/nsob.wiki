@@ -290,3 +290,4 @@ Caching should be used where possible to optimize performance. The AOLserver Sta
 
 You might find that flowing content one way per server gives better performance.  For example, one server brokering data from the tool server to the frontend, and a second from the frontend to the tool server.  This could perform better than one nsob server doing both.
 
+When debugging, always check logs on both the client and server.  If *nsob.put* fails, there might be insight in the sob server's server log.
