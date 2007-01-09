@@ -152,6 +152,9 @@ The bundled configuration has a single AOLserver instance configured with more t
     ns_section "ns/server/$server/module/dci/rpc/server/nsobc:sob"
         ns_param http 1
 
+    ns_section "ns/server/$server/module/dci/rpc/server/nsobc:sob/acl"
+        ns_paran allow 127.0.0.1
+
     ns_section "ns/server/$server/module/dci/sob"
         ns_param debug 1
  
@@ -165,7 +168,9 @@ The bundled configuration has a single AOLserver instance configured with more t
         ns_param statsdetail 1
 
     ns_section "ns/server/$server/module/dci/sob/server/sob/clients"
-        # This section is required but has no params.
+        # This section has no params but is required.
+        # Legacy client list before HTTP RPC.
+        # See the rpc/server acl section above.
 }}}
 ====Client:====
 {{{
