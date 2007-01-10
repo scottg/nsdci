@@ -202,45 +202,14 @@ The bundled configuration has a single AOLserver instance configured with more t
 Any client can "put" data on the server. Use the tool server's [http://code.google.com/p/aolserver/wiki/nscp  Control Port] to send some data to the sob server (See [Topology] for more information):
 
 {{{
-    % telnet 127.0.0.1 8900
-    Trying 127.0.0.1...
-    Connected to localhost.
-    Escape character is '^]'.
-    login: 
-    Password: 
- 
-    Welcome to tool running at /usr/local/aolserver/bin/nsd (pid 24173)
-    AOLserver/4.5.0 (aolserver4_5) for osx built on Jan  4 2007 at 17:11:28
-    CVS Tag: $Name:  $
     tool:nscp 1> nsob.put sob mySobFile "my sob data"
- 
-    tool:nscp 2> exit
- 
-    Goodbye!
-    Connection closed by foreign host.
 }}}
 
 Any client can "get" data from the server. Use the frontend's [http://code.google.com/p/aolserver/wiki/nscp Control Port] to request data from the sob server (See [Topology] for more information):
 
 {{{
-    [neon:/usr/local/aolserver] Michael% telnet 127.0.0.1 9900
-    Trying 127.0.0.1...
-    Connected to localhost.
-    Escape character is '^]'.
-    login: 
-    Password: 
-
-    Welcome to frontend running at /usr/local/aolserver/bin/nsd (pid 24171)
-    AOLserver/4.5.0 (aolserver4_5) for osx built on Jan  4 2007 at 17:11:28
-    CVS Tag: $Name:  $
     frontend:nscp 1> nsob.get sob mySobFile
     my sob data
- 
-    frontend:nscp 2> exit
- 
-    Goodbye!
-    Connection closed by foreign host.
-    [neon:/usr/local/aolserver] Michael%
 }}}
 
 ==Caching and Network Cache Flush==
@@ -251,37 +220,27 @@ Network Cache Flush ([ncf]) is another service availble in nsdci.  With the sobs
 There are significant performance gains from caching. Consider a fetch to "file.xml" which is 8KB:
 
 {{{
-    [neon:/tmp/sob] Michael% telnet 127.0.0.1 8900
-    Trying 127.0.0.1...
-    Connected to localhost.
-    Escape character is '^]'.
-    login: 
-    Password: 
- 
-    Welcome to tool running at /usr/local/aolserver/bin/nsd (pid 24410)
-    AOLserver/4.5.0 (aolserver4_5) for osx built on Jan  4 2007 at 17:11:28
-    CVS Tag: $Name:  $
     tool:nscp 1> time {nsob.get sob file.xml}
     555 microseconds per iteration
+
     tool:nscp 2> time {nsob.get sob file.xml} 100
     79.08 microseconds per iteration
-    tool:nscp 3> 
 }}}
 
 If dubugging is turned on, you will see the following log entries in the tool.server.log file:
 {{{
-    [04/Jan/2007:20:47:47][24410.25212928][-nscp:3-] Notice: sob: sob: get file.xml - ok
-    [04/Jan/2007:20:48:02][24410.25212928][-nscp:3-] Notice: sob: sob: get file.xml - ok (cached)
+    ...[-nscp:0-] Notice: sob: sob: get file.xml - ok
+    ...[-nscp:0-] Notice: sob: sob: get file.xml - ok (cached)
 }}}
 
 The first entry shows that the data was fetched from the server, the second shows the data was retrieved from cache.   Similar notices can be seen on the server in the sob.server.log file:
 
 {{{
-    [04/Jan/2007:20:48:02][25809.25191424][-conn:0-] Notice: read: file.xml
+    ...[-conn:0-] Notice: read: file.xml
 }}}
 or
 {{{
-    [04/Jan/2007:20:48:02][25809.25191424][-conn:0-] Notice: read: file.xml (cached)
+    ...[-conn:0-] Notice: read: file.xml (cached)
 }}}
 
 ==Best Practices==
