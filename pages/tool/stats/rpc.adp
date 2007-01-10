@@ -43,17 +43,17 @@ function getData() {
 
                 if (n == 0) {
                     n = 1
-                    class = 'even'
+                    className = "even"
                 } else {
                     n = 0
-                    class = 'odd'
+                    className = "odd"
                 }
 
                 for (field in data.clients[client]) {
                     var scNode = document.createElement('s_c')
                     var value = data.clients[client][field]
 
-                    scNode.className = class
+                    scNode.className = className
 
                     if (field == 'socks') {
                         continue
