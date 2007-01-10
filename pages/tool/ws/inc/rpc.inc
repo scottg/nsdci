@@ -70,6 +70,7 @@ foreach name [rpc.clients] {
 }
 %>
 result = {
+    timestamp:"<%=[ns_time]%>", 
     headers: { 
         clients: { 
             <%=[join $clientHdrs ", "]%> 

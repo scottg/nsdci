@@ -8,6 +8,13 @@ function getData() {
     dojo.io.bind ({
         url: '/tool/ws/stats.json?option=rpc',
         load: function(type, data, evt) {
+            var tsNode = document.getElementById('timestamp') 
+            var ts = data.timestamp
+            var date = new Date()
+             
+            date.setTime(ts * 1000)
+            tsNode.innerHTML = date.toString()
+
             var errorNode = document.getElementById('error')
             errorNode.innerHTML = ''
 
@@ -93,6 +100,7 @@ getData()
 </script>
 
 <div id='error'></div>
+<div id='timestamp'></div>
 
 <s_t id='stats'></s_t>
 
