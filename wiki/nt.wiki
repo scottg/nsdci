@@ -135,7 +135,7 @@ Each bucket is "swept" by the server using a bucket-specific callback. The follo
     }   
 }}}
 
-Using the frontend AOLserver Control Port, send some votes to the tally server:
+Using the frontend AOLserver Control Port, send some votes to the tally server (See [Topology] for more information):
 
 {{{
     [neon:~] Michael% telnet 127.0.0.1 9900
@@ -159,7 +159,7 @@ Using the frontend AOLserver Control Port, send some votes to the tally server:
     [neon:~] Michael%
 }}}
 
-Using the tool AOLserver Control Port, dump the bucket to see what will be processed:
+Using the tool AOLserver Control Port, dump the bucket to see what will be processed (See [Topology] for more information):
 {{{
     [neon:~] Michael% telnet 127.0.0.1 8900
     Trying 127.0.0.1...

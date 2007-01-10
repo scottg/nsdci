@@ -199,7 +199,7 @@ The bundled configuration has a single AOLserver instance configured with more t
 }}}
 
 ==Usage==
-Any client can "put" data on the server. Use the tool server's [http://code.google.com/p/aolserver/wiki/nscp  Control Port] to send some data to the sob server:
+Any client can "put" data on the server. Use the tool server's [http://code.google.com/p/aolserver/wiki/nscp  Control Port] to send some data to the sob server (See [Topology] for more information):
 
 {{{
     [neon:/usr/local/aolserver] Michael% telnet 127.0.0.1 8900
@@ -221,7 +221,7 @@ Any client can "put" data on the server. Use the tool server's [http://code.goog
     [neon:/usr/local/aolserver] Michael% 
 }}}
 
-Any client can "get" data from the server. Use the frontend's [http://code.google.com/p/aolserver/wiki/nscp Control Port] to request data from the sob server.
+Any client can "get" data from the server. Use the frontend's [http://code.google.com/p/aolserver/wiki/nscp Control Port] to request data from the sob server (See [Topology] for more information):
 
 {{{
     [neon:/usr/local/aolserver] Michael% telnet 127.0.0.1 9900

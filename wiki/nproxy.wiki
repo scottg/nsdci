@@ -100,7 +100,7 @@ Used to retrieve the current debug value, or to set a new debug value.
 }}}
 
 ==Usage==
-Use the frontend [http://code.google.com/p/aolserver/wiki/nscp  Control Port] to send a command to the tool server:
+Use the frontend [http://code.google.com/p/aolserver/wiki/nscp  Control Port] to send a command to the tool server (See [Topology] for more information):
 {{{
     Last login: Mon Jan  8 10:43:12 on ttyp5
     Welcome to Darwin!
@@ -122,7 +122,7 @@ If you tail the tool server log you will see the following notice:
 {{{
     [08/Jan/2007:15:28:54][7884.25210880][-conn:0-] Notice: eval: 0 expr 2 + 2 ...
 }}}
-The tool server accepted the request and evaluated the script. The result was sent back to the frontend server and was seen in the frontend AOLserver Control Port.  Send a log notice to the tool server:
+The tool server accepted the request and evaluated the script. The result was sent back to the frontend server and was seen in the frontend AOLserver Control Port.  Send a log notice to the tool server (See [Topology] for more information):
 {{{
     frontend:nscp 2> nproxy.send tool {ns_log notice "Sent this from the frontend server."}
 
