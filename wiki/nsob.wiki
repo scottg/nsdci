@@ -14,6 +14,7 @@ Additional Reading: [rpc], [ncf]
 --------------------------------------------------------------------------------
 }}}
 ===nsob.put===
+
 Used to put data from a client to the server. If sendflush is enabled (default), a [ncf] message will be sent to all clients.
 
 *nsob.put * _server key value_
