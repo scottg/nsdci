@@ -65,7 +65,7 @@ Create the nv array, create the nv client, then specify which arrays the nv clie
 ==Usage==
 The bundled set up comes with a pre-configured nv array called "nv" with the frontend server as a client (See [Topology] for more detail). In the tool [http://code.google.com/p/aolserver/wiki/nscp  Control Port], set some nv keys:
 {{{
-    [neon:local/aolserver/etc] Michael% telnet 127.0.0.1 8900
+    % telnet 127.0.0.1 8900
     Trying 127.0.0.1...
     Connected to localhost.
     Escape character is '^]'.
@@ -83,7 +83,6 @@ The bundled set up comes with a pre-configured nv array called "nv" with the fro
 
     Goodbye!
     Connection closed by foreign host.
-    [neon:local/aolserver/etc] Michael%
 }}}
 
 With debugging turned on, in the frontend server log you will see the updates arrive and the array flush to disk:

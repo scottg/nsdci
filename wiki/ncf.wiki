@@ -90,7 +90,6 @@ Sends a cache flush message to all configured clients. Flushes all keys in the c
 }}}
 
 ==Configuration==
-
 ====Server:====
 {{{
     ns_section "ns/server/$server/module/dci/broadcast"
@@ -121,7 +120,7 @@ Sends a cache flush message to all configured clients. Flushes all keys in the c
 ==Usage==
 Use the sob [http://code.google.com/p/aolserver/wiki/nscp  Control Port] to turn on debugging and send a cache flush (See [Topology] for more information):
 {{{
-    [neon:~] Michael% telnet 127.0.0.1 7900
+    % telnet 127.0.0.1 7900
     Trying 127.0.0.1...
     Connected to localhost.
     Escape character is '^]'.
@@ -136,7 +135,6 @@ Use the sob [http://code.google.com/p/aolserver/wiki/nscp  Control Port] to turn
     sob:nscp 3> exit
     Goodbye!
     Connection closed by foreign host.
-    [neon:~] Michael%
 }}}
 
 You can see by the following log entries that the message was sent to all the configured ncf clients:

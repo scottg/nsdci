@@ -102,9 +102,7 @@ Used to retrieve the current debug value, or to set a new debug value.
 ==Usage==
 Use the frontend [http://code.google.com/p/aolserver/wiki/nscp  Control Port] to send a command to the tool server (See [Topology] for more information):
 {{{
-    Last login: Mon Jan  8 10:43:12 on ttyp5
-    Welcome to Darwin!
-    [neon:~] Michael% telnet 127.0.0.1 9900
+    % telnet 127.0.0.1 9900
     Trying 127.0.0.1...
     Connected to localhost.
     Escape character is '^]'.
@@ -130,7 +128,6 @@ The tool server accepted the request and evaluated the script. The result was se
 
     Goodbye!
     Connection closed by foreign host.
-    [neon:~] Michael% 
 }}}
 There is no returned result for a log notice. But if you look in the tool server log you will see the evaluation notice as well as the result of the script:
 {{{

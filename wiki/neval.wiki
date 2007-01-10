@@ -24,7 +24,7 @@ Sends a script or command to a remote host. No result is returned.
 
 
 || *Result* || *Description* ||
-|| {{{VOID}}} || Success. The script was sent. ||
+|| {{{NULL}}} || Success. The script was sent. ||
 || {{{TCL_ERROR}}} || Failure. An error occurred. See the server log for more information. ||
 
 ==Configuration==
@@ -36,11 +36,10 @@ Sends a script or command to a remote host. No result is returned.
         ns_param password $encryptedPassword ; # ns_crypt $password t2
         ns_param allowed 127.0.0.1
 }}}
-
 ==Usage==
 In the tool [http://code.google.com/p/aolserver/wiki/nscp  Control Port] to send a command to the frontend server (See [Topology] for more detail):
 {{{
-    [neon:~/svn/nsdci/wiki] Michael% telnet 127.0.0.1 8900
+    % telnet 127.0.0.1 8900
     Trying 127.0.0.1...
     Connected to localhost.
     Escape character is '^]'.
@@ -56,7 +55,6 @@ In the tool [http://code.google.com/p/aolserver/wiki/nscp  Control Port] to send
 
     Goodbye!
     Connection closed by foreign host.
-    [neon:~/svn/nsdci/wiki] Michael%
 }}}
 
 Looking at the tool server log you will see the following log entry:
