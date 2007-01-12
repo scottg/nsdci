@@ -1,5 +1,5 @@
 #summary Starting Servers
-#labels Phase-Deploy,Featured
+#labels Phase-Deploy
 
 = File System Layout =
 {{{
