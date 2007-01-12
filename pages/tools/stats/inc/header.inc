@@ -9,13 +9,14 @@ set debug [ns_queryget debug "false"]
 <html>
 <head>
     <title><%=$title%></title>
-    <link rel="stylesheet" type="text/css" href="/tool/css/global.css">
+    <link rel="stylesheet" type="text/css" href="/tools/css/global.css">
     <script type="text/javascript">
     djConfig = { 
         isDebug: <%=$debug%>
     };
     </script>
     <script src="/dojo/dojo.js"></script>
+    <script src="/tools/js/common.js"></script>
     <%
     foreach javascriptFile $javascriptFiles {
         ns_adp_puts "<script src=\"$javascriptFile\"></script>"
