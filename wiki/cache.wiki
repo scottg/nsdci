@@ -207,16 +207,6 @@ cache.wait cache.timedWait cache.broadcast cache.signal
 ==Usage==
 The following [http://code.google.com/p/aolserver/wiki/nscp  Control Port] session is meant to give an overview only. Please see the "Best Practices" section on how to safely use the Cache API.
 {{{
-    % telnet localhost 9900
-    Trying 127.0.0.1...
-    Connected to localhost.
-    Escape character is '^]'.
-    login: 
-    Password: 
-
-    Welcome to frontend running at /usr/local/aolserver/bin/nsd (pid 628)
-    AOLserver/4.5.0 (aolserver4_5) for osx built on Jan  4 2007 at 17:11:28
-    CVS Tag: $Name:  $
     frontend:nscp 1> cache.createSized myCache 5000000          
 
     frontend:nscp 2> cache.lock myCache
@@ -233,10 +223,6 @@ The following [http://code.google.com/p/aolserver/wiki/nscp  Control Port] sessi
     1
     frontend:nscp 8> set returnVar
     my value
-    frontend:nscp 9> exit
-
-    Goodbye!
-    Connection closed by foreign host.
 }}}
 
 ==Best Practices==
