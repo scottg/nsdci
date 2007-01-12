@@ -2,106 +2,55 @@
 
 <script type="text/javascript">
 dojo.require("dojo.io.*")
-dojo.require("dojo.xml.*")
 
 function getData() {
     dojo.io.bind ({
-        url: '/tool/ws/stats.json?option=rpc',
+        url: '/tools/ws/stats.json?option=rpc',
         load: function(type, data, evt) {
-            var tsNode = document.getElementById('timestamp') 
-            var ts = data.timestamp
             var date = new Date()
-             
-            date.setTime(ts * 1000)
-            tsNode.innerHTML = date.toString()
+            var table = new Table()
 
-            var errorNode = document.getElementById('error')
-            errorNode.innerHTML = ''
+            date.setTime(data.timestamp * 1000)
 
-            var statsNode = document.getElementById('stats')  
-            statsNode.innerHTML = ''
+            setText('timestamp', date.toString())
+            setText('error', null)
 
-            var clientHeaders = data.headers.clients
-            var socksHeaders = data.headers.socks
-
-            var shNode = document.createElement('s_h')
-
-            for (i in clientHeaders) {
-                var slNode = document.createElement('s_l')
-                var hdrValue = clientHeaders[i]
-       
-                slNode.appendChild(document.createTextNode(hdrValue))
-                shNode.appendChild(slNode)
+            for (i in data.headers.clients) {
+                table.hdr(data.headers.clients[i])
             }
 
-            statsNode.appendChild(shNode)
-            
-            var n = 0
-
             for (client in data.clients) {
-                var srNode = document.createElement('s_r')
-
-                if (n == 0) {
-                    n = 1
-                    className = "even"
-                } else {
-                    n = 0
-                    className = "odd"
-                }
-
                 for (field in data.clients[client]) {
-                    var scNode = document.createElement('s_c')
-                    var value = data.clients[client][field]
-
-                    scNode.className = className
-
                     if (field == 'socks') {
-                        continue
-                        var sockStNode = document.createElement('s_t')
-
-                        for (j = 0; j < value.length; j++) {
-                            var sockSrNode = document.createElement('s_r')
-
-                            for (sockField in value[j]) {
-                                var sockValue = value[j][sockField]
-                                var sockScNode = document.createElement('s_c')
-                
-                                sockScNode.appendChild(document.createTextNode(sockValue)) 
-                                sockSrNode.appendChild(sockScNode)
-                            }
-
-                            sockStNode.appendChild(sockSrNode)
-                        }
-                         
-                        scNode.appendChild(sockStNode)    
+                        table.col('info') 
                     } else {
-                        scNode.appendChild(document.createTextNode(value))
+                        table.col(data.clients[client][field])
                     }
-
-                    srNode.appendChild(scNode)
                 }
+                 
+                table.row()
+            }
 
-                statsNode.appendChild(srNode)
-            } 
+            table.render('stats') 
 
             setTimeout('getData()', 1000);
         },
         error: function(type, error) {
-            var errorNode = document.getElementById('error')
-            errorNode.innerHTML = 'connection error...'
+            setText('error', 'connection error...' + type)
 
             setTimeout('getData()', 1000);
         },
         mimetype: "text/json"
     })
 }
-
-getData()
 </script>
 
 <div id='error'></div>
 <div id='timestamp'></div>
+<div id='stats'></div>
 
-<s_t id='stats'></s_t>
+<script>
+getData()
+</script>
 
 <% ns_adp_include inc/footer.inc %>
