@@ -1,0 +1,9 @@
+= SOB via HTTP =
+{{{
+ 1: <METHOD> /<RPCNAME>/<RPCCMD> HTTP/1.0\r\n
+ 2: host: <HOST>\r\n
+ 3: content-length: <LENGTH>\r\n
+ 4: connection: <close|keep-alive>\r\n
+ 5: \r\n
+ 6: <KEY>
+}}}
