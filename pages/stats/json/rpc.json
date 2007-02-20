@@ -1,0 +1,36 @@
+<%
+    if {![llength [info commands rpc.stats]]} {
+        ns_adp_puts "{message:\"There are no rpc clients configured.\"}"
+        ns_adp_return
+    }
+
+    lappend fieldList nsockerror nsend tmin nsocks tavg tmax
+    lappend fieldList nsockwait nsendwait nnosocks nrecv nrecvwait
+    lappend fieldList nsocktimeout nreqtimeout nrequest
+
+    set headerList [concat [list client] $fieldList]
+
+    foreach header $headerList {
+        lappend headers "${header}:\"${header}\""
+    }
+
+    foreach rpcClient [rpc.clients] {
+        rpc.stats $rpcClient stats
+
+        set thisRow "name:\"${rpcClient}\""
+
+        foreach field $fieldList {
+            lappend thisRow ${field}:\"$stats(${field})\"
+        }
+
+        lappend rows "\{[join $thisRow ", "]\}"
+    }
+
+    set timestamp "timestamp: [ns_time]"
+    set headers "headers: \{[join $headers ", "]\}"
+    set rows "rows: \[[join $rows ", "]\]"
+
+    ns_adp_trunc
+    ns_adp_puts "\{[join [list $timestamp $headers $rows] ", "]\}"
+    ns_adp_break
+%>
