@@ -28,6 +28,7 @@ function displayStatsTable (data) {
     }
 
     table.render('stats');
+    setText('error', null);
 }
 
 function displayStatsError(type, error) {
@@ -37,7 +38,8 @@ function displayStatsError(type, error) {
 
 function displayStatsMessage(data) {
     if (!data.message) {
-        return
+        setText('message', '');
+        return 
     }
     setText('message', data.message);
 }
