@@ -57,7 +57,7 @@
         cellpadding="0" cellspacing="0" border="0" style="margin-bottom:24px;">
         <thead>
         <tr>
-            <th field="Name" dataType="String">Name</th>
+            <th field="Name" dataType="String" align="left">Name</th>
             <th field="Nsockerror" dataType="Number" align="right">Sock Errs</th>
             <th field="Nsend" dataType="Number" align="right">Sends</th>
             <th field="Tmin" dataType="Number" align="right">Min Time</th>

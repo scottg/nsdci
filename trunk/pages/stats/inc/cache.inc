@@ -49,7 +49,7 @@
         cellpadding="0" cellspacing="0" border="0" style="margin-bottom:24px;">
         <thead>
         <tr>
-            <th field="Name" dataType="String">Name</th>
+            <th field="Name" dataType="String" align="left">Name</th>
             <th field="Entries" dataType="Number" align="right">Entries</th>
             <th field="Flushed" dataType="Number" align="right">Flushed</th>
             <th field="Hits" dataType="Number" align="right">Hits</th>

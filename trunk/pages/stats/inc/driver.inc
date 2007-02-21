@@ -12,16 +12,25 @@
                 var statsData = [];
                 
                 for (row in data.rows) {
+                    var socks = data.rows[row]['socks'];
+                    var sockStr = "";
+ 
+                    for (sock in socks) {
+                        sockStr = sockStr + socks[sock]['id'] + ' (' + socks[sock]['state'] + ') <br>';
+                    }
+                     
                     var o = {
                         Id:row,
                         Name:data.rows[row]['name'],
-                        Nerror:parseInt(data.rows[row]['nerror']),
-                        Ncbdel:parseInt(data.rows[row]['ncbdel']),
-                        Ncbpost:parseInt(data.rows[row]['ncbpost']),
-                        Ncopy:parseInt(data.rows[row]['ncopy']),
-                        Nwrite:parseInt(data.rows[row]['nwrite']),
-                        Nappend:parseInt(data.rows[row]['nappend']),
-                        Nreadnoent:parseInt(data.rows[row]['nreadnoent'])
+                        Time:parseInt(data.rows[row]['time']), 
+                        Spins:parseInt(data.rows[row]['spins']), 
+                        Accepts:parseInt(data.rows[row]['accepts']), 
+                        Queued:parseInt(data.rows[row]['queued']), 
+                        Reads:parseInt(data.rows[row]['reads']), 
+                        Dropped:parseInt(data.rows[row]['dropped']), 
+                        Overflow:parseInt(data.rows[row]['overflow']), 
+                        Timeout:parseInt(data.rows[row]['timeout']),
+                        Socks:sockStr
                     };
                     
                     statsData.push(o);
@@ -52,13 +61,14 @@
         <thead>
         <tr>
             <th field="Name" dataType="String" align="left">Name</th>
-            <th field="Ncbdel" dataType="Number" align="right">NCB Deletes</th>
-            <th field="Ncbpost" dataType="Number" align="right">NCB Posts</th>
-            <th field="Nreadnoent" dataType="Number" align="right">NCB Creates</th>
-            <th field="Ncopy" dataType="Number" align="right">Copies</th>
-            <th field="Nwrite" dataType="Number" align="right">Writes</th>
-            <th field="Nappend" dataType="Number" align="right">Appends</th>
-            <th field="Nerror" dataType="Number" align="right">Errors</th>
+            <th field="Spins" dataType="Number" align="right">Spins</th>
+            <th field="Accepts" dataType="Number" align="right">Accepts</th>
+            <th field="Queued" dataType="Number" align="right">Queued</th>
+            <th field="Reads" dataType="Number" align="right">Reads</th>
+            <th field="Dropped" dataType="Number" align="right">Dropped</th>
+            <th field="Overflow" dataType="Number" align="right">Overflows</th>
+            <th field="Timeout" dataType="Number" align="right">Timeouts</th>
+            <th field="Socks" dataType="html" align="left" nosort="true">Socks</th>
         </tr>
     	</thead>
     </table>
