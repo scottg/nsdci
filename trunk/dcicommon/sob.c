@@ -456,10 +456,12 @@ SobPutCmd(ClientData arg, Tcl_Interp *interp, int argc, char **argv)
             	" : ", Dci_RpcTclError(interp, jobs[i].result), NULL);
 	    result = TCL_ERROR;
 	}
-	sobPtr = jobs[i].data;
-
+        sobPtr = jobs[i].data;
+        if (fDebug) {
+            Ns_Log(Notice, "sob: %s: put %s - ok", sobPtr->name, argv[2]);
+        }
         if (sobPtr->flushOnWrite) {
-            SobFlush(sobPtr, argv[2]);            
+            SobFlush(sobPtr, argv[2]);
         }
     }
 done:
@@ -606,7 +608,9 @@ SobDeleteCmd(ClientData dummy, Tcl_Interp *interp, int argc, char **argv)
 	    result = TCL_ERROR;
 	}
 	sobPtr = jobs[i].data;
-
+        if (fDebug) {
+            Ns_Log(Notice, "sob: %s: delete %s - ok", sobPtr->name, argv[2]);
+        }
         if (sobPtr->flushOnWrite) {
             SobFlush(sobPtr, argv[2]);
         }
