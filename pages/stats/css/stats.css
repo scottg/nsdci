@@ -50,8 +50,8 @@ table tbody tr.selected td {
     background:yellow;
 }
 table tbody tr:hover td {
-    background:#a6c2e7;
+    background:#ffffcc;
 }
 table tbody tr.selected:hover td {
-    background:#ff9;
+    background:yellow;
 }
