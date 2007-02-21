@@ -24,8 +24,9 @@ table th {
     padding:2px;
     font-weight:normal;
     padding-right:20px;
+    border-right:1px solid #ececec;
 }
-table th {
+th.selectedUp, th.selectedDown {
     font-weight:bold;
 }
 table thead td, table thead th {
