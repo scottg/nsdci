@@ -196,6 +196,7 @@ The bundled configuration has a single AOLserver instance configured with more t
 
     ns_section "ns/server/$server/module/dci/sob/client/sob"
         ns_param timeout 1
+        ns_param flushOnWrite 1 ; # Default. See Best Practices.
 }}}
 
 ==Usage==
@@ -246,3 +247,5 @@ Caching should be used where possible to optimize performance. The AOLserver Sta
 You might find that flowing content one way per server gives better performance.  For example, one server brokering data from the tool server to the frontend, and a second from the frontend to the tool server. This could perform better than one nsob server doing both.
 
 When debugging, always check logs on both the client and server. If *nsob.put* fails, there might be insight in the sob server's server log.
+
+When writing from a client that receives ncf messages, you should turn off the flushOnWrite param in the client config. This will cause the client to write to the server without removing its cache entry allowing the ncf message to remove it instead. Useful if the server is set up to send ncf messages.
