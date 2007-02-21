@@ -41,10 +41,10 @@ table thead td.selectedDown, table thead th.selectedDown {
     background-image:url(/stats/images/ft-headdown.gif);
 }
 table tbody tr td {
-    border-bottom:1px solid #ddd;
+    border-bottom:1px solid #ececec;
 }
 table tbody tr.alt td {
-    background:#e3edfa;
+    background:#f1f5f9;
 }
 table tbody tr.selected td { 
     background:yellow;
