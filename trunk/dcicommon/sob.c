@@ -47,6 +47,7 @@ typedef struct {
     int timeout;
     int flags;
     Ns_Cache *cache;
+    int flushOnWrite;
 } Sob;
 
 /*
@@ -194,7 +195,7 @@ static Sob *
 SobCreate(char *server, char *module, char *name, char *path, int ncb)
 {
     Tcl_HashEntry *hPtr;
-    int new, cachesize, timeout, nocache;
+    int new, cachesize, timeout, nocache, flushOnWrite;
     Sob *sobPtr;
     char rpcname[DCI_RPCNAMESIZE];
     Ns_Callback *freeProc;
@@ -208,6 +209,9 @@ SobCreate(char *server, char *module, char *name, char *path, int ncb)
     }
     if (!Ns_ConfigGetBool(path, "nocache", &nocache)) {
 	nocache = 0;
+    }
+    if (!Ns_ConfigGetBool(path, "flushOnWrite", &flushOnWrite)) {
+        flushOnWrite = 1;
     }
     if (ncb && nocache) {
     	Ns_Log(Error, "sob: ncb sob cannot be set to nocache: %s", name);
@@ -245,6 +249,7 @@ SobCreate(char *server, char *module, char *name, char *path, int ncb)
     	sobPtr->cache = Ns_CacheCreateSz(rpcname, TCL_STRING_KEYS,
 	    (size_t)cachesize, freeProc);
     }
+    sobPtr->flushOnWrite = flushOnWrite;
     sobPtr->rpc = Dci_RpcCreateClient(server, module, rpcname, timeout);
     if (sobPtr->rpc != NULL) {
 	Tcl_SetHashValue(hPtr, sobPtr);
@@ -405,6 +410,7 @@ SobGetCmd(ClientData dummy, Tcl_Interp *interp, int argc, char **argv)
  *      Standard Tcl result code.
  *
  * Side effects:
+ *      if flushOnWrite is set to 1 (default),
  *      Current entry in cache, if any, is flushed.
  *
  *----------------------------------------------------------------------
@@ -451,7 +457,10 @@ SobPutCmd(ClientData arg, Tcl_Interp *interp, int argc, char **argv)
 	    result = TCL_ERROR;
 	}
 	sobPtr = jobs[i].data;
-    	SobFlush(sobPtr, argv[2]);
+
+        if (sobPtr->flushOnWrite) {
+            SobFlush(sobPtr, argv[2]);            
+        }
     }
 done:
     ns_free(jobs);
@@ -472,7 +481,8 @@ done:
  *      Standard Tcl result code.
  *
  * Side effects:
- *      Current entry in cache, if any, is flushed.
+ *      if flushOnWrite is set to 1 (default),
+ *      Current entry in cache, if any, is flushed. 
  *
  *----------------------------------------------------------------------
  */
@@ -550,7 +560,8 @@ SobCopyCmd(ClientData dummy, Tcl_Interp *interp, int argc, char **argv)
  *      Standard Tcl result code.
  *
  * Side effects:
- *      Current entry in cache, if any, is flushed.
+ *      if flushOnWrite is set to 1 (default),
+ *      Current entry in cache, if any, is flushed. 
  *
  *----------------------------------------------------------------------
  */
@@ -595,7 +606,10 @@ SobDeleteCmd(ClientData dummy, Tcl_Interp *interp, int argc, char **argv)
 	    result = TCL_ERROR;
 	}
 	sobPtr = jobs[i].data;
-    	SobFlush(sobPtr, argv[2]);
+
+        if (sobPtr->flushOnWrite) {
+            SobFlush(sobPtr, argv[2]);
+        }
     }
 done:
     ns_free(jobs);
@@ -670,8 +684,10 @@ NcbGetCmd(ClientData arg, Tcl_Interp *interp, int argc, char **argv)
  * Side effects:
  *      The interp result buffer will be filled with a "1" on success,
  *      "0" on failure. Success means the comment board post was 
- *      recieved by the server (presumably written), and cached entries
- *      were flushed on the client.
+ *      recieved by the server (presumably written).
+ *   
+ *      If flushOnWrite is set to 1 (default),
+ *      Current entry in cache, if any, is flushed.
  *
  *----------------------------------------------------------------------
  */
@@ -698,7 +714,9 @@ NcbPostCmd(ClientData arg, Tcl_Interp *interp, int argc, char **argv)
     status = Dci_RpcSend(sobPtr->rpc, DCI_NFSCMDCBPOST, &ds, NULL);
     Ns_DStringFree(&ds);
     if (status == RPC_OK) {
-    	SobFlush(sobPtr, board);
+        if (sobPtr->flushOnWrite) {
+    	    SobFlush(sobPtr, board);
+        }
     } else {
         Dci_RpcTclError(interp, status);
     }
@@ -722,8 +740,10 @@ NcbPostCmd(ClientData arg, Tcl_Interp *interp, int argc, char **argv)
  * Side effects:
  *      The interp result buffer will be filled with a "1" on success,
  *      "0" on failure. Success means the comment board delete was 
- *      recieved by the server (presumably saved), and cached entries
- *      were flushed on the client.
+ *      recieved by the server (presumably saved).
+ *
+ *      If flushOnWrite is set to 1 (default),
+ *      Current entry in cache, if any, is flushed.
  *
  *----------------------------------------------------------------------
  */
@@ -751,7 +771,9 @@ NcbDeleteCmd(ClientData arg, Tcl_Interp *interp, int argc, char **argv)
     status = Dci_RpcSend(sobPtr->rpc, DCI_NFSCMDCBDEL, &ds, NULL);
     Ns_DStringFree(&ds);
     if (status == RPC_OK) {
-    	SobFlush(sobPtr, board);
+        if (sobPtr->flushOnWrite) {
+            SobFlush(sobPtr, board);
+        }
     } else {
         Dci_RpcTclError(interp, status);
     }
@@ -881,7 +903,15 @@ SobFlush(Sob *sobPtr, char *key)
     	entry = Ns_CacheFindEntry(sobPtr->cache, key);
     	if (entry != NULL) {
             Ns_CacheFlushEntry(entry);
-    	}
+
+            if (fDebug) {
+                Ns_Log(Notice, "sob: flushed: nsobc:%s[%s]", sobPtr->name, key);
+            }
+    	} else {
+            if (fDebug) {
+                Ns_Log(Notice, "sob: no such entry: nsobc:%s[%s]", sobPtr->name, key);
+            }
+        }
     	Ns_CacheUnlock(sobPtr->cache);
     }
 }
