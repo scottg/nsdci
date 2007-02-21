@@ -1,0 +1,48 @@
+<%
+    set fields [list time spins accepts queued reads dropped overflow timeout]
+    set sockFields [list id sock state idx events revents accept timeout]
+
+    foreach field $fields {
+        lappend headers "${field}:\"${field}\""
+    }
+
+    foreach driver [ns_driver list] {
+        catch {unset driverArr}
+
+        array set driverArr [ns_driver query $driver]
+        array set statsArr $driverArr(stats)
+        set socks $driverArr(socks)
+
+        set thisRow "name:\"${driver}\""
+
+        foreach field $fields {
+            lappend thisRow ${field}:\"$statsArr(${field})\"
+        }
+  
+        set sockRows ""
+
+        foreach sock $socks {
+            catch {unset sockArr}
+
+            array set sockArr [lrange $sock 0 end-1]
+ 
+            foreach sockField $sockFields {
+                lappend thisSockRow ${sockField}:\"$sockArr(${sockField})\"
+            }
+ 
+            lappend sockRows "\{[join $thisSockRow ", "]\}"
+        }
+
+
+        lappend thisRow "socks:\[ [join $sockRows ", "] \]"
+        lappend rows "\{[join $thisRow ", "]\}"
+    }
+
+    set timestamp "timestamp: [ns_time]"
+    set headers "headers: \{[join $headers ", "]\}"
+    set rows "rows: \[[join $rows ", "]\]"
+
+    ns_adp_trunc
+    ns_adp_puts "\{[join [list $timestamp $headers $rows] ", "]\}"
+    ns_adp_break
+%>
