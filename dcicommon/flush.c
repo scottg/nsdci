@@ -322,17 +322,15 @@ NcfRecv(void *ignored, Ns_DString *dsPtr)
             if (entry != NULL) {
                 Ns_CacheFlushEntry(entry);
                 Ns_CacheBroadcast(cache);
+
+                if (fDebug) {
+                    Ns_Log(Notice, "ncf: flushed: %s[%s]", name, key);
+                }
             } else if (fDebug) {
                 Ns_Log(Notice, "ncf: no such entry: %s[%s]", name, key);
             }
+
             Ns_CacheUnlock(cache);
-        }
-        if (fDebug) {
-            if (cache == NULL) {
-                Ns_Log(Notice, "ncf: no such cache: %s", name);
-            } else {
-                Ns_Log(Notice, "ncf: flushed: %s[%s]", name, key);
-            }
         }
     }
     return NS_OK;
