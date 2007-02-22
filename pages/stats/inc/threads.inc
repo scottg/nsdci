@@ -36,6 +36,14 @@
                         
                         args = "";
                     }
+
+                    if (args == "a:0x0") {
+                        args = "";
+                    }
+
+                    if (proc == "p:0x0") {
+                        proc = "";
+                    }
                  
                     var o = {
                         Id:row,
