@@ -14,6 +14,10 @@
                 for (row in data.rows) {
                     var args = data.rows[row]['args'];
                     var proc = data.rows[row]['proc'];
+
+                    var ctime = data.rows[row]['ctime'];
+                    var date = new Date();
+                    date.setTime(ctime * 1000);
                      
                     var connId = "";
                     var peer = "";
@@ -51,7 +55,7 @@
                         Parent:data.rows[row]['parent'],
                         Tid:parseInt(data.rows[row]['tid']),
                         Flags:data.rows[row]['flags'],
-                        Ctime:parseInt(data.rows[row]['ctime']),
+                        Ctime:date,
                         Proc:proc,
                         Args:args,
                         ConnId:connId,
@@ -94,7 +98,7 @@
             <th field="Parent" dataType="String" align="left">Parent</th>
             <th field="Tid" dataType="Number" align="right">Tid</th>
             <th field="Flags" dataType="String" align="left">Flags</th>
-            <th field="Ctime" dataType="Number" align="right">Created</th>
+            <th field="Ctime" dataType="Date" format="%r (%D)" align="left">Created</th>
             <th field="Proc" dataType="String" align="left">Proc</th>
             <th field="Args" dataType="String" align="left">Args</th>
             <th field="ConnId" dataType="Number" align="right">Cid</th>
