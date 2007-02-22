@@ -1,0 +1,56 @@
+<%
+    set fields [list name parent tid flags ctime proc args]
+    set connFields [list connId peer state method url elapsed sent]
+    
+    foreach field $fields {
+        lappend headers "${field}:\"${field}\""
+    }
+
+    foreach thread [ns_info threads] {
+        set i 0
+        set thisRow ""
+        
+        foreach field $fields {
+            set value [lindex $thread $i]
+            
+            switch $i {
+                3 {
+                    set value "\"[_ns_stats.getThreadType $value]\""
+                }
+                6 {
+                    if {[string match "ns:connthread" [lindex $thread 5]]} {
+                        set connRow ""
+                        set connValues [split $value]
+                        
+                        set j 0
+                        
+                        foreach connField $connFields {
+                            lappend connRow "${connField}:\"[lindex $connValues $j]\""
+                            incr j
+                        }
+                        
+                        set value "\{[join $connRow ", "]\}"
+                    } else {
+                        set value "\"$value\""
+                    }
+                }
+                default {
+                    set value "\"$value\""
+                }
+            }
+            
+            lappend thisRow "${field}:$value"
+            incr i
+        }
+        
+        lappend rows "\{[join $thisRow ", "]\}"
+    }
+    
+    set timestamp "timestamp: [ns_time]"
+    set headers "headers: \{[join $headers ", "]\}"
+    set rows "rows: \[[join $rows ", "]\]"
+
+    ns_adp_trunc
+    ns_adp_puts "\{[join [list $timestamp $headers $rows] ", "]\}"
+    ns_adp_break
+%>

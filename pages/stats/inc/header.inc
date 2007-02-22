@@ -1,6 +1,7 @@
 <%
     lappend nav {RPC Clients} rpc.adp {Cache} cache.adp
     lappend nav {NFS Servers} nfs.adp {Driver} driver.adp
+    lappend nav {Threads} threads.adp
 
     set thisPage [lindex [ns_conn urlv] end]
 
