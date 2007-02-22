@@ -16,3 +16,14 @@
 
     ns_adp_puts "<h1>[page.getValue title]</h1>" 
 %>
+
+<div id=pause>
+<a href="javascript:controlStats('pause');">Pause</a>
+</div>
+<div id=resume style="display:none">
+<a href="javascript:controlStats('resume');">Resume</a>
+</div>
+
+<script>
+    var UpdateStats = 1;
+</script>
