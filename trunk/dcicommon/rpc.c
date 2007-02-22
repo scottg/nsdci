@@ -928,8 +928,10 @@ RpcGet(Dci_Rpc *rpc)
 	    if (poll(&pfd, 1, 0)) {
                 if (connPtr->http) {
                     httpConnDrop = 1;
+                    RpcClose(connPtr, NULL);
+                } else {
+    	    	    RpcClose(connPtr, "server dropped");
                 }
-    	    	RpcClose(connPtr, "server dropped");
 	    	connPtr = NULL;
 	    }
 	    Ns_MutexLock(&rpcPtr->lock);
