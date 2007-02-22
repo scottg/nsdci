@@ -24,13 +24,15 @@
                     var sent = "";
                     
                     if (proc == "ns:connthread") {
-                        connId = parseInt(args['connId']);
-                        peer = args['peer'];
-                        state = args['state'];
-                        method = args['method'];
-                        url = args['url'];
-                        elapsed = parseFloat(args['elapsed']);
-                        sent = parseInt(args['sent']);
+                        if (args['connId'] != "") {
+                            connId = parseInt(args['connId']);
+                            peer = args['peer'];
+                            state = args['state'];
+                            method = args['method'];
+                            url = args['url'];
+                            elapsed = parseFloat(args['elapsed']);
+                            sent = parseInt(args['sent']);
+                        } 
                         
                         args = "";
                     }
@@ -42,7 +44,7 @@
                         Tid:parseInt(data.rows[row]['tid']),
                         Flags:data.rows[row]['flags'],
                         Ctime:parseInt(data.rows[row]['ctime']),
-                        Proc:data.rows[row]['proc'],
+                        Proc:proc,
                         Args:args,
                         ConnId:connId,
                         Peer:peer,
