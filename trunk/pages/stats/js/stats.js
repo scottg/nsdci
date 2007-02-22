@@ -19,3 +19,25 @@ function setText(id, text) {
 		node.innerHTML = text;
 	}
 }
+
+function updateStats() {
+	if (UpdateStats == 1) {
+		setTimeout('getData()', 1000);
+	}
+}
+
+function controlStats(action) {
+	pauseNode = document.getElementById('pause');
+	resumeNode = document.getElementById('resume');
+	
+	if (action == "pause") {
+		pauseNode.style.display = "none"
+		resumeNode.style.display = "block"
+		UpdateStats = 0
+	} else {
+		pauseNode.style.display = "block"
+		resumeNode.style.display = "none"
+		UpdateStats = 1
+		updateStats()
+	}
+}

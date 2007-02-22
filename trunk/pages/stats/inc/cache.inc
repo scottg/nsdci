@@ -30,11 +30,11 @@
                 w.store.clearData();
     		    w.store.setData(statsData);
                 
-                setTimeout('getData()', 1000);
+                updateStats();
             },
             error: function(type, error) {
                 updateError(type, error);
-                setTimeout('getData()', 1000);
+                updateStats();
             },
             mimetype: "text/json"
         });
