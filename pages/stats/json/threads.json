@@ -28,9 +28,13 @@
                             set value [lindex $connValues $j]
 
                             if {$j == 5} {
-                                set sec [lindex [split $value "."] 0]
-                                set us [format %.1f [lindex [split $value "."] 1]]
-                                set value [format %4f [expr ($us / 1000000) + $sec]]
+                                if {[catch {
+                                    set sec [lindex [split $value "."] 0]
+                                    set us [format %.1f [lindex [split $value "."] 1]]
+                                    set value [format %4f [expr ($us / 1000000) + $sec]] 
+                                }]} {
+                                    set value 0
+                                }
                             }
 
                             lappend connRow "${connField}:\"$value\""
