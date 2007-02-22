@@ -92,10 +92,10 @@
             <th field="ConnId" dataType="Number" align="right">Cid</th>
             <th field="Peer" dataType="Number" align="right">Peer</th>
             <th field="State" dataType="String" align="left">State</th>
-            <th field="Method" dataType="String" align="left">Method</th>
-            <th field="Url" dataType="String" align="left">Url</th>
             <th field="Elapsed" dataType="Number" align="right">Elapsed</th>
             <th field="Sent" dataType="Number" align="right">Sent</th>
+            <th field="Method" dataType="String" align="left">Method</th>
+            <th field="Url" dataType="String" align="left">Url</th>
         </tr>
     	</thead>
     </table>
