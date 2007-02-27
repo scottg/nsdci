@@ -178,7 +178,7 @@ DciHttpLibInit(void)
     Ns_MutexSetName(&alloclock, "nshttp:alloc");
     Ns_TlsAlloc(&bufid, ns_free);
     stats = Ns_CacheCreateSz("nshttp:stats", TCL_STRING_KEYS, 1000, ns_free);
-    fnscmds = 1;
+    fnscmds = 0;
     fhttpcmds = 1;
     flags = (FLAG_SHUTDOWN | FLAG_ASYNC);
     agent = "NSHTTP/" DCI_VERSION;
